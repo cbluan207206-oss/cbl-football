@@ -125,7 +125,8 @@ function confirmOrder() {
 ----------------------------
 🚀 Check đơn ngay chủ shop ơi!
     `;
-    
+    // Mã hóa messageContent
+const encodedMessage = 
     sendTelegramMessage(messageContent);
 
     const billDetail = document.getElementById('bill-detail');
