@@ -126,9 +126,12 @@ function confirmOrder() {
 🚀 Check đơn ngay chủ shop ơi!
     `;
     // Mã hóa messageContent
-const encodedMessage = 
-    sendTelegramMessage(messageContent);
+const encodedMessage = encodeURIComponent(messageContent); // Đảm bảo an toàn ký tự đặc biệt
 
+// Truyền message đã mã hóa vào hàm sendTelegramMessage
+sendTelegramMessage(encodedMessage);
+
+// Render thông tin đơn hàng lên giao diện
     const billDetail = document.getElementById('bill-detail');
     if (billDetail) {
         billDetail.innerHTML = `
