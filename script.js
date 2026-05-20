@@ -103,7 +103,12 @@ function confirmOrder() {
         alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
         return;
     }
-
+// Kiểm tra số điện thoại (phải đủ 10 ký tự và toàn là số)
+    const phoneRegex = /^[0-9]{10}$/; // Regex kiểm tra chuỗi 10 số
+    if (!phoneRegex.test(phone)) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (đúng 10 chữ số)!");
+        return;
+    }
     let productNames = cart.map(item => item.name).join(", ");
     let totalPrice = document.getElementById('total-price').innerText;
 
