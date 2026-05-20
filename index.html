@@ -3,91 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CBL Soccer chuyên cung cấp giày đá bóng Nike Mercurial, Mizuno cao cấp. Cam kết 100% đúng hình, bảo hành lỗi 1 đổi 1.">
+    <meta name="description" content="Khám phá bộ sưu tập giày bóng đá hàng đầu tại CBL Soccer. Nơi cung cấp sản phẩm chính hãng, uy tín và dịch vụ chuyên nghiệp.">
     <meta name="author" content="CBL Soccer">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cbluan207206-oss.github.io/CBL-football/">
-
-    <meta property="og:title" content="CBL Soccer - Giày Thể Thao Cao Cấp">
-    <meta property="og:description" content="Khám phá bộ sưu tập giày bóng đá chuyên nghiệp.">
-    <meta property="og:image" content="images/default-banner.png">
-    <meta property="og:url" content="https://cbluan207206-oss.github.io/CBL-football/">
-    <meta property="og:type" content="website">
-    
-    <title>CBL Soccer - Giày Đá Bóng Cao Cấp</title>
+    <title>CBL Soccer - Sản Phẩm Giày Đá Bóng Cao Cấp</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- NavBar -->
+    <!-- Header/Navigation -->
     <nav class="navbar">
         <div class="brand">CBL Soccer</div>
         <ul class="menu-links">
-            <li onclick="showSection(0)">Trang Chủ</li>
-            <li onclick="showSection(1)">Sản Phẩm</li>
-            <li onclick="showSection(2)">Thông Tin</li>
+            <li onclick="navigate('home')">Trang Chủ</li>
+            <li onclick="navigate('products')">Sản Phẩm</li>
+            <li onclick="navigate('contact')">Liên Hệ</li>
         </ul>
         <div class="search-container">
-            <input type="text" id="product-search" placeholder="Tìm giày..." onkeyup="searchProduct()">
+            <input type="text" id="search" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
             <i class="fas fa-search"></i>
         </div>
-        <div class="cart-icon" onclick="toggleCart()">
+        <div class="cart" onclick="toggleCart()">
             <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
+            <span id="cartCount">0</span>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="container">
+    <main>
         <!-- Home Section -->
-        <section class="page active">
-            <div class="hero" style="background-image: url('images/banner.jpg');">
-                <h1>CBL Soccer</h1>
-                <p>Khám phá bộ sưu tập giày bóng đá chuyên nghiệp nhất.</p>
-                <button class="button-primary" onclick="showSection(1)">Mua Ngay</button>
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Nâng Tầm Đam Mê Cùng CBL Soccer</h1>
+                <p>Khám phá những mẫu giày bóng đá chuyên nghiệp để nâng cao từng bước chạy.</p>
+                <button onclick="navigate('products')">Mua Ngay</button>
             </div>
         </section>
 
         <!-- Products Section -->
-        <section class="page">
-            <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="images/nike.png" alt="Nike Mercurial Vapor 14">
-                    <h3>Nike Mercurial Vapor 14</h3>
-                    <p class="price">650,000đ</p>
-                    <button onclick="addToCart('Nike Mercurial Vapor 14', '650,000')">Thêm vào giỏ</button>
-                </div>
-                <!-- Thêm các sản phẩm khác nếu cần -->
+        <section id="products" class="section">
+            <h2>Sản Phẩm Của Chúng Tôi</h2>
+            <div class="product-grid" id="productGrid">
+                <!-- Product items dynamically generated here -->
             </div>
         </section>
 
-        <!-- Information Section -->
-        <section class="page">
-            <h2>Liên Hệ</h2>
-            <p><strong>Địa chỉ:</strong> 342 Tân Sơn Nhì, Tân Phú, TP.HCM</p>
-            <p><strong>Liên hệ:</strong> 0984.169.335</p>
-            <p>
-                <strong>Facebook:</strong>
-                <a href="https://www.facebook.com/cblsoccer" target="_blank">Facebook Page</a>
-            </p>
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Liên Hệ Chúng Tôi</h2>
+            <p>Địa chỉ: 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
+            <p>Số điện thoại: 0984.169.335</p>
+            <p>Email: <a href="mailto:support@cblsoccer.com">support@cblsoccer.com</a></p>
+            <p>Facebook: <a href="https://www.facebook.com/cblsoccer" target="_blank">Facebook Page</a></p>
         </section>
     </main>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="modal">
+    <div id="cartModal" class="modal">
         <div class="modal-content">
-            <span class="close-x" onclick="toggleCart()">&times;</span>
-            <h2>Giỏ hàng của bạn</h2>
-            <div id="cart-items-list"></div>
-            <p>Tổng cộng: <span id="total-price">0đ</span></p>
-            <button class="button-primary" onclick="checkout()">Đặt Hàng</button>
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h3>Giỏ Hàng</h3>
+            <div id="cartItems"></div>
+            <p><strong>Tổng tiền:</strong> <span id="totalPrice">0đ</span></p>
+            <button class="checkout" onclick="checkout()">Đặt Hàng</button>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 CBL Soccer | Powered by GitHub Pages</p>
+        <p>© 2026 CBL Soccer | Designed with ❤️</p>
     </footer>
 
     <script src="script.js"></script>
