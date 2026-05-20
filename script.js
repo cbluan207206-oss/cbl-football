@@ -161,6 +161,13 @@ function confirmOrder() {
     }, 6000);
 }
 
+const phoneInput = document.getElementById('cus-phone');
+const errorMessage = document.createElement('p');
+errorMessage.style.color = 'red';
+errorMessage.style.fontSize = '14px';
+errorMessage.innerText = "Vui lòng nhập số điện thoại hợp lệ (10 chữ số).";
+phoneInput.parentNode.appendChild(errorMessage); // Hiển thị lỗi bên dưới ô input
+
 function showProductDetail(name, price, size, desc, img) {
     const modal = document.getElementById('product-detail-modal');
     const content = document.getElementById('detail-content');
