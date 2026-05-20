@@ -1,55 +1,216 @@
-document.addEventListener('DOMContentLoaded', () => {
-    updateCartCounter();
-    loadProducts();
-});
+// Khởi tạo giỏ hàng từ LocalStorage nếu có
+let cart = JSON.parse(localStorage.getItem('cbl_cart')) || [];
 
-let cart = [];
-
-function navigate(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-        section.classList.remove('active');
+function showSection(index) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach((page, i) => {
+        if(i === index) {
+            page.classList.add('active');
+        } else {
+            page.classList.remove('active');
+        }
     });
-    document.getElementById(sectionId).classList.add('active');
-}
-
-function loadProducts() {
-    const products = [
-        { name: 'Nike Mercurial', price: 650000, image: 'images/nike.png' },
-        { name: 'Adidas Predator', price: 750000, image: 'images/adidas.png' },
-        { name: 'Mizuno Neo 3', price: 800000, image: 'images/mizuno.png' }
-    ];
-    const productGrid = document.getElementById('productGrid');
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.price.toLocaleString()}đ</p>
-            <button onclick="addToCart('${product.name}', ${product.price})">Thêm vào giỏ</button>
-        `;
-        productGrid.appendChild(productCard);
-    });
+    // Đóng các modal nếu đang mở khi chuyển trang
+    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 }
 
 function addToCart(name, price) {
-    cart.push({ name, price });
-    updateCartCounter();
-    alert(`${name} đã thêm vào giỏ hàng!`);
+    cart.push({ name: name, price: price });
+    saveCart();
+    updateCartUI();
+    alert("Đã thêm " + name + " vào giỏ!");
 }
 
-function updateCartCounter() {
-    document.getElementById('cartCount').innerText = cart.length;
+function saveCart() {
+    localStorage.setItem('cbl_cart', JSON.stringify(cart));
+}
+
+function updateCartUI() {
+    const countEl = document.getElementById('cart-count');
+    if(countEl) countEl.innerText = cart.length;
 }
 
 function toggleCart() {
-    const cartModal = document.getElementById('cartModal');
-    cartModal.style.display = cartModal.style.display === 'none' ? 'flex' : 'none';
+    const modal = document.getElementById('cart-modal');
+    if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'flex';
+        renderCartItems();
+    }
+}
+
+function renderCartItems() {
+    const list = document.getElementById('cart-items-list');
+    const totalEl = document.getElementById('total-price');
+    
+    if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center; padding:20px;">Chưa có sản phẩm nào.</p>';
+        totalEl.innerText = '0đ';
+        return;
+    }
+
+    let html = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+        html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
+                <div style="text-align:left;">
+                    <span style="display:block; font-weight:bold;">${item.name}</span>
+                    <span style="color:#ff4757;">${item.price}đ</span>
+                </div>
+                <button onclick="removeFromCart(${index})" 
+                        style="background:#ff4757; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-size:12px;">
+                    Hủy
+                </button>
+            </div>
+        `;
+        total += parseInt(item.price.replace(/\./g, ''));
+    });
+
+    list.innerHTML = html;
+    totalEl.innerText = total.toLocaleString('vi-VN') + "đ";
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCartUI(); 
+    renderCartItems(); 
 }
 
 function checkout() {
-    alert('Cảm ơn bạn! Đơn hàng đã được đặt.');
-    cart = [];
-    updateCartCounter();
-    toggleCart();
+    if (cart.length === 0) {
+        alert("Giỏ hàng đang trống!");
+        return;
+    }
+    document.getElementById('cart-modal').style.display = 'none';
+    document.getElementById('checkout-modal').style.display = 'flex';
 }
+
+function closeCheckout() {
+    document.getElementById('checkout-modal').style.display = 'none';
+}
+
+function confirmOrder() {
+    const name = document.getElementById('cus-name').value;
+    const phone = document.getElementById('cus-phone').value;
+    const address = document.getElementById('cus-address').value;
+    const note = document.getElementById('cus-note').value;
+    const size = document.getElementById('cus-size').value;
+
+    if (!size || !name || !phone || !address) {
+        alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
+        return;
+    }
+
+    let productNames = cart.map(item => item.name).join(", ");
+    let totalPrice = document.getElementById('total-price').innerText;
+
+    const messageContent = `
+👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟
+----------------------------
+📦 Sản phẩm: ${productNames}
+📏 Size: ${size}
+💰 Tổng cộng: ${totalPrice}
+👤 Khách: ${name}
+📞 SĐT: ${phone}
+📍 Địa chỉ: ${address}
+📝 Ghi chú: ${note || 'Không có'}
+----------------------------
+🚀 Check đơn ngay chủ shop ơi!
+    `;
+    
+    sendTelegramMessage(messageContent);
+
+    const billDetail = document.getElementById('bill-detail');
+    if (billDetail) {
+        billDetail.innerHTML = `
+            <p><b>Sản phẩm:</b> ${productNames}</p>
+            <p><b>Size:</b> <span style="color:blue; font-weight:bold;">${size}</span></p>
+            <p><b>Tổng tiền:</b> <span style="color:red; font-weight:bold;">${totalPrice}</span></p>
+            <hr style="border: 0.5px dashed #ddd; margin: 10px 0;">
+            <p><b>Người nhận:</b> ${name}</p>
+            <p><b>SĐT:</b> ${phone}</p>
+            <p><b>Địa chỉ:</b> ${address}</p>
+            <p><b>Ghi chú:</b> ${note || 'Không có'}</p>
+        `;
+    }
+
+    document.getElementById('checkout-modal').style.display = 'none';
+    const billModal = document.getElementById('bill-modal');
+    if (billModal) billModal.style.display = 'flex';
+
+    // Xóa giỏ hàng sau khi đặt thành công
+    cart = [];
+    saveCart();
+    updateCartUI();
+
+    setTimeout(() => {
+        if (billModal) billModal.style.display = 'none';
+        document.getElementById('cus-name').value = "";
+        document.getElementById('cus-phone').value = "";
+        document.getElementById('cus-address').value = "";
+        document.getElementById('cus-note').value = "";
+        document.getElementById('cus-size').value = "";
+    }, 6000);
+}
+
+function showProductDetail(name, price, size, desc, img) {
+    const modal = document.getElementById('product-detail-modal');
+    const content = document.getElementById('detail-content');
+    content.innerHTML = `
+        <img src="${img}" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        <h2>${name}</h2>
+        <p style="color:#ff4757; font-weight:bold; font-size:20px;">${price}đ</p>
+        <p><b>Size:</b> ${size}</p>
+        <p style="color:#666; margin:15px 0;">${desc}</p>
+        <button onclick="addToCart('${name}', '${price}'); closeProductDetail()" style="width:100%; padding:12px; background:#27ae60; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">THÊM VÀO GIỎ NGAY</button>
+    `;
+    modal.style.display = 'flex';
+}
+
+function closeProductDetail() {
+    document.getElementById('product-detail-modal').style.display = 'none';
+}
+// --- ĐOẠN CODE TÌM KIẾM MỚI ---
+function searchProduct() {
+    // Lấy từ khóa người dùng nhập và chuyển về chữ thường
+    let input = document.getElementById('product-search').value.toLowerCase();
+    
+    // Lấy tất cả các thẻ sản phẩm trong grid
+    let cards = document.querySelectorAll('.product-card');
+
+    cards.forEach(card => {
+        // Lấy tên sản phẩm bên trong thẻ h3 của từng card
+        let productName = card.querySelector('h3').innerText.toLowerCase();
+        
+        // So khớp: Nếu tên sản phẩm chứa từ khóa thì hiện, không thì ẩn
+        if (productName.includes(input)) {
+            card.style.display = "flex"; 
+        } else {
+            card.style.display = "none"; 
+        }
+    });
+
+    // Nếu người dùng đang gõ, tự động chuyển sang trang Sản Phẩm (Section 1) để xem kết quả
+    if (input.length > 0) {
+        showSection(1);
+    }
+}
+// ------------------------------
+
+// Hàm Telegram của bạn vẫn giữ nguyên ở dưới này...
+
+function sendTelegramMessage(message) {
+    const token = "8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0";
+    const chatId = "7901882812";
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+    fetch(url);
+}
+
+// Khi trang load xong
+window.onload = () => {
+    updateCartUI();
+    showSection(0); // Luôn bắt đầu ở trang chủ
+};
