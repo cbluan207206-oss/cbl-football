@@ -78,6 +78,35 @@ function removeFromCart(index) {
     updateCartUI(); 
     renderCartItems(); 
 }
+function showToast(message) {
+    conts toast = document.creeateElemenet('div');
+    toast.innerText = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.right = '20px';
+    toast.style.padding = '10px 20px';
+    toast.style.backgroundColor = '#333';
+    toast.style.color = '#fff';
+    toast.style.borderRadius = '5px';
+    toast.style.boxShadow = '0 2px 10px rgba( 0,0,0,0.2)';
+    toast.style.zIndex = '10000';
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 500);
+    }, 3000);
+}
+
+function addToCart(name, price) {
+    cart.push({ name: name, price: price });
+    saveCart();
+    updateCartUI();
+    showToast(✅ ${name} đã được thêm vào giỏ hàng!);
+}
 
 function checkout() {
     if (cart.length === 0) {
