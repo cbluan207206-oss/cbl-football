@@ -221,7 +221,7 @@ button:hover {
     .menu-links {
         flex-direction: column; /* Menu xếp thành một cột */
         gap: 10px;
-        margin-top: 10px
+        margin-top: 10px;
     }
     .menu-links li {
         font-size: 12px;
