@@ -91,18 +91,26 @@ function checkout() {
 function closeCheckout() {
     document.getElementById('checkout-modal').style.display = 'none';
 }
-
-function confirmOrder() {
-    const name = document.getElementById('cus-name').value;
-    const phone = document.getElementById('cus-phone').value;
-    const address = document.getElementById('cus-address').value;
-    const note = document.getElementById('cus-note').value;
+ // báo lỗi đặt hàng //
+    function confirmOrder() {
+    const name = document.getElementById('cus-name').value.trim();
+    const phone = document.getElementById('cus-phone').value.trim();
+    const address = document.getElementById('cus-address').value.trim();
     const size = document.getElementById('cus-size').value;
 
-    if (!size || !name || !phone || !address) {
-        alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
+    if (!name || !phone || !address || !size) {
+        alert("Vui lòng điền đầy đủ thông tin đặt hàng!");
         return;
     }
+
+    const phoneRegex = /^\d{4} \d{3} \d{3}$/; // Format đúng
+    if (!phoneRegex.test(phone)) {
+        alert("Số điện thoại không hợp lệ! Vui lòng nhập đúng định dạng: 0123 456 789.");
+        return;
+    }
+
+    alert("Đơn hàng của bạn đã được xác nhận!");
+}
 // Kiểm tra số điện thoại (phải đủ 10 ký tự và toàn là số)
     const phoneRegex = /^[0-9]{10}$/; // Regex kiểm tra chuỗi 10 số
     if (!phoneRegex.test(phone)) {
