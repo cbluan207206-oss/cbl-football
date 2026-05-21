@@ -227,7 +227,7 @@ button:hover {
         font-size: 12px;
     }
     .search-container {
-        max-width: 130px;
+        width: 100%;
     }
 }
 @media (max-width: 768px) {
