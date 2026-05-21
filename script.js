@@ -93,9 +93,9 @@ function closeCheckout() {
 }
  // báo lỗi đặt hàng //
     function confirmOrder() {
-    const name = document.getElementById('cus-name').value.trim();
-    const phone = document.getElementById('cus-phone').value.trim();
-    const address = document.getElementById('cus-address').value.trim();
+    const name = document.getElementById('cus-name').value;
+    const phone = document.getElementById('cus-phone').value;
+    const address = document.getElementById('cus-address').value;
     const size = document.getElementById('cus-size').value;
 
     if (!name || !phone || !address || !size) {
@@ -103,11 +103,6 @@ function closeCheckout() {
         return;
     }
 
-    const phoneRegex = /^\d{4} \d{3} \d{3}$/; // Format đúng
-    if (!phoneRegex.test(phone)) {
-        alert("Số điện thoại không hợp lệ! Vui lòng nhập đúng định dạng: 0123 456 789.");
-        return;
-    }
 
     alert("Đơn hàng của bạn đã được xác nhận!");
 }
