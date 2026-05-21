@@ -32,6 +32,13 @@ button:hover {
     transfrom: scale(1.05); /*phóng to nhẹ */
     background: #ff4757; /* màu nền */
     calor: white: /* đổi màu chữ */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo đổ bóng */
+}
+
+.menu-links li:hover {
+    color: #ff4757; /* Đổi màu chữ */
+    text-decoration: underline; /* Gạch chân chữ */
+}
 }
 .menu-links {
     list-style: none;
