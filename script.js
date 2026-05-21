@@ -96,16 +96,14 @@ function closeCheckout() {
     const name = document.getElementById('cus-name').value;
     const phone = document.getElementById('cus-phone').value;
     const address = document.getElementById('cus-address').value;
+    const note = document.getElementById('cus-note').value;
     const size = document.getElementById('cus-size').value;
 
-    if (!name || !phone || !address || !size) {
-        alert("Vui lòng điền đầy đủ thông tin đặt hàng!");
+    if (!size || !name || !phone || !address) {
+        alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
         return;
     }
-
-
-    alert("Đơn hàng của bạn đã được xác nhận!");
-}
+    
 // Kiểm tra số điện thoại (phải đủ 10 ký tự và toàn là số)
     const phoneRegex = /^[0-9]{10}$/; // Regex kiểm tra chuỗi 10 số
     if (!phoneRegex.test(phone)) {
