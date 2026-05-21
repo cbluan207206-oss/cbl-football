@@ -28,7 +28,7 @@ button {
     transition: all 0.3s ease;
 }
 
-nutton:hover {
+button:hover {
     transfrom: scale(1.05); /*phóng to nhẹ */
     background: #ff4757; /* màu nền */
     calor: white: /* đổi màu chữ */
