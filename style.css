@@ -212,10 +212,13 @@ button:hover {
 /* Fix lỗi trên mobile trong ảnh của bạn */
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 10px;
+        padding: 10px 15px;
         height: auto; /* Để navbar thích ứng với nội dung */
         flex-wrap: wrap; /* Thanh menu xuống dòng khi hẹp */
-    }
+        gap: 10px;             /* Tạo khoảng cách đều giữa các dòng */
+        position: relative;    /* Đổi từ fixed sang relative để không đè lên nội dung dưới */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
 
     .menu-links {
         flex-direction: column; /* Menu xếp thành một cột */
@@ -223,11 +226,17 @@ button:hover {
         margin-top: 10px;
     }
     .menu-links li {
-        font-size: 12px;
-    }
+        font-size: 13px;
+    white-space: nowrap;   /* Ép chữ không được tự động xuống dòng lỗi */
+    }
     .search-container {
         width: 100%;
     }
+trên */
+    .page {
+        padding-top: 15px !important; /* Xóa khoảng trống cố định 70px cũ */
+        height: auto;
+        }
 }
 
 @media (max-width: 768px) {
