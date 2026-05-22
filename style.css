@@ -335,3 +335,26 @@ trên */
         font-size: 12px;
     }
 }
+@media (max-width: 768px) {
+    /* Ép phần trang nội dung (chứa chữ Về Chúng Tôi) phải cách thanh Menu ra */
+    .page {
+        position: relative !important;
+        top: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto !important;
+        min-height: 100vh;
+        
+        /* ĐÂY LÀ DÒNG QUAN TRỌNG: Tạo khoảng cách phía trên để không bị che mất chữ */
+        padding-top: 20px !important; 
+        padding-bottom: 40px;
+    }
+
+    /* Đảm bảo khung chứa lớn không bóp nghẹt chiều cao của trang */
+    .container {
+        height: auto !important;
+        width: 100vw;
+        overflow-y: visible !important;
+    }
+}
