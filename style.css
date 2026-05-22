@@ -241,3 +241,46 @@ button:hover {
         font-size: 24px; /* Giảm kích thước nút đóng */
     }
 }
+/* Phần Thương Hiệu */
+.brands-section {
+    text-align: center;
+    padding: 30px 20px;
+    background: #f9f9f9;
+}
+
+.brands-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.brand-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Khoảng cách giữa các thương hiệu */
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 120px;
+}
+
+.brand img {
+    width: 100%; /* Logo fill toàn bộ khung */
+    max-width: 100px; /* Giới hạn chiều ngang logo */
+    height: auto; /* Để hình không bị méo */
+    margin-bottom: 10px;
+    object-fit: contain; /* Căn giữa logo trong khung */
+}
+
+.brand p {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    margin-top: 5px;
+}
