@@ -180,192 +180,81 @@ button:hover {
     font-size: 16px;
 }
 
-@media (max-width: 768px) {
-    .navbar { 
-        padding: 10px 15px;
-        height: auto; 
-        flex-direction: column;
-        gap: 8px;
-        position: fixed; /* Ghim cứng menu trên cùng */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .product-grid { padding: 20px; }
-    .product-card { flex: 0 0 85%; }
-}
-/* Thanh tìm kiếm */
-.search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: #f1f1f1;
-    border-radius: 20px;
-    padding: 5px 12px;
-    margin: 0 10px;
-    flex: 1; /* Giúp thanh tìm kiếm giãn ra */
-    min-width: 120px; /* Độ rộng tối thiểu để hiện chữ */
-    border: 1px solid #ddd;
-}
-
-.search-container input {
-    border: none;
-    background: none;
-    outline: none;
-    width: 100%;
-    padding: 8px 5px;
-    font-size: 16px; /* Để điện thoại không bị tự động zoom */
-    color: #333; /* Màu chữ hiển thị */
-}
-
-/* Fix lỗi trên mobile trong ảnh của bạn */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 10px 15px;
-        height: auto; /* Để navbar thích ứng với nội dung */
-        flex-wrap: wrap; /* Thanh menu xuống dòng khi hẹp */
-        gap: 10px;             /* Tạo khoảng cách đều giữa các dòng */
-        position: fixed;    /* Đổi từ fixed sang relative để không đè lên nội dung dưới */
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-
-    .menu-links {
-        flex-direction: column; /* Menu xếp thành một cột */
-        gap: 10px;
-        margin-top: 10px;
-    }
-    .menu-links li {
-        font-size: 13px;
-    white-space: nowrap;   /* Ép chữ không được tự động xuống dòng lỗi */
-    }
-    .search-container {
-        width: 100%;
-    }
-    .page {
-        padding-top: 130px !important; /* Xóa khoảng trống cố định 70px cũ */
-        height: auto;
-        }
-}
-
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 20px;
-        width: 95%; /* Phủ gần toàn màn hình nhưng vẫn có khoảng trống */
-        max-height: 70vh; /* Dễ cuộn hơn nếu nội dung dài */
-    }
-    
-    .close-x {
-        font-size: 24px; /* Giảm kích thước nút đóng */
-    }
-}
 /* ==========================================================================
-   CẤU TRÚC PHẦN THƯƠNG HIỆU (ĐÃ SỬA THẲNG HÀNG)
-   ========================================================================== */
-.brands-section {
-    text-align: center;
-    padding: 30px 15px;
-    background: #f9f9f9;
-}
+   TOÀN BỘ ĐOẠN ĐIỀU CHỈNH MOBILE (THAY THẾ TỪ DÒNG 183 ĐẾN HẾT FILE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* 1. Cấu hình Navbar cố định dạng dọc trên mobile */
+    .navbar {
+        padding: 10px 15px;
+        height: auto; 
+        flex-direction: column;
+        gap: 8px;
+        position: fixed !important; /* Ghim cứng trên đầu để không bị trôi */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
 
-.brands-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-}
+    /* 2. Menu chữ xếp hàng ngang gọn gàng, thưa thoáng không bị bẻ dọc chữ */
+    .menu-links {
+        flex-direction: row !important; 
+        justify-content: center;
+        gap: 15px;
+        margin-top: 5px;
+        width: 100%;
+    }
 
-/* Khung chứa lớn: Căn giữa toàn bộ danh sách */
-.brand-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Giúp các logo thừa ở hàng dưới luôn căn giữa */
-    gap: 15px; /* Khoảng cách đều giữa các ô */
-    max-width: 1200px;
-    margin: 0 auto;
-}
+    .menu-links li {
+        font-size: 13px;
+        white-space: nowrap; /* Ép chữ không tự động xuống dòng */
+    }
 
-/* Từng ô thương hiệu: Ép cố định kích thước để thẳng hàng */
-.brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px 10px;
-    
-    /* Mặc định trên PC: Chia đều 6 ô trên 1 hàng */
-    width: calc(16.66% - 15px); 
-    min-width: 140px; /* Không cho phép bóp quá nhỏ */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}
+    /* 3. Thanh tìm kiếm co giãn vừa vặn chiều rộng mobile */
+    .search-container {
+        width: 100%;
+        margin: 5px 0 0 0;
+    }
 
-/* Khung ảnh: Ép ảnh bằng nhau, không lo ảnh dọc ảnh ngang làm lệch chữ */
-.brand img {
-    width: 100%;
-    height: 60px; /* Chiều cao cố định cho mọi logo */
-    object-fit: contain; /* Giữ nguyên tỉ lệ logo, không bị méo */
-    margin-bottom: 10px;
-}
+    /* 4. Đẩy trang nội dung né hẳn Menu dọc phía trên ra để hiện chữ "VỀ CHÚNG TÔI" */
+    .page {
+        padding-top: 145px !important; /* Khoảng cách hoàn hảo để né menu */
+        height: 100vh;
+    }
 
-.brand p {
-    font-size: 14px;
-    color: #444;
-    font-weight: bold;
-    margin: 0;
-    text-transform: capitalize;
+    /* 5. Khung lưới sản phẩm vuốt mượt trên mobile */
+    .product-grid { padding: 20px; }
+    .product-card { flex: 0 0 85%; }
+
+    /* 6. Tối ưu hiển thị bảng thông báo (Modal) */
+    .modal-content {
+        padding: 20px;
+        width: 95%; 
+        max-height: 70vh; 
+    }
+    .close-x {
+        font-size: 24px; 
+    }
+
+    /* 7. Khung thương hiệu chia đều 3 ô/hàng thẳng tắp tăm tắp */
+    .brand-logos {
+        gap: 10px; 
+    }
+    .brand {
+        width: calc(33.33% - 10px);
+        min-width: 95px; 
+        padding: 10px 5px;
+    }
+    .brand img {
+        height: 45px; 
+        margin-bottom: 5px;
+    }
+    .brand p {
+        font-size: 12px;
+    }
 }
 
 /* ==========================================================================
-   HỖ TRỢ ĐIỆN THOẠI (RESPONSIVE)
-   ========================================================================== */
-@media (max-width: 768px) {
-    .brand-logos {
-        gap: 10px; /* Giảm khoảng cách trên mobile một chút */
-    }
-
-    .brand {
-        /* Trên mobile: Tự động xếp 3 ô một hàng đều đặn */
-        width: calc(33.33% - 10px);
-        min-width: 95px; 
-        padding: 10px 5px;
-    }
-
-    .brand img {
-        height: 45px; /* Thu nhỏ chiều cao logo trên mobile cho cân đối */
-        margin-bottom: 5px;
-    }
-
-    .brand p {
-        font-size: 12px;
-    }
-}
-@media (max-width: 768px) {
-    /* Ép phần trang nội dung (chứa chữ Về Chúng Tôi) phải cách thanh Menu ra */
-    .page {
-        position: relative !important;
-        top: 0 !important;
-        transform: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        height: auto !important;
-        min-height: 100vh;
-        
-        /* ĐÂY LÀ DÒNG QUAN TRỌNG: Tạo khoảng cách phía trên để không bị che mất chữ */
-        padding-top: 20px !important; 
-        padding-bottom: 40px;
-    }
-
-    /* Đảm bảo khung chứa lớn không bóp nghẹt chiều cao của trang */
-    .container {
-        height: auto !important;
-        width: 100vw;
-        overflow-y: visible !important;
-    }
-}
-/* Xóa gạch chân toàn bộ nội dung trong trang */
+   DÒNG CUỐI CÙNG: XÓA TRIỆT ĐỂ GẠCH CHÂN CỦA ĐƯỜNG LINK TOÀN TRANG
+   ========================================================================== */
 .page, .page * {
-    text-decoration: none !important;
-}
-a, a:hover {
-    text-decoration: none !important;
+    text-decoration: none !important;
 }
