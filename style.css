@@ -209,24 +209,47 @@ button:hover {
     color: #333; /* Màu chữ hiển thị */
 }
 
-/* Fix lỗi trên mobile trong ảnh của bạn */
+/* ==========================================================================
+   FIX LỖI NAVBAR / HEADER TRÊN MOBILE (THAY THẾ ĐOẠN CŨ TRONG @MEDIA)
+   ========================================================================== */
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 10px;
-        height: auto; /* Để navbar thích ứng với nội dung */
-        flex-wrap: wrap; /* Thanh menu xuống dòng khi hẹp */
+        padding: 10px 15px;
+        height: auto;          /* Cho phép navbar co giãn theo nội dung xếp chồng */
+        flex-direction: column; /* Chuyển bố cục từ hàng ngang thành hàng dọc */
+        gap: 10px;             /* Tạo khoảng cách đều giữa các dòng */
+        position: relative;    /* Đổi từ fixed sang relative để không đè lên nội dung dưới */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
+    /* Khung chứa các chữ Menu (Trang chủ, Sản phẩm...) */
     .menu-links {
-        flex-direction: column; /* Menu xếp thành một cột */
-        gap: 10px;
-        margin-top: 10px;
-    }
-    .menu-links li {
-        font-size: 12px;
-    }
-    .search-container {
+        display: flex;
+        flex-direction: row;   /* Giữ hàng ngang trên mobile */
+        justify-content: center;
+        gap: 20px;             /* Khoảng cách vừa phải giữa các chữ */
+        margin: 0;
+        padding: 0;
         width: 100%;
+    }
+
+    .menu-links li {
+        font-size: 13px;       /* Hạ size chữ một chút cho vừa màn hình */
+        white-space: nowrap;   /* Ép chữ không được tự động xuống dòng lỗi */
+    }
+
+    /* Khung chứa Thanh tìm kiếm và Giỏ hàng */
+    /* Lưu ý: Bạn nên bọc thanh search và giỏ hàng vào 1 div chung trong HTML nếu chưa có, 
+       hoặc dùng code dưới để ép chúng nằm chung 1 hàng */
+    .search-container {
+        width: 85%;            /* Dành lối cho giỏ hàng */
+        margin: 0;
+    }
+
+    /* Ép phần trang nội dung bên dưới tự động nối đuôi, không bị hụt lên trên */
+    .page {
+        padding-top: 15px !important; /* Xóa khoảng trống cố định 70px cũ */
+        height: auto;
     }
 }
 @media (max-width: 768px) {
