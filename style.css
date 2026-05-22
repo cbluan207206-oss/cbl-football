@@ -234,6 +234,7 @@ button:hover {
     }
 trên */
     .page {
+        text-decoration: none !important;
         padding-top: 15px !important; /* Xóa khoảng trống cố định 70px cũ */
         height: auto;
         }
