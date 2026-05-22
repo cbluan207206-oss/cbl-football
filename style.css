@@ -284,3 +284,20 @@ button:hover {
     font-weight: bold;
     margin-top: 5px;
 }
+@media (max-width: 768px) {
+    .brand-logos {
+        gap: 20px; /* Giảm khoảng cách giữa các thương hiệu */
+    }
+
+    .brand {
+        max-width: 80px;
+    }
+
+    .brand img {
+        max-width: 60px; /* Logo nhỏ hơn trên màn hình hẹp */
+    }
+
+    .brand p {
+        font-size: 12px; /* Văn bản nhỏ hơn trên mobile */
+    }
+}
