@@ -39,7 +39,6 @@ button:hover {
     color: #ff4757; /* Đổi màu chữ */
     text-decoration: underline; /* Gạch chân chữ */
 }
-}
 .menu-links {
     list-style: none;
     display: flex;
