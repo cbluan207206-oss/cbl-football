@@ -240,7 +240,9 @@ button:hover {
         font-size: 24px; /* Giảm kích thước nút đóng */
     }
 }
-/* Phần Thương Hiệu */
+/* ==========================================================================
+   CẤU TRÚC PHẦN THƯƠNG HIỆU (ĐÃ SỬA THẲNG HÀNG)
+   ========================================================================== */
 .brands-section {
     text-align: center;
     padding: 30px 15px;
@@ -255,15 +257,17 @@ button:hover {
     text-transform: uppercase;
 }
 
+/* Khung chứa lớn: Căn giữa toàn bộ danh sách */
 .brand-logos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* Khoảng cách giữa các thương hiệu */
+    justify-content: center; /* Giúp các logo thừa ở hàng dưới luôn căn giữa */
+    gap: 15px; /* Khoảng cách đều giữa các ô */
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Từng ô thương hiệu: Ép cố định kích thước để thẳng hàng */
 .brand {
     display: flex;
     flex-direction: column;
@@ -280,24 +284,28 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 
+/* Khung ảnh: Ép ảnh bằng nhau, không lo ảnh dọc ảnh ngang làm lệch chữ */
 .brand img {
-    width: 100%; /* Logo fill toàn bộ khung */
-    max-width: 100px; /* Giới hạn chiều ngang logo */
-    height: auto; /* Để hình không bị méo */
+    width: 100%;
+    height: 60px; /* Chiều cao cố định cho mọi logo */
+    object-fit: contain; /* Giữ nguyên tỉ lệ logo, không bị méo */
     margin-bottom: 10px;
-    object-fit: contain; /* Căn giữa logo trong khung */
 }
 
 .brand p {
     font-size: 14px;
-    color: #555;
+    color: #444;
     font-weight: bold;
     margin: 0;
     text-transform: capitalize;
 }
+
+/* ==========================================================================
+   HỖ TRỢ ĐIỆN THOẠI (RESPONSIVE)
+   ========================================================================== */
 @media (max-width: 768px) {
     .brand-logos {
-        gap: 10px; /* Giảm khoảng cách giữa các thương hiệu */
+        gap: 10px; /* Giảm khoảng cách trên mobile một chút */
     }
 
     .brand {
@@ -313,6 +321,6 @@ button:hover {
     }
 
     .brand p {
-        font-size: 12px; /* Văn bản nhỏ hơn trên mobile */
+        font-size: 12px;
     }
 }
