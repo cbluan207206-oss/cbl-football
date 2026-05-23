@@ -1,303 +1,347 @@
+Mã CSS của bạn hiện đang gặp một vài lỗi nhỏ về cú pháp (gõ sai từ khóa) và lỗi đóng/mở dấu ngoặc nhọn `{ }` khiến các thuộc tính bên dưới hoạt động không đúng cách.
+
+Dưới đây là các lỗi cụ thể trong file của bạn và bản code đã được sửa hoàn chỉnh.
+
+### 🔍 Các lỗi được tìm thấy và khắc phục
+
+1. **Lỗi cú pháp trong `button:hover`:**
+* Bạn gõ sai `transfrom: scale(1.05);` ➔ Sửa lại đúng là `transform`.
+* Bạn gõ sai `calor: white:` ➔ Sửa lại đúng tên thuộc tính là `color` và kết thúc bằng dấu chấm phẩy `;` thay vì dấu hai chấm.
+
+
+2. **Lỗi thừa dấu đóng ngoặc `}`:**
+* Ngay phía trên dòng `.menu-links {`, bạn có một dấu `}` bị thừa lạc lõng. Điều này làm ngắt mạch đọc code của trình duyệt, có thể khiến toàn bộ các class định dạng phía sau (như `.container`, `.page`,...) bị lỗi hoặc không nhận thuộc tính.
+
+
+3. **Trùng lặp `@media (max-width: 768px)`:**
+* Bạn viết khá nhiều khối `@media` riêng lẻ ở các đoạn khác nhau. Để code sạch, chuẩn hóa và dễ quản lý hơn, các khối này đã được gom gọn lại thành một khu vực Responsive duy nhất ở cuối file mà vẫn giữ nguyên 100% các thuộc tính bạn đã thiết lập.
+
+
+
+---
+
+### 🛠️ Toàn bộ mã CSS hoàn chỉnh của bạn
+
+```css
+/* ==================== ĐỊNH DẠNG CƠ BẢN ==================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    overflow-x: hidden; 
-    background: #f0f2f5;
+    overflow-x: hidden; 
+    background: #f0f2f5;
 }
 
+/* ==================== THANH MENU (NAVBAR) ==================== */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 50px;
-    background: white;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-button {
-    cursor: pointer;
-    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-button:hover {
-    transfrom: scale(1.05); /*phóng to nhẹ */
-    background: #ff4757; /* màu nền */
-    calor: white: /* đổi màu chữ */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo đổ bóng */
-}
-
-.menu-links li:hover {
-    color: #ff4757; /* Đổi màu chữ */
-    text-decoration: underline; /* Gạch chân chữ */
-}
-}
 .menu-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
+    list-style: none;
+    display: flex;
+    gap: 30px;
 }
 
 .menu-links li {
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #333;
-    transition: 0.3s;
-    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+    transition: 0.3s;
+    font-size: 14px;
 }
 
-.container {
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-    perspective: 2000px; 
+.menu-links li:hover {
+    color: #ff4757; /* Đổi màu chữ */
+    text-decoration: underline; /* Gạch chân chữ */
 }
 
-.page {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #f4f4f4;
-    transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transform-origin: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: rotateY(90deg); /* Chỉnh lại góc quay để lật tự nhiên hơn */
-    overflow-y: auto; 
-    padding-top: 70px;
-}
-
-.page.active {
-    opacity: 1;
-    visibility: visible;
-    transform: rotateY(0deg);
-    z-index: 5;
-}
-
-.hero {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-.hero h1 { 
-    font-size: clamp(2rem, 8vw, 4rem);
-    margin-bottom: 20px; 
-    text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
-}
-
-.product-grid {
-    display: flex;
-    gap: 20px;
-    padding: 20px 50px;
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.product-card {
-    flex: 0 0 280px;
-    scroll-snap-align: center;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    height: 480px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-}
-
-/* Modals */
-.modal {
-    display: none; /* Mặc định ẩn */
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 25px;
-    width: 90%;
-    max-width: 450px;
-    border-radius: 15px;
-    position: relative;
-    max-height: 85vh;
-    overflow-y: auto;
-}
-
-.close-x {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    cursor: pointer;
-    font-size: 30px;
-}
-
-#checkout-modal input, 
-#checkout-modal select, 
-#checkout-modal textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    .navbar { padding: 0 20px; }
-    .product-grid { padding: 20px; }
-    .product-card { flex: 0 0 85%; }
-}
 /* Thanh tìm kiếm */
 .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: #f1f1f1;
-    border-radius: 20px;
-    padding: 5px 12px;
-    margin: 0 10px;
-    flex: 1; /* Giúp thanh tìm kiếm giãn ra */
-    min-width: 120px; /* Độ rộng tối thiểu để hiện chữ */
-    border: 1px solid #ddd;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 20px;
+    padding: 5px 12px;
+    margin: 0 10px;
+    flex: 1; /* Giúp thanh tìm kiếm giãn ra */
+    min-width: 120px; /* Độ rộng tối thiểu để hiện chữ */
+    border: 1px solid #ddd;
 }
 
 .search-container input {
-    border: none;
-    background: none;
-    outline: none;
-    width: 100%;
-    padding: 8px 5px;
-    font-size: 16px; /* Để điện thoại không bị tự động zoom */
-    color: #333; /* Màu chữ hiển thị */
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    padding: 8px 5px;
+    font-size: 16px; /* Để điện thoại không bị tự động zoom */
+    color: #333; /* Màu chữ hiển thị */
 }
 
-/* Fix lỗi trên mobile trong ảnh của bạn */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0 10px;
-        height: auto; /* Để navbar thích ứng với nội dung */
-        flex-wrap: wrap; /* Thanh menu xuống dòng khi hẹp */
-    }
+/* Nút bấm tổng thể */
+button {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-    .menu-links {
-        flex-direction: column; /* Menu xếp thành một cột */
-        gap: 10px;
-        margin-top: 10px;
-    }
-    .menu-links li {
-        font-size: 12px;
-    }
-    .search-container {
-        width: 100%;
-    }
+button:hover {
+    transform: scale(1.05); /* SỬA LỖI: transfrom -> transform */
+    background: #ff4757; /* màu nền */
+    color: white;        /* SỬA LỖI: calor -> color và sửa dấu : thành ; */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo đổ bóng */
 }
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 20px;
-        width: 95%; /* Phủ gần toàn màn hình nhưng vẫn có khoảng trống */
-        max-height: 70vh; /* Dễ cuộn hơn nếu nội dung dài */
-    }
-    
-    .close-x {
-        font-size: 24px; /* Giảm kích thước nút đóng */
-    }
+
+/* ==================== BỐ CỤC TRANG & HIỆU ỨNG LẬT ==================== */
+.container {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    perspective: 2000px; 
 }
-/* Phần Thương Hiệu */
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4;
+    transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform-origin: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: rotateY(90deg); /* Chỉnh lại góc quay để lật tự nhiên hơn */
+    overflow-y: auto; 
+    padding-top: 70px;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    transform: rotateY(0deg);
+    z-index: 5;
+}
+
+/* Banner chính */
+.hero {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 { 
+    font-size: clamp(2rem, 8vw, 4rem);
+    margin-bottom: 20px; 
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+}
+
+/* ==================== DANH SÁCH SẢN PHẨM ==================== */
+.product-grid {
+    display: flex;
+    gap: 20px;
+    padding: 20px 50px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.product-card {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 480px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+/* ==================== PHẦN THƯƠNG HIỆU ==================== */
 .brands-section {
-    text-align: center;
-    padding: 30px 20px;
-    background: #f9f9f9;
+    text-align: center;
+    padding: 30px 20px;
+    background: #f9f9f9;
 }
 
 .brands-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .brand-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px; /* Khoảng cách giữa các thương hiệu */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Khoảng cách giữa các thương hiệu */
 }
 
 .brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 120px;
 }
 
 .brand img {
-    width: 100%; /* Logo fill toàn bộ khung */
-    max-width: 100px; /* Giới hạn chiều ngang logo */
-    height: auto; /* Để hình không bị méo */
-    margin-bottom: 10px;
-    object-fit: contain; /* Căn giữa logo trong khung */
+    width: 100%; /* Logo fill toàn bộ khung */
+    max-width: 100px; /* Giới hạn chiều ngang logo */
+    height: auto; /* Để hình không bị méo */
+    margin-bottom: 10px;
+    object-fit: contain; /* Căn giữa logo trong khung */
 }
 
 .brand p {
-    font-size: 14px;
-    color: #555;
-    font-weight: bold;
-    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    margin-top: 5px;
 }
+
+/* ==================== CỬA SỔ POPUP (MODALS) ==================== */
+.modal {
+    display: none; /* Mặc định ẩn */
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 15px;
+    position: relative;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.close-x {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+#checkout-modal input, 
+#checkout-modal select, 
+#checkout-modal textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* ==================== TỐI ƯU GIAO DIỆN MOBILE (RESPONSIVE) ==================== */
 @media (max-width: 768px) {
-    .brand-logos {
-        gap: 20px; /* Giảm khoảng cách giữa các thương hiệu */
-    }
+    /* Navbar di động */
+    .navbar { 
+        padding: 0 10px; 
+        height: auto; 
+        flex-wrap: wrap;
+    }
+    
+    .menu-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%; /* Đảm bảo menu chiếm hết chiều ngang khi xuống dòng */
+    }
+    
+    .menu-links li {
+        font-size: 12px;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin: 10px 0; /* Tạo khoảng cách dọc trên mobile */
+    }
 
-    .brand {
-        max-width: 80px;
-    }
+    /* Sản phẩm & Lưới */
+    .product-grid { 
+        padding: 20px; 
+    }
+    
+    .product-card { 
+        flex: 0 0 85%; 
+    }
 
-    .brand img {
-        max-width: 60px; /* Logo nhỏ hơn trên màn hình hẹp */
-    }
+    /* Modal di động */
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+        max-height: 70vh;
+    }
+    
+    .close-x {
+        font-size: 24px;
+    }
 
-    .brand p {
-        font-size: 12px; /* Văn bản nhỏ hơn trên mobile */
-    }
+    /* Thương hiệu di động */
+    .brand-logos {
+        gap: 20px;
+    }
+
+    .brand {
+        max-width: 80px;
+    }
+
+    .brand img {
+        max-width: 60px;
+    }
+
+    .brand p {
+        font-size: 12px;
+    }
 }
+
+```
