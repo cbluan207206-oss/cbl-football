@@ -25,16 +25,18 @@
 </head>
 <body>
     
+    <!-- THANH DIỀU HƯỚNG (NAVBAR) -->
     <nav class="navbar">
         <ul class="menu-links">
             <li onclick="showSection(0)">Trang Chủ</li>
             <li onclick="showSection(1)">Sản Phẩm</li>
             <li onclick="showSection(2)">Thông Tin</li>
         </ul>
+        
         <div class="search-container">
-    <input type="text" id="product-search" placeholder="Tìm giày..." onkeyup="searchProduct()">
-    <i class="fas fa-search"></i>
-</div>
+            <input type="text" id="product-search" placeholder="Tìm giày..." onkeyup="searchProduct()">
+            <i class="fas fa-search"></i>
+        </div>
 
         <div class="cart-icon" onclick="toggleCart()">
             <i class="fas fa-shopping-cart"></i>
@@ -42,7 +44,10 @@
         </div>
     </nav>
 
+    <!-- NỘI DUNG CHÍNH (MAIN) -->
     <main class="container">
+        
+        <!-- TRANG CHỦ (SECTION 0) -->
         <section class="page active">
             <div class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('1images.png');">
                 <h1>NÂNG TẦM CẢM GIÁC BÓNG</h1>
@@ -51,9 +56,12 @@
             </div>
         </section>
 
+        <!-- TRANG SẢN PHẨM (SECTION 1) -->
         <section class="page">
             <h2 class="section-title">Tất Cả Sản Phẩm</h2>
             <div class="product-grid">
+                
+                <!-- Sản phẩm 1 -->
                 <div class="product-card">
                     <img src="2,2images.jpeg" alt="Nike Mercurial Vapor 14" 
                          onclick="showProductDetail('Nike Mercurial Vapor 14', '650.000', '39 - 45', 'Giày đá bóng dòng Mercurial – thiên về tốc độ. Thiết kế cổ thấp, ôm chân, nhẹ và linh hoạt. Trang bị Zoom Air hỗ trợ bật và giảm chấn. Upper mỏng cho cảm giác bóng tốt. Đế TF phù hợp sân cỏ nhân tạo. Phù hợp: tiền đạo, chạy cánh.', '2,2images.jpeg')" 
@@ -63,15 +71,19 @@
                     <p class="info">Size: 39 - 45. Độ bền cao, bám sân cực tốt.</p>
                     <button onclick="addToCart('Nike Mercurial Vapor 14', '650.000')">Thêm vào giỏ</button>
                 </div>
-                 <div class="product-card">
-                      <img src="IMG_4113.jpeg" alt="ADIDAS F50 SPARKFUSION" 
-                           onclick="showProductDetail('ADIDAS F50 SPARKFUSION', '710.000', '39 - 45', 'Adidas F50 TF là dòng giày dành cho những cầu thủ yêu thích tốc độ và sự linh hoạt trên sân cỏ nhân tạo. Thiết kế siêu nhẹ giúp bứt tốc nhanh, di chuyển linh hoạt và xử lý bóng gọn hơn. Upper mỏng ôm chân tạo cảm giác bóng chân thật, kết hợp đế TF bám sân tốt giúp đổi hướng ổn định và tự tin hơn khi thi đấu. Phù hợp: đá cánh, tiền đạo, người chơi tốc độ. Ưu điểm: nhẹ, ôm chân, tăng tốc tốt.', 'IMG_4113.jpeg')"
-                           style="cursor: pointer;">
-                           <h3>ADIDAS F50 SPARKFUSION</h3>
-                           <p class="price">710.000đ</p>
-                           <p class="info">Size: 39 - 45. Kiểm soát bóng tối ưu.</p>
-                           <button onclick="addToCart('ADIDAS F50 SPARKFUSION', '710.000')">Thêm vào giỏ</button>
+                
+                <!-- Sản phẩm 2 -->
+                <div class="product-card">
+                    <img src="IMG_4113.jpeg" alt="ADIDAS F50 SPARKFUSION" 
+                         onclick="showProductDetail('ADIDAS F50 SPARKFUSION', '710.000', '39 - 45', 'Adidas F50 TF là dòng giày dành cho những cầu thủ yêu thích tốc độ và sự linh hoạt trên sân cỏ nhân tạo. Thiết kế siêu nhẹ giúp bứt tốc nhanh, di chuyển linh hoạt và xử lý bóng gọn hơn. Upper mỏng ôm chân tạo cảm giác bóng chân thật, kết hợp đế TF bám sân tốt giúp đổi hướng ổn định và tự tin hơn khi thi đấu. Phù hợp: đá cánh, tiền đạo, người chơi tốc độ. Ưu điểm: nhẹ, ôm chân, tăng tốc tốt.', 'IMG_4113.jpeg')"
+                         style="cursor: pointer;">
+                    <h3>ADIDAS F50 SPARKFUSION</h3>
+                    <p class="price">710.000đ</p>
+                    <p class="info">Size: 39 - 45. Kiểm soát bóng tối ưu.</p>
+                    <button onclick="addToCart('ADIDAS F50 SPARKFUSION', '710.000')">Thêm vào giỏ</button>
                 </div>  
+                
+                <!-- Sản phẩm 3 -->
                 <div class="product-card">
                     <img src="4images.png" alt="Mizuno Alpha 3 Elite" 
                          onclick="showProductDetail('Mizuno Alpha 3 Elite', '760.000', '38 - 43', 'Dòng giày tốc độ nhẹ nhất của Mizuno (~195g). Upper knit siêu mỏng cho cảm giác bóng chân thật. Đệm Mizuno Enerzy êm ái, hoàn trả lực tốt. Phù hợp cho tiền đạo và cầu thủ chạy cánh.', '4images.png')" 
@@ -82,6 +94,7 @@
                     <button onclick="addToCart('Mizuno Alpha 3 Elite', '760.000')">Thêm vào giỏ</button>
                 </div>
 
+                <!-- Sản phẩm 4 -->
                 <div class="product-card">
                     <img src="IMG_4099.png" alt="Nike Mercurial M3P" 
                          onclick="showProductDetail('Nike Mercurial M3P TF', '650.000', '39 - 45', 'Phiên bản Nike Mercurial M3P TF màu đen mang phong cách tối giản mạnh mẽ. Thiết kế nhẹ, linh hoạt, hỗ trợ di chuyển tốc độ cao.\n\nĐế cao su TF êm, phù hợp sân cỏ nhân tạo tại Việt Nam.\n\n👉 Ưu điểm: dễ mang, êm chân, bền.', 'IMG_4099.png')" 
@@ -92,6 +105,7 @@
                     <button onclick="addToCart('Nike Mercurial M3P TF', '650.000')">Thêm vào giỏ</button>
                 </div>
 
+                <!-- Sản phẩm 5 -->
                 <div class="product-card">
                     <img src="IMG_4104.jpeg" alt="Nike Mercurial 17" 
                          onclick="showProductDetail('Nike Mercurial 17 TF', '740.000', '39 - 45', 'Thiết kế xanh ngọc nổi bật. Form giày ôm chân, hỗ trợ bứt tốc và xử lý bóng nhanh.\n\nPhù hợp đá cánh, tiền đạo thiên về rê bóng – dứt điểm.\n\n👉 Lưu ý: form hơi bó, chân bè nên tăng 0.5 size.', 'IMG_4104.jpeg')" 
@@ -104,13 +118,15 @@
             </div>
         </section>
 
+        <!-- TRANG THÔNG TIN (SECTION 2) -->
         <section class="page">
             <div class="contact-info">
                 <h2>VỀ CHÚNG TÔI</h2>
                 <p><strong>Địa chỉ:</strong> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
                 <p><strong>Liên hệ:</strong> 0984.169.335</p>
                 <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1H5czPAx3n/" target="_blank">CBL Soccer Page</a></p>
-                <p><strong>Tiktok:</strong> <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" targaet="_blank">DLS-ONLY FOOTBALL⚽️ Page</a></p>
+                <p><strong>Tiktok:</strong> <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" target="_blank">DLS-ONLY FOOTBALL⚽️ Page</a></p>
+                
                 <div class="commitment">
                     <h3>Cam kết của cửa hàng:</h3>
                     <ul>
@@ -118,60 +134,62 @@
                         <li>Bảo hành lỗi 1 đổi 1 trong 30 ngày</li>
                         <li>Giao hàng nhanh toàn quốc</li>
                     </ul>
-                    <div class="commitment">
-                        <h3>Quyền Lợi Nhận Được:</h3>
-                        <u>
-                        <p><strong>Vận Chuyển</strong>
-                            <li>Giao Hàng Siêu Tốc, Tiết Kiệm Thời Gian.</li></p>
-                        <p><strong>Chính Sách Đổi Trả & Bảo Hành</strong>
-                             <li>Đổi Trả Hàng Trong 30 Ngày
-                             Bảo Hành Keo Đế Trong 12 Tháng.</li></p>
-                         <p><strong>Hỗ Trợ Khách Hàng</strong>
-                            <li>Tư Vấn Size Chuẩn Xác, Luôn Hỗ Trợ Nhiệt Tình
-                            Nếu Gặp Vấn Đề.</li></p>
+                </div>
+
+                <!-- SỬA LỖI: Chuẩn hóa lại cấu trúc danh sách hiển thị quyền lợi -->
+                <div class="commitment">
+                    <h3>Quyền Lợi Nhận Được:</h3>
+                    <ul>
+                        <li><strong>Vận Chuyển:</strong> Giao Hàng Siêu Tốc, Tiết Kiệm Thời Gian.</li>
+                        <li><strong>Chính Sách Đổi Trả & Bảo Hành:</strong> Đổi Trả Hàng Trong 30 Ngày. Bảo Hành Keo Đế Trong 12 Tháng.</li>
+                        <li><strong>Hỗ Trợ Khách Hàng:</strong> Tư Vấn Size Chuẩn Xác, Luôn Hỗ Trợ Nhiệt Tình Nếu Gặp Vấn Đề.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DANH MỤC THƯƠNG HIỆU -->
+            <div class="brands-section">
+                <h2 class="brands-title">Thương Hiệu</h2>
+                <div class="brand-logos">
+                    <div class="brand">
+                        <img src="nike.png" alt="Nike Logo">
+                        <p>Nike</p>
+                    </div>
+                    <div class="brand">
+                        <img src="adidas.jpg" alt="Adidas Logo">
+                        <p>Adidas</p>
+                    </div>
+                    <div class="brand">
+                        <img src="mizuno.png" alt="Mizuno Logo">
+                        <p>Mizuno</p>
+                    </div>
+                    <div class="brand">
+                        <img src="wika.jpg" alt="Wika Logo">
+                        <p>Wika</p>
+                    </div>
+                    <div class="brand">
+                        <img src="zocker.png" alt="Zocker Logo">
+                        <p>Zocker</p>
+                    </div>
+                    <div class="brand">
+                        <img src="kamito.jpg" alt="Kamito Logo">
+                        <p>Kamito</p>
                     </div>
                 </div>
             </div>
-        <div class="brands-section">
-    <h2 class="brands-title">Thương Hiệu</h2>
-    <div class="brand-logos">
-        <div class="brand">
-            <img src="nike.png" alt="Nike Logo">
-            <p>Nike</p>
-        </div>
-        <div class="brand">
-            <img src="adidas.jpg" alt="Adidas Logo">
-            <p>Adidas</p>
-        </div>
-        <div class="brand">
-            <img src="mizuno.png" alt="Mizuno Logo">
-            <p>Mizuno</p>
-        </div>
-        <div class="brand">
-            <img src="wika.jpg" alt="Wika Logo">
-            <p>Wika</p>
-        </div>
-        <div class="brand">
-            <img src="zocker.png" alt="Zocker Logo">
-            <p>Zocker</p>
-        </div>
-        <div class="brand">
-            <img src="kamito.jpg" alt="Kamito Logo">
-            <p>Kamito</p>
-        </div>
-    </div>
-    </div>
-</section>
+        </section>
     </main>
 
-    <div id="product-detail-modal" class="modal" style="display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+    <!-- CỬA SỔ POPUP CHI TIẾT SẢN PHẨM -->
+    <div id="product-detail-modal" class="modal" style="display:none;">
         <div style="background:white; margin:auto; padding:20px; width:90%; max-width:500px; border-radius:15px; position:relative; max-height: 85vh; display: flex; flex-direction: column;">
             <span onclick="closeProductDetail()" class="close-x" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:30px; z-index: 10;">&times;</span>
             <div id="detail-content" style="overflow-y: auto; flex-grow: 1; padding: 10px; text-align: left;"></div>
         </div>
     </div>
 
-    <div id="cart-modal" class="modal" style="display:none; position:fixed; z-index:11000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <!-- CỬA SỔ POPUP GIỎ HÀNG -->
+    <div id="cart-modal" class="modal" style="display:none;">
         <div style="background:white; padding:20px; width:90%; max-width:450px; border-radius:15px; position:relative;">
             <span onclick="toggleCart()" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:25px;">&times;</span>
             <h2 style="margin-bottom: 15px; text-align: center;">Giỏ hàng của bạn</h2>
@@ -189,7 +207,8 @@
         </div>
     </div>
 
-    <div id="checkout-modal" class="modal" style="display:none; position:fixed; z-index:12000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+    <!-- CỬA SỔ POPUP ĐẶT HÀNG (CHECKOUT) -->
+    <div id="checkout-modal" class="modal" style="display:none;">
         <div style="background:white; padding:25px; width:90%; max-width:400px; border-radius:15px; position:relative;">
             <span onclick="closeCheckout()" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:25px;">&times;</span>
             <h2 style="text-align:center; margin-bottom:20px;">Thông Tin Nhận Hàng</h2>
@@ -217,7 +236,8 @@
         </div>
     </div>
     
-    <div id="bill-modal" class="modal" style="display:none; position:fixed; z-index:13000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); align-items: center; justify-content: center;">
+    <!-- CỬA SỔ POPUP HÓA ĐƠN (BILL) -->
+    <div id="bill-modal" class="modal" style="display:none;">
         <div style="background:white; padding:20px; width:85%; max-width:320px; border-radius:10px; border: 2px dashed #333; font-family: monospace;">
             <h2 style="text-align:center; border-bottom: 1px solid #ddd; padding-bottom:10px;">CBL SOCCER</h2>
             <div id="bill-detail" style="margin: 15px 0; font-size: 13px;"></div>
