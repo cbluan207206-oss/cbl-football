@@ -260,25 +260,35 @@ button:hover {
 @media (max-width: 768px) {
     /* Navbar di động */
     .navbar { 
-        padding: 12px 15px; 
+        padding: 10px 15px; 
         height: auto;
         display: flex; 
         flex-direction: column;
         align-items: center;
-        gap: 12px
+        gap: 10px
     }
     
     .menu-links {
-        flex-direction: row;
+        flex-direction: row !important;
         justify-content: center;
-        gap: 20px;
-        width: auto;
+        align-items: center;
+        gap: 150px;
+        width: 100^;
         padding: 0;
-        display: flex
+        position: relative;
+        display: flex !important;
+    }
+    .menu-links li {
+        font-size: 13px;
+        list-style: none;
     }
     .cart-icon {
-        margin-left: 10px;
-        font-size: 13px;
+        position: absolute;
+        right: 0;
+        font-size: 14px;
+        display: flex;
+        align-itemn:center;
+        gap: 4px;
     }
     
     .search-container {
@@ -324,6 +334,6 @@ button:hover {
     }
     
     .page {
-        padding-top: 130px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
+        padding-top: 155px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
     }
 }
