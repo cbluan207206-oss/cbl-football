@@ -272,7 +272,7 @@ button:hover {
         flex-direction: row !important;
         justify-content: center;
         align-items: center;
-        gap: 150px;
+        gap: 15px;
         width: 100^;
         padding: 0;
         position: relative;
@@ -334,6 +334,6 @@ button:hover {
     }
     
     .page {
-        padding-top: 155px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
+        padding-top: 130px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
     }
 }
