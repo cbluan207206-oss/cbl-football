@@ -333,6 +333,9 @@ button:hover {
         font-size: 12px;
     }
     
+    .page {
+        padding-top: 155px !important;
+    }
     .contact-info {
         padding-top: 50px; 
 }
