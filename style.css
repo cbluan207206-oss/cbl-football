@@ -274,15 +274,19 @@ button:hover {
         gap: 20px;
         width: 100%;
         padding: 0;
+        display: flex
     }
-    
+    cart-icon {
+        margin-left: 10px;
+        
+    }
     .menu-links li {
         font-size: 13px;
     }
     
     .search-container {
-        width: 85%;
-        margin: 5px 0; /* Tạo khoảng cách dọc trên mobile */
+        width: 100%;
+        margin: 0; /* Tạo khoảng cách dọc trên mobile */
     }
 
     /* Sản phẩm & Lưới */
