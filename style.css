@@ -276,7 +276,7 @@ button:hover {
         padding: 0;
         display: flex
     }
-    cart-icon {
+    .cart-icon {
         margin-left: 10px;
         font-size: 13px;
     }
