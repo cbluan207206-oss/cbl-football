@@ -334,6 +334,10 @@ button:hover {
     }
     
     .page {
-        padding-top: 145px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
+        padding-top: 130px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
     }
+    /* CHỈ ĐẨY NỘI DUNG CỦA PHẦN THÔNG TIN XUỐNG */
+    .contact-info {
+        padding-top: 50px; 
+}
 }
