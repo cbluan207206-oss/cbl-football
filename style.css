@@ -334,6 +334,6 @@ button:hover {
     }
     
     .page {
-        padding-top: 200px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
+        padding-top: 170px !important; /* Đẩy nội dung toàn bộ trang xuống dưới, né thanh navbar ra */
     }
 }
