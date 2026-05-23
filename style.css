@@ -260,27 +260,24 @@ button:hover {
 @media (max-width: 768px) {
     /* Navbar di động */
     .navbar { 
-        padding: 10px 15px; 
+        padding: 12px 15px; 
         height: auto;
         display: flex; 
         flex-direction: column;
         align-items: center;
-        gap: 10px
+        gap: 12px
     }
     
     .menu-links {
         flex-direction: row;
         justify-content: center;
         gap: 20px;
-        width: 100%;
+        width: auto;
         padding: 0;
         display: flex
     }
     cart-icon {
         margin-left: 10px;
-        
-    }
-    .menu-links li {
         font-size: 13px;
     }
     
