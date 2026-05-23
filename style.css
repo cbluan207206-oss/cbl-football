@@ -1,28 +1,3 @@
-Mã CSS của bạn hiện đang gặp một vài lỗi nhỏ về cú pháp (gõ sai từ khóa) và lỗi đóng/mở dấu ngoặc nhọn `{ }` khiến các thuộc tính bên dưới hoạt động không đúng cách.
-
-Dưới đây là các lỗi cụ thể trong file của bạn và bản code đã được sửa hoàn chỉnh.
-
-### 🔍 Các lỗi được tìm thấy và khắc phục
-
-1. **Lỗi cú pháp trong `button:hover`:**
-* Bạn gõ sai `transfrom: scale(1.05);` ➔ Sửa lại đúng là `transform`.
-* Bạn gõ sai `calor: white:` ➔ Sửa lại đúng tên thuộc tính là `color` và kết thúc bằng dấu chấm phẩy `;` thay vì dấu hai chấm.
-
-
-2. **Lỗi thừa dấu đóng ngoặc `}`:**
-* Ngay phía trên dòng `.menu-links {`, bạn có một dấu `}` bị thừa lạc lõng. Điều này làm ngắt mạch đọc code của trình duyệt, có thể khiến toàn bộ các class định dạng phía sau (như `.container`, `.page`,...) bị lỗi hoặc không nhận thuộc tính.
-
-
-3. **Trùng lặp `@media (max-width: 768px)`:**
-* Bạn viết khá nhiều khối `@media` riêng lẻ ở các đoạn khác nhau. Để code sạch, chuẩn hóa và dễ quản lý hơn, các khối này đã được gom gọn lại thành một khu vực Responsive duy nhất ở cuối file mà vẫn giữ nguyên 100% các thuộc tính bạn đã thiết lập.
-
-
-
----
-
-### 🛠️ Toàn bộ mã CSS hoàn chỉnh của bạn
-
-```css
 /* ==================== ĐỊNH DẠNG CƠ BẢN ==================== */
 * {
     margin: 0;
@@ -343,5 +318,3 @@ button:hover {
         font-size: 12px;
     }
 }
-
-```
