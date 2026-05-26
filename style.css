@@ -94,10 +94,9 @@ button:hover {
 .page {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background: #f4f4f4;
     transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -106,7 +105,8 @@ button:hover {
     visibility: hidden;
     transform: rotateY(90deg); /* Chỉnh lại góc quay để lật tự nhiên hơn */
     overflow-y: auto; 
-    padding-top: 70px;
+    padding-top: 90px;
+    padding-bottom: 40px;
 }
 
 .page.active {
@@ -337,5 +337,47 @@ button:hover {
 
     .contact-info {
         padding-top: 100px; 
+}
+/* ==================== ĐỊNH DẠNG KHU VỰC THÔNG TIN ==================== */
+/* Định dạng chung cho phần thông tin liên hệ */
+.contact-info {
+    width: 100%;
+    max-width: 800px; /* Giới hạn độ rộng vừa mắt trên máy tính */
+    padding: 20px;
+    text-align: left; /* Căn lề trái giúp đọc danh sách dễ dàng hơn */
+}
+
+/* Khoảng cách cho các dòng thông tin cơ bản (Địa chỉ, SĐT...) */
+.contact-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* Tạo khoảng cách thông thoáng cho các khối Cam kết và Quyền lợi */
+.commitment {
+    margin-top: 25px; /* Đẩy khối Cam kết & Quyền lợi cách xa phần trên */
+    margin-bottom: 15px;
+}
+
+/* Định dạng riêng cho tiêu đề h3 (Cam kết của cửa hàng, Quyền Lợi Nhận Được) */
+.commitment h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 12px; /* Khoảng cách từ tiêu đề xuống danh sách phía dưới */
+    text-transform: uppercase;
+}
+
+/* Giãn khoảng cách giữa các dòng trong thẻ danh sách ul li */
+.commitment ul {
+    padding-left: 20px; /* Tạo khoảng lùi đầu dòng cho dấu chấm tròn bullet */
+}
+
+.commitment ul li {
+    font-size: 15px;
+    line-height: 1.8; /* Tăng chiều cao dòng để các chữ không đè dính nhau */
+    margin-bottom: 8px; /* Khoảng cách giữa các dòng cam kết */
+    color: #333;
 }
 }
