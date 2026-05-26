@@ -256,16 +256,16 @@ button:hover {
     font-size: 16px;
 }
 
-/* ==================== TỐI ƯU GIAO DIỆN MOBILE (RESPONSIVE) ==================== */
+/* ============================== TỐI ƯU GIAO DIỆN MOBILE CHUẨN ============================== */
 @media (max-width: 768px) {
-    /* Navbar di động */
+    /* 1. Cố định chiều cao Navbar di động để tính toán khoảng cách */
     .navbar { 
         position: fixed !important;
         top: 0;
         left: 0;
         width: 100%;
-        padding: 10px 15px;
-        height: 110px;
+        padding: 10px 15px; 
+        height: 120px !important; /* Đặt chiều cao cố định 120px */
         display: flex; 
         flex-direction: column;
         justify-content: space-between;
@@ -277,115 +277,177 @@ button:hover {
     }
     
     .menu-links {
+        display: flex !important;
         flex-direction: row !important;
         justify-content: center;
         align-items: center;
         gap: 15px;
         width: 100%;
         padding: 0;
-        position: relative;
-        display: flex !important;
-    }
-    .menu-links li {
-        font-size: 13px;
-        list-style: none;
-    }
-    .cart-icon {
-        position: absolute;
-        right: 0;
-        font-size: 14px;
-        display: flex;
-        align-itemn: center;
-        gap: 4px;
-    }
-    
-    .search-container {
-        width: 100%;
-        margin: 0; /* Tạo khoảng cách dọc trên mobile */
+        margin-bottom: 5px;
     }
 
-    /* Sản phẩm & Lưới */
+    .menu-links li {
+        font-size: 13px;
+        text-transform: uppercase;
+        list-style: none;
+    }
+
+    /* Định vị giỏ hàng gọn gàng bên góc */
+    .cart-icon {
+        position: absolute;
+        right: 15px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    /* Thanh tìm kiếm hiển thị rõ ràng, không bị che khuất chữ */
+    .search-container {
+        width: 100%;
+        margin: 0;
+        padding: 0 5px;
+    }
+    
+    .search-container input {
+        width: 100%;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    /* 2. Đẩy nội dung các trang xuống dưới thanh menu chính xác 120px */
+    .page {
+        position: absolute;
+        top: 120px; /* Bắt đầu ngay dưới navbar */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 120px); /* Khóa chiều cao vừa vặn màn hình */
+        padding: 15px 0 30px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: auto; /* Cho phép vuốt cuộn mượt mà */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 3. Trang chủ: Ép ảnh banner phủ kín màn hình điện thoại, xóa khoảng trắng */
+    .page:has(.hero) {
+        overflow: hidden !important; /* Khóa cuộn dọc riêng ở trang chủ */
+    }
+
+    .hero {
+        width: 100%;
+        height: 100% !important; /* Banner chiếm trọn phần không gian còn lại */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    /* 4. Lưới sản phẩm: Vuốt mượt theo chiều ngang */
     .product-grid { 
-        padding: 20px; 
+        width: 100%;
+        padding: 10px 20px; 
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
     }
     
     .product-card { 
-        flex: 0 0 85%; 
+        flex: 0 0 85%; /* Thẻ sản phẩm rộng rãi vừa tầm nhìn mobile */
+        height: 440px; 
+        scroll-snap-align: start;
     }
 
-    /* Modal di động */
+    .page h2 {
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+
+    /* 5. Giao diện Modal trên điện thoại */
     .modal-content {
         padding: 20px;
         width: 95%;
-        max-height: 70vh;
+        max-height: 80vh;
+        overflow-y: auto;
     }
-    
+
     .close-x {
         font-size: 24px;
     }
 
-    /* Thương hiệu di động */
+    /* 6. Logo các thương hiệu giày trên mobile */
     .brand-logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 20px;
+        flex-wrap: wrap;
+        padding: 10px;
     }
 
     .brand {
         max-width: 80px;
+        text-align: center;
     }
 
     .brand img {
         max-width: 60px;
+        height: auto;
     }
 
     .brand p {
         font-size: 12px;
+        margin-top: 5px;
     }
-    
 
-
+    /* 7. Định dạng riêng phần Thông tin liên hệ trên mobile */
     .contact-info {
-        padding-top: 100px; 
-}
-/* ==================== ĐỊNH DẠNG KHU VỰC THÔNG TIN ==================== */
-/* Định dạng chung cho phần thông tin liên hệ */
-.contact-info {
-    width: 100%;
-    max-width: 800px; /* Giới hạn độ rộng vừa mắt trên máy tính */
-    padding: 20px;
-    text-align: left; /* Căn lề trái giúp đọc danh sách dễ dàng hơn */
-}
+        width: 100%;
+        padding: 15px 20px !important;
+        text-align: left;
+    }
 
-/* Khoảng cách cho các dòng thông tin cơ bản (Địa chỉ, SĐT...) */
-.contact-info p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-}
+    .contact-info p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
 
-/* Tạo khoảng cách thông thoáng cho các khối Cam kết và Quyền lợi */
-.commitment {
-    margin-top: 25px; /* Đẩy khối Cam kết & Quyền lợi cách xa phần trên */
-    margin-bottom: 15px;
-}
+    .commitment {
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
 
-/* Định dạng riêng cho tiêu đề h3 (Cam kết của cửa hàng, Quyền Lợi Nhận Được) */
-.commitment h3 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 12px; /* Khoảng cách từ tiêu đề xuống danh sách phía dưới */
-    text-transform: uppercase;
-}
+    .commitment h3 {
+        font-size: 17px;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
 
-/* Giãn khoảng cách giữa các dòng trong thẻ danh sách ul li */
-.commitment ul {
-    padding-left: 20px; /* Tạo khoảng lùi đầu dòng cho dấu chấm tròn bullet */
-}
+    .commitment ul {
+        padding-left: 20px;
+    }
 
-.commitment ul li {
-    font-size: 15px;
-    line-height: 1.8; /* Tăng chiều cao dòng để các chữ không đè dính nhau */
-    margin-bottom: 8px; /* Khoảng cách giữa các dòng cam kết */
-    color: #333;
-}
+    .commitment ul li {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 8px;
+        color: #333;
+    }
 }
