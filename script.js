@@ -91,7 +91,8 @@ function checkout() {
 function closeCheckout() {
     document.getElementById('checkout-modal').style.display = 'none';
 }
- function confirmOrder() {
+
+function confirmOrder() {
     const name = document.getElementById('cus-name').value.trim();
     const phone = document.getElementById('cus-phone').value.trim();
     const address = document.getElementById('cus-address').value.trim();
@@ -117,7 +118,7 @@ function closeCheckout() {
     // 3. Nội dung tin nhắn gửi về Telegram
     const messageContent = `👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟\n----------------------------\n📦 Sản phẩm: ${productNames}\n📏 Size: ${size}\n💰 Tổng cộng: ${totalPrice}\n👤 Khách: ${name}\n📞 SĐT: ${phone}\n📍 Địa chỉ: ${address}\n📝 Ghi chú: ${note || 'Không có'}\n----------------------------\n🚀 Check đơn ngay chủ shop ơi!`;
     
-    // Gửi Telegram
+    // Gửi Telegram (Hàm bên dưới tự động mã hóa URL 1 lần duy nhất để không lỗi font)
     sendTelegramMessage(messageContent);
 
     // 4. Hiển thị hóa đơn (Bill) lên màn hình cho khách xem
@@ -155,13 +156,6 @@ function closeCheckout() {
     }, 6000);
 }
 
-const phoneInput = document.getElementById('cus-phone');
-const errorMessage = document.createElement('p');
-errorMessage.style.color = 'red';
-errorMessage.style.fontSize = '14px';
-errorMessage.innerText = "Vui lòng nhập số điện thoại hợp lệ (10 chữ số).";
-phoneInput.parentNode.appendChild(errorMessage); // Hiển thị lỗi bên dưới ô input
-
 function showProductDetail(name, price, size, desc, img) {
     const modal = document.getElementById('product-detail-modal');
     const content = document.getElementById('detail-content');
@@ -170,7 +164,7 @@ function showProductDetail(name, price, size, desc, img) {
         <h2>${name}</h2>
         <p style="color:#ff4757; font-weight:bold; font-size:20px;">${price}đ</p>
         <p><b>Size:</b> ${size}</p>
-        <p style="color:#666; margin:15px 0;">${desc}</p>
+        <p style="color:#666; margin:15px 0; white-space: pre-line;">${desc}</p>
         <button onclick="addToCart('${name}', '${price}'); closeProductDetail()" style="width:100%; padding:12px; background:#27ae60; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">THÊM VÀO GIỎ NGAY</button>
     `;
     modal.style.display = 'flex';
@@ -179,35 +173,33 @@ function showProductDetail(name, price, size, desc, img) {
 function closeProductDetail() {
     document.getElementById('product-detail-modal').style.display = 'none';
 }
-// --- ĐOẠN CODE TÌM KIẾM MỚI ---
+
+// --- HÀM TÌM KIẾM MỚI (ĐÃ SỬA LỖI KHÔNG HOẠT ĐỘNG) ---
 function searchProduct() {
-    // Lấy từ khóa người dùng nhập và chuyển về chữ thường
-    let input = document.getElementById('product-search').value.toLowerCase();
-    
-    // Lấy tất cả các thẻ sản phẩm trong grid
+    let input = document.getElementById('product-search').value.toLowerCase().trim();
     let cards = document.querySelectorAll('.product-card');
 
-    cards.forEach(card => {
-        // Lấy tên sản phẩm bên trong thẻ h3 của từng card
-        let productName = card.querySelector('h3').innerText.toLowerCase();
-        
-        // So khớp: Nếu tên sản phẩm chứa từ khóa thì hiện, không thì ẩn
-        if (productName.includes(input)) {
-            card.style.display = "flex"; 
-        } else {
-            card.style.display = "none"; 
-        }
-    });
-
-    // Nếu người dùng đang gõ, tự động chuyển sang trang Sản Phẩm (Section 1) để xem kết quả
+    // Nếu người dùng đang gõ, tự động chuyển ngay sang trang Sản Phẩm (Section 1) để lộ kết quả lọc ra
     if (input.length > 0) {
         showSection(1);
     }
+
+    cards.forEach(card => {
+        let titleTag = card.querySelector('h3');
+        if (titleTag) {
+            let productName = titleTag.innerText.toLowerCase();
+            
+            // So khớp từ khóa
+            if (productName.includes(input)) {
+                card.style.display = "flex"; 
+            } else {
+                card.style.display = "none"; 
+            }
+        }
+    });
 }
-// ------------------------------
 
-// Hàm Telegram của bạn vẫn giữ nguyên ở dưới này...
-
+// --- HÀM GỬI TELEGRAM (MÃ HÓA CHUẨN 1 LẦN) ---
 function sendTelegramMessage(message) {
     const token = "8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0";
     const chatId = "7901882812";
