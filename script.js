@@ -91,48 +91,36 @@ function checkout() {
 function closeCheckout() {
     document.getElementById('checkout-modal').style.display = 'none';
 }
- // báo lỗi đặt hàng //
-    function confirmOrder() {
-    const name = document.getElementById('cus-name').value;
-    const phone = document.getElementById('cus-phone').value;
-    const address = document.getElementById('cus-address').value;
-    const note = document.getElementById('cus-note').value;
+ function confirmOrder() {
+    const name = document.getElementById('cus-name').value.trim();
+    const phone = document.getElementById('cus-phone').value.trim();
+    const address = document.getElementById('cus-address').value.trim();
+    const note = document.getElementById('cus-note').value.trim();
     const size = document.getElementById('cus-size').value;
 
+    // 1. Kiểm tra trống thông tin cơ bản
     if (!size || !name || !phone || !address) {
         alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
         return;
     }
     
-// Kiểm tra số điện thoại (phải đủ 10 ký tự và toàn là số)
-    const phoneRegex = /^[0-9]{10}$/; // Regex kiểm tra chuỗi 10 số
+    // 2. Kiểm tra định dạng số điện thoại (10 chữ số)
+    const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(phone)) {
         alert("Vui lòng nhập số điện thoại hợp lệ (đúng 10 chữ số)!");
         return;
     }
+
     let productNames = cart.map(item => item.name).join(", ");
     let totalPrice = document.getElementById('total-price').innerText;
 
-    const messageContent = `
-👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟
-----------------------------
-📦 Sản phẩm: ${productNames}
-📏 Size: ${size}
-💰 Tổng cộng: ${totalPrice}
-👤 Khách: ${name}
-📞 SĐT: ${phone}
-📍 Địa chỉ: ${address}
-📝 Ghi chú: ${note || 'Không có'}
-----------------------------
-🚀 Check đơn ngay chủ shop ơi!
-    `;
-    // Mã hóa messageContent
-const encodedMessage = encodeURIComponent(messageContent); // Đảm bảo an toàn ký tự đặc biệt
+    // 3. Nội dung tin nhắn gửi về Telegram
+    const messageContent = `👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟\n----------------------------\n📦 Sản phẩm: ${productNames}\n📏 Size: ${size}\n💰 Tổng cộng: ${totalPrice}\n👤 Khách: ${name}\n📞 SĐT: ${phone}\n📍 Địa chỉ: ${address}\n📝 Ghi chú: ${note || 'Không có'}\n----------------------------\n🚀 Check đơn ngay chủ shop ơi!`;
+    
+    // Gửi Telegram
+    sendTelegramMessage(messageContent);
 
-// Truyền message đã mã hóa vào hàm sendTelegramMessage
-sendTelegramMessage(encodedMessage);
-
-// Render thông tin đơn hàng lên giao diện
+    // 4. Hiển thị hóa đơn (Bill) lên màn hình cho khách xem
     const billDetail = document.getElementById('bill-detail');
     if (billDetail) {
         billDetail.innerHTML = `
@@ -151,11 +139,12 @@ sendTelegramMessage(encodedMessage);
     const billModal = document.getElementById('bill-modal');
     if (billModal) billModal.style.display = 'flex';
 
-    // Xóa giỏ hàng sau khi đặt thành công
+    // 5. Làm sạch giỏ hàng sau khi đặt thành công
     cart = [];
     saveCart();
     updateCartUI();
 
+    // Tự động đóng Bill sau 6 giây và xóa trắng các ô nhập liệu
     setTimeout(() => {
         if (billModal) billModal.style.display = 'none';
         document.getElementById('cus-name').value = "";
