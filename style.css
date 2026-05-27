@@ -42,11 +42,11 @@ body {
 }
 
 .menu-links li:hover {
-    color: #ff4757; /* Đổi màu chữ */
-    text-decoration: underline; /* Gạch chân chữ */
+    color: #ff4757; 
+    text-decoration: underline; 
 }
 
-/* Thanh tìm kiếm */
+/* Thanh tìm kiếm PC */
 .search-container {
     position: relative;
     display: flex;
@@ -55,8 +55,8 @@ body {
     border-radius: 20px;
     padding: 5px 12px;
     margin: 0 10px;
-    flex: 1; /* Giúp thanh tìm kiếm giãn ra */
-    min-width: 120px; /* Độ rộng tối thiểu để hiện chữ */
+    flex: 1; 
+    min-width: 120px; 
     border: 1px solid #ddd;
 }
 
@@ -66,8 +66,27 @@ body {
     outline: none;
     width: 100%;
     padding: 8px 5px;
-    font-size: 16px; /* Để điện thoại không bị tự động zoom */
-    color: #333; /* Màu chữ hiển thị */
+    font-size: 16px; 
+    color: #333; 
+}
+
+/* Biểu tượng giỏ hàng */
+.cart-icon {
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+#cart-count {
+    background: #ff4757;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
 }
 
 /* Nút bấm tổng thể */
@@ -77,10 +96,10 @@ button {
 }
 
 button:hover {
-    transform: scale(1.05); /* SỬA LỖI: transfrom -> transform */
-    background: #ff4757; /* màu nền */
-    color: white;        /* SỬA LỖI: calor -> color và sửa dấu : thành ; */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tạo đổ bóng */
+    transform: scale(1.05); 
+    background: #ff4757; 
+    color: white;        
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 /* ==================== BỐ CỤC TRANG & HIỆU ỨNG LẬT ==================== */
@@ -95,7 +114,7 @@ button:hover {
     position: absolute;
     width: 100%;
     min-height: 100vh;
-    display: flex;
+    display: none; /* Mặc định ẩn hoàn toàn để tránh lỗi đè chồng chéo các trang */
     flex-direction: column;
     align-items: center;
     background: #f4f4f4;
@@ -103,20 +122,23 @@ button:hover {
     transform-origin: center;
     opacity: 0;
     visibility: hidden;
-    transform: rotateY(90deg); /* Chỉnh lại góc quay để lật tự nhiên hơn */
+    transform: rotateY(90deg); 
     overflow-y: auto; 
     padding-top: 90px;
     padding-bottom: 40px;
+    box-sizing: border-box;
 }
 
+/* Chỉ hiển thị trang khi được kích hoạt */
 .page.active {
+    display: flex !important;
     opacity: 1;
     visibility: visible;
     transform: rotateY(0deg);
     z-index: 5;
 }
 
-/* Banner chính */
+/* Banner chính trang chủ */
 .hero {
     width: 100%;
     height: 100%;
@@ -137,6 +159,22 @@ button:hover {
     text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
 }
 
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+.hero button {
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 25px;
+}
+
 /* ==================== DANH SÁCH SẢN PHẨM ==================== */
 .product-grid {
     display: flex;
@@ -144,7 +182,7 @@ button:hover {
     padding: 20px 50px;
     width: 100%;
     overflow-x: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
 }
 
@@ -168,11 +206,41 @@ button:hover {
     object-fit: contain;
 }
 
+.product-card h3 {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+    color: #222;
+}
+
+.product-card .price {
+    color: #ff4757;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-card .info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.product-card button {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
 /* ==================== PHẦN THƯƠNG HIỆU ==================== */
 .brands-section {
     text-align: center;
     padding: 30px 20px;
     background: #f9f9f9;
+    width: 100%;
 }
 
 .brands-title {
@@ -187,7 +255,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px; /* Khoảng cách giữa các thương hiệu */
+    gap: 30px; 
 }
 
 .brand {
@@ -198,11 +266,11 @@ button:hover {
 }
 
 .brand img {
-    width: 100%; /* Logo fill toàn bộ khung */
-    max-width: 100px; /* Giới hạn chiều ngang logo */
-    height: auto; /* Để hình không bị méo */
+    width: 100%; 
+    max-width: 100px; 
+    height: auto; 
     margin-bottom: 10px;
-    object-fit: contain; /* Căn giữa logo trong khung */
+    object-fit: contain; 
 }
 
 .brand p {
@@ -212,9 +280,50 @@ button:hover {
     margin-top: 5px;
 }
 
+/* Trang thông tin gốc (PC) */
+.contact-info {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+    text-align: left;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.contact-info a {
+    color: #ff4757;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.commitment {
+    margin-top: 30px;
+}
+
+.commitment h3 {
+    margin-bottom: 10px;
+}
+
+.commitment ul {
+    padding-left: 20px;
+}
+
+.commitment ul li {
+    margin-bottom: 8px;
+}
+
 /* ==================== CỬA SỔ POPUP (MODALS) ==================== */
 .modal {
-    display: none; /* Mặc định ẩn */
+    display: none; 
     position: fixed;
     z-index: 10000;
     left: 0;
@@ -256,198 +365,233 @@ button:hover {
     font-size: 16px;
 }
 
-/* ============================== TỐI ƯU GIAO DIỆN MOBILE CHUẨN ============================== */
+/* ============================== ĐOẠN ĐIỀU CHỈNH GIAO DIỆN MOBILE CHUẨN ============================== */
 @media (max-width: 768px) {
-    /* 1. Cố định chiều cao Navbar di động để tính toán khoảng cách */
+    /* 1. Thiết lập thanh điều hướng di động cao 120px, phân tách không gian rõ ràng */
     .navbar { 
         position: fixed !important;
         top: 0;
         left: 0;
         width: 100%;
         padding: 10px 15px; 
-        height: 120px !important; /* Đặt chiều cao cố định 120px */
-        display: flex; 
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        gap: 5px;
-        background: white;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        height: 120px !important; 
+        display: flex !important; 
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 5px !important;
+        background: #ffffff !important;
+        z-index: 9999 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        box-sizing: border-box;
     }
     
     .menu-links {
         display: flex !important;
         flex-direction: row !important;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        width: 100%;
-        padding: 0;
-        margin-bottom: 5px;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 0 5px 0 !important;
     }
 
     .menu-links li {
-        font-size: 13px;
-        text-transform: uppercase;
-        list-style: none;
+        font-size: 13px !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+        list-style: none !important;
     }
 
-    /* Định vị giỏ hàng gọn gàng bên góc */
+    /* Đặt icon giỏ hàng nhỏ gọn ở góc phải menu */
     .cart-icon {
-        position: absolute;
-        right: 15px;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
+        position: absolute !important;
+        right: 15px !important;
+        top: 12px !important;
+        font-size: 16px !important;
+        z-index: 10000;
     }
 
-    /* Thanh tìm kiếm hiển thị rõ ràng, không bị che khuất chữ */
+    /* Định hình thanh tìm kiếm bo gọn vừa khít, không bung viền màn hình */
     .search-container {
-        width: 100%;
-        margin: 0;
-        padding: 0 5px;
+        width: 100% !important;
+        margin: 0 !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
     }
     
     .search-container input {
-        width: 100%;
-        padding: 6px 10px;
-        font-size: 14px;
+        width: 100% !important;
+        padding: 6px 35px 6px 12px !important;
+        font-size: 14px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 20px !important;
+        box-sizing: border-box !important;
     }
 
-    /* 2. Đẩy nội dung các trang xuống dưới thanh menu chính xác 120px */
+    .search-container i {
+        position: absolute !important;
+        right: 12px !important;
+        color: #888 !important;
+    }
+
+    /* 2. Đẩy nội dung các trang đổ xuống dưới thanh Menu chính xác 120px (Hết lỗi rúc gầm) */
     .page {
-        position: absolute;
-        top: 120px; /* Bắt đầu ngay dưới navbar */
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 120px); /* Khóa chiều cao vừa vặn màn hình */
-        padding: 15px 0 30px 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        overflow-y: auto; /* Cho phép vuốt cuộn mượt mà */
-        -webkit-overflow-scrolling: touch;
+        position: absolute !important;
+        top: 120px !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: calc(100vh - 120px) !important;
+        padding: 15px 0 40px 0 !important;
+        display: none !important; 
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+        transform: none !important; /* Tắt lật xoay 3D trên Mobile để tránh lag giật */
     }
 
-    /* 3. Trang chủ: Ép ảnh banner phủ kín màn hình điện thoại, xóa khoảng trắng */
+    .page.active {
+        display: flex !important;
+    }
+
+    /* 3. Trang chủ: Ép ảnh nền quả bóng phủ kín khít màn hình, dứt điểm khoảng trắng hở */
     .page:has(.hero) {
-        overflow: hidden !important; /* Khóa cuộn dọc riêng ở trang chủ */
+        overflow: hidden !important;
     }
 
     .hero {
-        width: 100%;
-        height: 100% !important; /* Banner chiếm trọn phần không gian còn lại */
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
+        width: 100% !important;
+        height: 100% !important;
+        background-size: cover !important;
+        background-position: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
     }
 
     .hero h1 {
-        font-size: 24px;
-        text-align: center;
-        padding: 0 15px;
+        font-size: 24px !important;
+        text-align: center !important;
+        margin-bottom: 10px !important;
     }
 
-    /* 4. Lưới sản phẩm: Vuốt mượt theo chiều ngang */
+    .hero p {
+        font-size: 13px !important;
+        text-align: center !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* 4. Lưới sản phẩm: Cho phép vuốt lướt theo chiều ngang cực mượt */
     .product-grid { 
-        width: 100%;
-        padding: 10px 20px; 
-        display: flex;
-        gap: 15px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        width: 100% !important;
+        padding: 10px 15px !important; 
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 15px !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        box-sizing: border-box !important;
     }
     
     .product-card { 
-        flex: 0 0 85%; /* Thẻ sản phẩm rộng rãi vừa tầm nhìn mobile */
-        height: 440px; 
-        scroll-snap-align: start;
+        flex: 0 0 82% !important; 
+        height: auto !important;
+        padding: 15px !important;
+        padding-bottom: 20px !important;
+        scroll-snap-align: start !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    .product-card img {
+        width: 100% !important;
+        height: 180px !important;
+        object-fit: cover !important; /* Cắt ảnh bo viền gọn gàng không bị bóp méo */
+        border-radius: 8px !important;
     }
 
     .page h2 {
-        margin-top: 10px;
-        margin-bottom: 15px;
-        font-size: 22px;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        font-size: 20px !important;
+        text-align: center !important;
     }
 
-    /* 5. Giao diện Modal trên điện thoại */
-    .modal-content {
-        padding: 20px;
-        width: 95%;
-        max-height: 80vh;
-        overflow-y: auto;
+    /* 5. Căn chuẩn khung Popup Modal nằm chính giữa màn hình điện thoại */
+    .modal {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 10000 !important;
+        display: none; 
+        justify-content: center !important;
+        align-items: center !important;
     }
 
-    .close-x {
-        font-size: 24px;
+    .modal > div {
+        width: 92% !important;
+        max-height: 82vh !important;
+        border-radius: 12px !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
     }
 
-    /* 6. Logo các thương hiệu giày trên mobile */
+    /* 6. Thu nhỏ tỷ lệ logo các hãng giày xếp hàng cân đối */
     .brand-logos {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
-        padding: 10px;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+        padding: 10px !important;
     }
 
     .brand {
-        max-width: 80px;
-        text-align: center;
+        flex: 0 0 28% !important;
+        text-align: center !important;
+        margin-bottom: 10px !important;
     }
 
     .brand img {
-        max-width: 60px;
-        height: auto;
+        width: 50px !important;
+        height: 50px !important;
+        object-fit: contain !important;
     }
 
-    .brand p {
-        font-size: 12px;
-        margin-top: 5px;
-    }
-
-    /* 7. Định dạng riêng phần Thông tin liên hệ trên mobile */
+    /* 7. Ép chữ trang Thông Tin rải đều không bị thụt lề xiên vẹo */
     .contact-info {
-        width: 100%;
-        padding: 15px 20px !important;
-        text-align: left;
+        width: 100% !important;
+        padding: 10px 20px !important;
+        box-sizing: border-box !important;
     }
 
     .contact-info p {
-        font-size: 15px;
-        line-height: 1.6;
-        margin-bottom: 12px;
-    }
-
-    .commitment {
-        margin-top: 20px;
-        margin-bottom: 15px;
-    }
-
-    .commitment h3 {
-        font-size: 17px;
-        font-weight: bold;
-        color: #222;
-        margin-bottom: 10px;
-        text-transform: uppercase;
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 10px !important;
     }
 
     .commitment ul {
-        padding-left: 20px;
+        padding-left: 15px !important;
     }
 
     .commitment ul li {
-        font-size: 14px;
-        line-height: 1.7;
-        margin-bottom: 8px;
-        color: #333;
+        font-size: 13px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 6px !important;
     }
 }
