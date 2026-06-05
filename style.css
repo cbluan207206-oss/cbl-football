@@ -114,7 +114,7 @@ button:hover {
     position: absolute;
     width: 100%;
     min-height: 100vh;
-    display: none; /* Mặc định ẩn hoàn toàn để tránh lỗi đè chồng chéo các trang */
+    display: none;
     flex-direction: column;
     align-items: center;
     background: #f4f4f4;
@@ -173,6 +173,18 @@ button:hover {
     color: white;
     border: none;
     border-radius: 25px;
+}
+
+/* ==================== TIÊU ĐỀ MỤC ==================== */
+/* SỬA LỖI 8: Thêm định nghĩa .section-title còn thiếu */
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* ==================== DANH SÁCH SẢN PHẨM ==================== */
@@ -322,6 +334,7 @@ button:hover {
 }
 
 /* ==================== CỬA SỔ POPUP (MODALS) ==================== */
+/* SỬA LỖI 3: Thêm align-items và justify-content vào .modal gốc */
 .modal {
     display: none; 
     position: fixed;
@@ -331,8 +344,8 @@ button:hover {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.8);
-    align-items: center;
-    justify-content: center;
+    align-items: center;       /* THÊM MỚI: căn giữa dọc */
+    justify-content: center;   /* THÊM MỚI: căn giữa ngang */
 }
 
 .modal-content {
@@ -367,7 +380,7 @@ button:hover {
 
 /* ============================== ĐOẠN ĐIỀU CHỈNH GIAO DIỆN MOBILE CHUẨN ============================== */
 @media (max-width: 768px) {
-    /* 1. Thiết lập thanh điều hướng di động cao 120px, phân tách không gian rõ ràng */
+    /* 1. Thiết lập thanh điều hướng di động cao 120px */
     .navbar { 
         position: fixed !important;
         top: 0;
@@ -413,7 +426,7 @@ button:hover {
         z-index: 10000;
     }
 
-    /* Định hình thanh tìm kiếm bo gọn vừa khít, không bung viền màn hình */
+    /* Định hình thanh tìm kiếm bo gọn vừa khít */
     .search-container {
         width: 100% !important;
         margin: 0 !important;
@@ -438,7 +451,7 @@ button:hover {
         color: #888 !important;
     }
 
-    /* 2. Đẩy nội dung các trang đổ xuống dưới thanh Menu chính xác 120px (Hết lỗi rúc gầm) */
+    /* 2. Đẩy nội dung các trang xuống dưới navbar 120px */
     .page {
         position: absolute !important;
         top: 120px !important;
@@ -453,14 +466,14 @@ button:hover {
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
         box-sizing: border-box !important;
-        transform: none !important; /* Tắt lật xoay 3D trên Mobile để tránh lag giật */
+        transform: none !important;
     }
 
     .page.active {
         display: flex !important;
     }
 
-    /* 3. Trang chủ: Ép ảnh nền quả bóng phủ kín khít màn hình, dứt điểm khoảng trắng hở */
+    /* 3. Trang chủ: ảnh nền phủ kín màn hình */
     .page:has(.hero) {
         overflow: hidden !important;
     }
@@ -491,7 +504,7 @@ button:hover {
         margin-bottom: 20px !important;
     }
 
-    /* 4. Lưới sản phẩm: Cho phép vuốt lướt theo chiều ngang cực mượt */
+    /* 4. Lưới sản phẩm: vuốt ngang mượt */
     .product-grid { 
         width: 100% !important;
         padding: 10px 15px !important; 
@@ -518,7 +531,7 @@ button:hover {
     .product-card img {
         width: 100% !important;
         height: 180px !important;
-        object-fit: cover !important; /* Cắt ảnh bo viền gọn gàng không bị bóp méo */
+        object-fit: cover !important;
         border-radius: 8px !important;
     }
 
@@ -529,7 +542,13 @@ button:hover {
         text-align: center !important;
     }
 
-    /* 5. Căn chuẩn khung Popup Modal nằm chính giữa màn hình điện thoại */
+    /* SỬA LỖI 8 Mobile: section-title trên mobile */
+    .section-title {
+        font-size: 18px !important;
+        margin: 10px 0 !important;
+    }
+
+    /* 5. Căn chuẩn Popup Modal chính giữa màn hình */
     .modal {
         position: fixed !important;
         top: 0 !important;
@@ -550,7 +569,7 @@ button:hover {
         box-sizing: border-box !important;
     }
 
-    /* 6. Thu nhỏ tỷ lệ logo các hãng giày xếp hàng cân đối */
+    /* 6. Thu nhỏ logo thương hiệu */
     .brand-logos {
         display: flex !important;
         justify-content: center !important;
@@ -572,7 +591,7 @@ button:hover {
         object-fit: contain !important;
     }
 
-    /* 7. Ép chữ trang Thông Tin rải đều không bị thụt lề xiên vẹo */
+    /* 7. Trang Thông Tin căn chỉnh đúng */
     .contact-info {
         width: 100% !important;
         padding: 10px 20px !important;
