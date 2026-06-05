@@ -1,10 +1,28 @@
-// Khởi tạo giỏ hàng từ LocalStorage nếu có
-let cart = JSON.parse(localStorage.getItem('cbl_cart')) || [];
+// SỬA LỖI 2: Bọc localStorage bằng try-catch phòng trường hợp bị chặn (Safari private, WebView, iframe)
+function safeGetStorage(key) {
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    } catch (e) {
+        console.warn('localStorage không khả dụng:', e);
+        return null;
+    }
+}
+
+function safeSetStorage(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+        console.warn('Không thể lưu vào localStorage:', e);
+    }
+}
+
+// Khởi tạo giỏ hàng từ localStorage (có xử lý lỗi)
+let cart = safeGetStorage('cbl_cart') || [];
 
 function showSection(index) {
     const pages = document.querySelectorAll('.page');
     pages.forEach((page, i) => {
-        if(i === index) {
+        if (i === index) {
             page.classList.add('active');
         } else {
             page.classList.remove('active');
@@ -22,12 +40,13 @@ function addToCart(name, price) {
 }
 
 function saveCart() {
-    localStorage.setItem('cbl_cart', JSON.stringify(cart));
+    // SỬA LỖI 2: Dùng hàm bảo mật thay vì gọi localStorage trực tiếp
+    safeSetStorage('cbl_cart', cart);
 }
 
 function updateCartUI() {
     const countEl = document.getElementById('cart-count');
-    if(countEl) countEl.innerText = cart.length;
+    if (countEl) countEl.innerText = cart.length;
 }
 
 function toggleCart() {
@@ -65,7 +84,12 @@ function renderCartItems() {
                 </button>
             </div>
         `;
-        total += parseInt(item.price.replace(/\./g, ''));
+        // SỬA LỖI 4: Chuẩn hóa parse giá — xóa cả dấu chấm lẫn dấu phẩy trước khi parseInt
+        const cleanPrice = item.price.replace(/[.,]/g, '');
+        const parsedPrice = parseInt(cleanPrice);
+        if (!isNaN(parsedPrice)) {
+            total += parsedPrice;
+        }
     });
 
     list.innerHTML = html;
@@ -118,10 +142,15 @@ function confirmOrder() {
     // 3. Nội dung tin nhắn gửi về Telegram
     const messageContent = `👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟\n----------------------------\n📦 Sản phẩm: ${productNames}\n📏 Size: ${size}\n💰 Tổng cộng: ${totalPrice}\n👤 Khách: ${name}\n📞 SĐT: ${phone}\n📍 Địa chỉ: ${address}\n📝 Ghi chú: ${note || 'Không có'}\n----------------------------\n🚀 Check đơn ngay chủ shop ơi!`;
     
-    // Gửi Telegram (Hàm bên dưới tự động mã hóa URL 1 lần duy nhất để không lỗi font)
-    sendTelegramMessage(messageContent);
+    // SỬA LỖI 7: Gửi Telegram có xử lý lỗi — thông báo nếu gửi thất bại
+    sendTelegramMessage(messageContent).catch(() => {
+        // Ghi log lỗi nhưng không làm gián đoạn trải nghiệm khách hàng
+        console.error('Không thể gửi thông báo Telegram. Vui lòng kiểm tra đơn hàng thủ công!');
+        // Có thể thêm alert cho chủ shop nếu muốn:
+        // alert('⚠️ Lỗi gửi thông báo Telegram! Kiểm tra đơn thủ công.');
+    });
 
-    // 4. Hiển thị hóa đơn (Bill) lên màn hình cho khách xem
+    // 4. Hiển thị hóa đơn (Bill) cho khách xem
     const billDetail = document.getElementById('bill-detail');
     if (billDetail) {
         billDetail.innerHTML = `
@@ -174,12 +203,12 @@ function closeProductDetail() {
     document.getElementById('product-detail-modal').style.display = 'none';
 }
 
-// --- HÀM TÌM KIẾM MỚI (ĐÃ SỬA LỖI KHÔNG HOẠT ĐỘNG) ---
+// --- HÀM TÌM KIẾM ---
 function searchProduct() {
     let input = document.getElementById('product-search').value.toLowerCase().trim();
     let cards = document.querySelectorAll('.product-card');
 
-    // Nếu người dùng đang gõ, tự động chuyển ngay sang trang Sản Phẩm (Section 1) để lộ kết quả lọc ra
+    // Nếu đang gõ, tự động chuyển sang trang Sản Phẩm
     if (input.length > 0) {
         showSection(1);
     }
@@ -188,8 +217,6 @@ function searchProduct() {
         let titleTag = card.querySelector('h3');
         if (titleTag) {
             let productName = titleTag.innerText.toLowerCase();
-            
-            // So khớp từ khóa
             if (productName.includes(input)) {
                 card.style.display = "flex"; 
             } else {
@@ -199,12 +226,17 @@ function searchProduct() {
     });
 }
 
-// --- HÀM GỬI TELEGRAM (MÃ HÓA CHUẨN 1 LẦN) ---
-function sendTelegramMessage(message) {
+// SỬA LỖI 7: Đổi thành async function trả về Promise để có thể .catch() ở ngoài
+async function sendTelegramMessage(message) {
     const token = "8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0";
     const chatId = "7901882812";
     const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-    fetch(url);
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Telegram API lỗi: ${response.status}`);
+    }
+    return response;
 }
 
 // Khi trang load xong
