@@ -68,7 +68,6 @@ const products = [
     }
 ];
 
-// Khởi tạo các biến toàn cục điều khiển trạng thái ứng dụng
 let cart = safeGetStorage('cbl_cart');
 let selectedSizeTemp = null; 
 let billTimeout = null;
@@ -372,12 +371,10 @@ function confirmOrder() {
     cart.forEach(item => { subTotal += (parseInt(item.price.replace(/[.,]/g, '')) || 0) * item.quantity; });
     let finalTotalText = subTotal >= 200000 ? subTotal.toLocaleString('vi-VN') + "đ (Freeship)" : (subTotal + 30000).toLocaleString('vi-VN') + "đ (+30k Ship)";
 
-    // Tạo nội dung String gửi đến Telegram
     const msg = `👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟\n----------------------------\n📦 Sản phẩm:\n${productDetails}\n💰 Tổng cộng: ${finalTotalText}\n👤 Khách hàng: ${name}\n📞 SĐT: ${phone}\n📍 Địa chỉ: ${address}, ${ward}, ${district}, ${city}\n📧 Email: ${email || 'Không cung cấp'}\n📝 Ghi chú: ${note || 'Không có'}\n----------------------------\n🚀 Check đơn chuẩn bị hàng nhé shop!`;
 
     sendTelegramMessage(msg).catch(err => console.error("Lỗi API Telegram: ", err));
 
-    // Hiển thị và in hóa đơn ra màn hình (Bill Modal)
     const billDetail = document.getElementById('bill-detail');
     if (billDetail) {
         billDetail.innerHTML = `
@@ -395,14 +392,12 @@ function confirmOrder() {
     if (checkoutModal) checkoutModal.style.display = 'none';
     if (billModal) billModal.style.display = 'flex';
 
-    // Xóa sạch trạng thái giỏ hàng sau khi đặt hàng thành công
     cart = []; 
     saveCart(); 
     updateCartUI();
 
     if (billTimeout) clearTimeout(billTimeout);
 
-    // Tiến hành Reset Form tự động sau 8 giây
     billTimeout = setTimeout(() => {
         if (billModal) billModal.style.display = 'none';
         const fields = ['cus-name', 'cus-phone', 'cus-address', 'cus-district', 'cus-ward', 'cus-note', 'cus-email'];
@@ -432,7 +427,7 @@ function searchProduct() {
     if (!searchInput) return;
 
     let input = searchInput.value.toLowerCase().trim();
-    if (input.length > 0) showSection(1); // Chuyển dịch vùng view sang danh mục khi tìm kiếm
+    if (input.length > 0) showSection(1); 
     
     const filtered = products.filter(p => p.name.toLowerCase().includes(input));
     renderProducts(filtered);
@@ -442,18 +437,17 @@ function showSection(index) {
     const pages = document.querySelectorAll('.page');
     pages.forEach((page, i) => page.classList.toggle('active', i === index));
     
-    // Đóng toàn bộ các modal đang mở nếu có điều hướng xảy ra
     document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 }
+
 /* ==========================================================================
    10. KÍCH HOẠT CÁC NÚT TƯƠNG TÁC TRÊN HEADER & HERO BANNER
    ========================================================================== */
 function initHeaderInteractions() {
-    // 1. Nút 3 gạch (Menu Mobile)
+    // 1. Nút Menu Mobile (Sửa lỗi hiển thị mượt mà)
     const menuBtn = document.querySelector('.header-left i, .fa-bars, #menu-toggle');
     if (menuBtn) {
         menuBtn.addEventListener('click', () => {
-            // Tùy thuộc vào class sidebar của bạn, ví dụ: .mobile-drawer hoặc .sidebar
             const sidebar = document.querySelector('.mobile-drawer, .sidebar, #mobile-menu');
             if (sidebar) {
                 sidebar.classList.toggle('active');
@@ -464,40 +458,36 @@ function initHeaderInteractions() {
         });
     }
 
-    // 2. Nút Mặt trăng (Đổi màu giao diện Sáng / Tối)
+    // 2. Chế độ Sáng / Tối (Dark / Light Mode)
     const themeBtn = document.querySelector('.fa-moon, .theme-toggle');
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
             const htmlTag = document.documentElement;
             if (htmlTag.getAttribute('data-theme') === 'light') {
                 htmlTag.removeAttribute('data-theme');
-                themeBtn.className = 'fas fa-moon'; // Đổi lại thành mặt trăng
+                themeBtn.className = 'fas fa-moon';
             } else {
                 htmlTag.setAttribute('data-theme', 'light');
-                themeBtn.className = 'fas fa-sun';  // Đổi thành mặt trời khi ở chế độ sáng
+                themeBtn.className = 'fas fa-sun';
             }
         });
     }
 
-    // 3. Nút Hình người (Tài khoản / Admin)
+    // 3. Nút Tài khoản / Admin
     const userBtn = document.querySelector('.fa-user, .account-toggle');
     if (userBtn) {
         userBtn.addEventListener('click', () => {
-            // Chuyển sang trang danh mục hoặc hiển thị form đăng nhập tùy ý bạn
-            // Tạm thời cho chuyển hướng mượt đến khu vực quản trị hoặc thông báo:
             alert("Tính năng đăng nhập tài khoản thành viên đang được bảo mật!");
         });
     }
 
-    // 4. Nút Giỏ hàng (Gọi hàm toggleCart đã có sẵn trong code của bạn)
+    // 4. Kết nối Giỏ hàng
     const cartBtn = document.querySelector('.fa-shopping-cart, .fa-shopping-bag, .cart-icon-wrapper');
     if (cartBtn) {
-        cartBtn.setAttribute('onclick', 'toggleCart()'); // Gán trực tiếp lệnh bật giỏ hàng
+        cartBtn.setAttribute('onclick', 'toggleCart()');
     }
 
-    // 5. Nút "MUA NGAY" ở Banner chính (Cuộn mượt xuống danh sách sản phẩm)
-    const heroBuyBtn = document.querySelector('.btn-primary-gold, button:contains("MUA NGAY")') || document.querySelectorAll('.product-card - index button')[0];
-    // Tìm chính xác nút MUA NGAY dựa vào bộ chọn class hoặc text
+    // 5. Nút "MUA NGAY" ở Hero Banner (Đã sửa lỗi loại bỏ selector :contains)
     const allButtons = document.querySelectorAll('button');
     allButtons.forEach(btn => {
         if (btn.textContent.trim() === 'MUA NGAY') {
@@ -512,10 +502,9 @@ function initHeaderInteractions() {
     });
 }
 
-// Cập nhật lại hàm onload để kích hoạt toàn bộ tính năng
 window.onload = () => {
     renderProducts();
     updateCartUI();
     showSection(0);
-    initHeaderInteractions(); // Chạy trình kết nối nút bấm ở đây
+    initHeaderInteractions();
 };
