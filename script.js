@@ -1,365 +1,300 @@
-// ==========================================
-// 1. CƠ SỞ DỮ LIỆU SẢN PHẨM (MẢNG TẬP TRUNG)
-// ==========================================
-const products = [
-    {
-        id: 1,
-        name: "Nike Mercurial Vapor 14",
-        price: "650.000",
-        sizes: "39 - 45",
-        info: "Size: 39 - 45. Độ bền cao, bám sân cực tốt.",
-        image: "2_2images.jpeg",
-        desc: "Giày đá bóng dòng Mercurial – thiên về tốc độ. Thiết kế cổ thấp, ôm chân, nhẹ và linh hoạt. Trang bị Zoom Air hỗ trợ bật và giảm chấn. Upper mỏng cho cảm giác bóng tốt. Đế TF phù hợp sân cỏ nhân tạo. Phù hợp: tiền đạo, chạy cánh."
-    },
-    {
-        id: 2,
-        name: "ADIDAS F50 SPARKFUSION",
-        price: "710.000",
-        sizes: "39 - 45",
-        info: "Size: 39 - 45. Kiểm soát bóng tối ưu.",
-        image: "IMG_4113.jpeg",
-        desc: "Adidas F50 TF là dòng giày dành cho những cầu thủ yêu thích tốc độ và sự linh hoạt trên sân cỏ nhân tạo. Thiết kế siêu nhẹ giúp bứt tốc nhanh, di chuyển linh hoạt và xử lý bóng gọn hơn. Upper mỏng ôm chân tạo cảm giác bóng chân thật, kết hợp đế TF bám sân tốt giúp đổi hướng ổn định và tự tin hơn khi thi đấu. Phù hợp: đá cánh, tiền đạo, người chơi tốc độ. Ưu điểm: nhẹ, ôm chân, tăng tốc tốt."
-    },
-    {
-        id: 3,
-        name: "Mizuno Alpha 3 Elite",
-        price: "760.000",
-        sizes: "38 - 43",
-        info: "Size: 38 - 43. Đệm khí êm ái cho chạy.",
-        image: "4images.png",
-        desc: "Dòng giày tốc độ nhẹ nhất của Mizuno (~195g). Upper knit siêu mỏng cho cảm giác bóng chân thật. Đệm Mizuno Enerzy êm ái, hoàn trả lực tốt. Phù hợp cho tiền đạo và cầu thủ chạy cánh."
-    },
-    {
-        id: 4,
-        name: "Nike Mercurial M3P TF",
-        price: "650.000",
-        sizes: "39 - 45",
-        info: "Size: 39 - 45. Thiết kế tập trung hiệu năng.",
-        image: "IMG_4099.png",
-        desc: "Phiên bản Nike Mercurial M3P TF màu đen mang phong cách tối giản mạnh mẽ. Thiết kế nhẹ, linh hoạt, hỗ trợ di chuyển tốc độ cao.\n\nĐế cao su TF êm, phù hợp sân cỏ nhân tạo tại Việt Nam.\n\n👉 Ưu điểm: dễ mang, êm chân, bền."
-    },
-    {
-        id: 5,
-        name: "Nike Mercurial 17 TF",
-        price: "740.000",
-        sizes: "39 - 45",
-        info: "Size: 39 - 45. Màu xanh ngọc nổi bật.",
-        image: "IMG_4104.jpeg",
-        desc: "Thiết kế xanh ngọc nổi bật. Form giày ôm chân, hỗ trợ bứt tốc và xử lý bóng nhanh.\n\nPhù hợp đá cánh, tiền đạo thiên về rê bóng – dứt điểm.\n\n👉 Lưu ý: form hơi bó, chân bè nên tăng 0.5 size."
-    }
-];
+/**
+ * ELYSIUM LUXURY STORE - CORE JAVASCRIPT SYSTEM
+ * Phong cách: Tối giản - Sang trọng - Bảo mật cao
+ */
 
-// ==========================================
-// 2. BẢO MẬT & KHỞI TẠO LOCALSTORAGE
-// ==========================================
-function safeGetStorage(key) {
-    try {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : [];
-    } catch (e) {
-        console.warn('localStorage không khả dụng:', e);
-        return [];
-    }
-}
-
-function safeSetStorage(key, value) {
-    try {
-        localStorage.setItem(key, JSON.stringify(value));
-    } catch (e) {
-        console.warn('Không thể lưu vào localStorage:', e);
-    }
-}
-
-let cart = safeGetStorage('cbl_cart');
-let billTimeout = null; // Quản lý đóng mở hóa đơn không bị xung đột đơn liên tiếp
-
-// ==========================================
-// 3. TỰ ĐỘNG ĐỔ DỮ LIỆU SẢN PHẨM (RENDER UI)
-// ==========================================
-function renderProducts(productsList = products) {
-    const container = document.getElementById('product-grid-container');
-    if (!container) return;
+document.addEventListener("DOMContentLoaded", function() {
     
-    if (productsList.length === 0) {
-        container.innerHTML = '<p style="text-align:center; width:100%; padding:20px; color:#888;">Không tìm thấy sản phẩm phù hợp.</p>';
-        return;
+    // ==========================================================================
+    // 1. KHỞI TẠO HỆ THỐNG & ĐIỀU HƯỚNG SPA (SINGLE PAGE APPLICATION)
+    // ==========================================================================
+    const sections = document.querySelectorAll('.page-section');
+    const navLinks = document.querySelectorAll('.desktop-nav a, .sidebar-links a, .logo a, .prod-name a, .admin-quick-link');
+
+    function handleRouting() {
+        let hash = window.location.hash || '#home';
+        
+        // Kiểm tra xem phân đoạn ID có tồn tại trong HTML không
+        const targetSection = document.querySelector(hash);
+        if (!targetSection) hash = '#home';
+
+        sections.forEach(sec => {
+            if('#' + sec.id === hash) {
+                sec.classList.add('active-section');
+            } else {
+                sec.classList.remove('active-section');
+            }
+        });
+
+        // Cập nhật trạng thái Active trên thanh Menu chính
+        navLinks.forEach(link => {
+            if(link.getAttribute('href') === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Tự động cuộn mượt lên đỉnh đầu trang khi chuyển trang
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    container.innerHTML = productsList.map(prod => `
-        <div class="product-card">
-            <img src="${prod.image}" alt="${prod.name}" onclick="viewDetail(${prod.id})" style="cursor: pointer;">
-            <h3>${prod.name}</h3>
-            <p class="price">${prod.price}đ</p>
-            <p class="info">${prod.info}</p>
-            <button onclick="addToCart('${prod.name}', '${prod.price}')">Thêm vào giỏ</button>
-        </div>
-    `).join('');
-}
+    window.addEventListener('hashchange', handleRouting);
+    if(window.location.hash) handleRouting();
 
-// ==========================================
-// 4. LOGIC ĐIỀU HƯỚNG TRANG (SPA)
-// ==========================================
-function showSection(index) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach((page, i) => {
-        page.classList.toggle('active', i === index);
-    });
-    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-}
-
-// ==========================================
-// 5. QUẢN LÝ GIỎ HÀNG (CÓ THÊM LOGIC SỐ LƯỢNG)
-// ==========================================
-function addToCart(name, price) {
-    const existingItem = cart.find(item => item.name === name);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ name: name, price: price, quantity: 1 });
-    }
-    
-    saveCart();
-    updateCartUI();
-    alert(`Đã thêm ${name} vào giỏ!`);
-}
-
-function saveCart() {
-    safeSetStorage('cbl_cart', cart);
-}
-
-function updateCartUI() {
-    const countEl = document.getElementById('cart-count');
-    if (countEl) {
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        countEl.innerText = totalItems;
-    }
-}
-
-function toggleCart() {
-    const modal = document.getElementById('cart-modal');
-    if (!modal) return;
-    
-    if (modal.style.display === 'flex') {
-        modal.style.display = 'none';
-    } else {
-        modal.style.display = 'flex';
-        renderCartItems();
-    }
-}
-
-function renderCartItems() {
-    const list = document.getElementById('cart-items-list');
-    const totalEl = document.getElementById('total-price');
-    
-    if (!list || !totalEl) return;
-    if (cart.length === 0) {
-        list.innerHTML = '<p style="text-align:center; padding:20px; color:#888;">Chưa có sản phẩm nào.</p>';
-        totalEl.innerText = '0đ';
-        return;
-    }
-
-    let html = '';
-    let total = 0;
-
-    cart.forEach((item, index) => {
-        const cleanPrice = parseInt(item.price.replace(/[.,]/g, '')) || 0;
-        const itemTotal = cleanPrice * item.quantity;
-        total += itemTotal;
-
-        html += `
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">
-                <div style="text-align:left;">
-                    <span style="display:block; font-weight:bold;">${item.name} (x${item.quantity})</span>
-                    <span style="color:#ff4757;">${itemTotal.toLocaleString('vi-VN')}đ</span>
-                </div>
-                <button onclick="removeFromCart(${index})" 
-                        style="background:#ff4757; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; font-size:12px;">
-                    Xóa
-                </button>
-            </div>
-        `;
+    // ==========================================================================
+    // 2. GIẢ LẬP KHO DỮ LIỆU SẢN PHẨM & LIÊN KẾT GIAO DIỆN MẪU
+    // ==========================================================================
+    // Tự động gán sự kiện Xem Chi Tiết cho các nút "Xem nhanh" hoặc Click tên sản phẩm
+    document.querySelectorAll('.view-detail-trigger, .prod-name a').forEach(element => {
+        element.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.hash = '#product-detail';
+        });
     });
 
-    list.innerHTML = html;
-    totalEl.innerText = total.toLocaleString('vi-VN') + "đ";
-}
 
-function removeFromCart(index) {
-    if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-    } else {
-        cart.splice(index, 1);
-    }
-    
-    saveCart();
-    updateCartUI(); 
-    renderCartItems(); 
-}
+    // ==========================================================================
+    // 3. LOGIC TRANG CHI TIẾT SẢN PHẨM (PRODUCT DETAIL GALLERY & PICKERS)
+    // ==========================================================================
+    // Đổi ảnh lớn khi click vào ảnh Thumb tương ứng (Góc nhìn khác)
+    const thumbnails = document.querySelectorAll('.thumbnail-list .thumb');
+    const mainDetailImg = document.getElementById('mainDetailImg');
 
-// ==========================================
-// 6. ĐẶT HÀNG & THỦ TỤC THANH TOÁN (CHECKOUT)
-// ==========================================
-function checkout() {
-    if (cart.length === 0) {
-        alert("Giỏ hàng đang trống!");
-        return;
-    }
-    document.getElementById('cart-modal').style.display = 'none';
-    document.getElementById('checkout-modal').style.display = 'flex';
-}
-
-function closeCheckout() {
-    document.getElementById('checkout-modal').style.display = 'none';
-}
-
-function confirmOrder() {
-    const name = document.getElementById('cus-name').value.trim();
-    const phone = document.getElementById('cus-phone').value.trim();
-    const address = document.getElementById('cus-address').value.trim();
-    const note = document.getElementById('cus-note').value.trim();
-    const size = document.getElementById('cus-size').value;
-
-    if (!size || !name || !phone || !address) {
-        alert("Vui lòng chọn Size và điền đủ thông tin nhận hàng!");
-        return;
-    }
-    
-    const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(phone)) {
-        alert("Vui lòng nhập số điện thoại hợp lệ (đúng 10 chữ số)!");
-        return;
-    }
-
-    let productNames = cart.map(item => `${item.name} (x${item.quantity})`).join(", ");
-    let totalPrice = document.getElementById('total-price').innerText;
-
-    // Gửi thông báo đến Bot Telegram
-    const messageContent = `👟 ĐƠN HÀNG MỚI - CBL SOCCER 👟\n----------------------------\n📦 Sản phẩm: ${productNames}\n📏 Size: ${size}\n💰 Tổng cộng: ${totalPrice}\n👤 Khách: ${name}\n📞 SĐT: ${phone}\n📍 Địa chỉ: ${address}\n📝 Ghi chú: ${note || 'Không có'}\n----------------------------\n🚀 Check đơn ngay chủ shop ơi!`;
-    
-    sendTelegramMessage(messageContent).catch((err) => {
-        console.error('Không thể gửi thông báo Telegram:', err);
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            mainDetailImg.src = this.src.replace('150', '800'); // Phóng to độ phân giải ảnh
+        });
     });
 
-    // In hoá đơn hiển thị lên UI cho khách
-    const billDetail = document.getElementById('bill-detail');
-    if (billDetail) {
-        billDetail.innerHTML = `
-            <p><b>Sản phẩm:</b> ${productNames}</p>
-            <p><b>Size:</b> <span style="color:blue; font-weight:bold;">${size}</span></p>
-            <p><b>Tổng tiền:</b> <span style="color:red; font-weight:bold;">${totalPrice}</span></p>
-            <hr style="border: 0.5px dashed #ddd; margin: 10px 0;">
-            <p><b>Người nhận:</b> ${name}</p>
-            <p><b>SĐT:</b> ${phone}</p>
-            <p><b>Địa chỉ:</b> ${address}</p>
-            <p><b>Ghi chú:</b> ${note || 'Không có'}</p>
-        `;
-    }
-
-    document.getElementById('checkout-modal').style.display = 'none';
-    const billModal = document.getElementById('bill-modal');
-    if (billModal) billModal.style.display = 'flex';
-
-    // Làm sạch giỏ hàng hoàn tất đơn
-    cart = [];
-    saveCart();
-    updateCartUI();
-
-    // Reset bộ đếm thời gian tránh xung đột hoá đơn
-    if (billTimeout) clearTimeout(billTimeout);
-
-    // Tự động đóng Bill sau 6 giây và làm sạch form nhập liệu
-    billTimeout = setTimeout(() => {
-        if (billModal) billModal.style.display = 'none';
-        document.getElementById('cus-name').value = "";
-        document.getElementById('cus-phone').value = "";
-        document.getElementById('cus-address').value = "";
-        document.getElementById('cus-note').value = "";
-        document.getElementById('cus-size').value = "";
-    }, 6000);
-}
-
-// ==========================================
-// 7. POPUP CHI TIẾT SẢN PHẨM (AN TOÀN BẢO MẬT)
-// ==========================================
-function viewDetail(id) {
-    const prod = products.find(p => p.id === id);
-    if (prod) {
-        showProductDetail(prod.name, prod.price, prod.sizes, prod.desc, prod.image);
-    }
-}
-
-function showProductDetail(name, price, size, desc, img) {
-    const modal = document.getElementById('product-detail-modal');
-    const content = document.getElementById('detail-content');
-    if (!content || !modal) return;
-
-    content.innerHTML = `
-        <img src="${img}" style="width:100%; border-radius:10px; margin-bottom:15px;" alt="${name}">
-        <h2>${name}</h2>
-        <p style="color:#ff4757; font-weight:bold; font-size:20px;">${price}đ</p>
-        <p><b>Size:</b> ${size}</p>
-        <p style="color:#666; margin:15px 0; white-space: pre-line;">${desc}</p>
-        <button id="modal-add-btn" style="width:100%; padding:12px; background:#27ae60; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">THÊM VÀO GIỎ NGAY</button>
-    `;
-    
-    // Gán sự kiện Click trực tiếp thông qua JS để loại bỏ rủi ro vỡ ký tự đặc biệt ở HTML
-    document.getElementById('modal-add-btn').onclick = function() {
-        addToCart(name, price);
-        closeProductDetail();
-    };
-
-    modal.style.display = 'flex';
-}
-
-function closeProductDetail() {
-    document.getElementById('product-detail-modal').style.display = 'none';
-}
-
-// ==========================================
-// 8. TÌM KIẾM SẢN PHẨM CHUẨN REAL-TIME
-// ==========================================
-function searchProduct() {
-    let input = document.getElementById('product-search').value.toLowerCase().trim();
-
-    if (input.length > 0) {
-        showSection(1); // Tự chuyển tab Sản Phẩm khi bắt đầu gõ
-    }
-
-    // Lọc mảng sản phẩm gốc thay vì ẩn/hiện DOM thô sơ
-    const filteredProducts = products.filter(prod => 
-        prod.name.toLowerCase().includes(input)
-    );
-
-    renderProducts(filteredProducts);
-}
-
-// ==========================================
-// 9. API GỬI TELEGRAM (PHƯƠNG THỨC POST AN TOÀN)
-// ==========================================
-async function sendTelegramMessage(message) {
-    const token = "8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0";
-    const chatId = "7901882812";
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-    
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message
-        })
+    // Chọn Size & Màu sắc thượng lưu (Bật tắt class Selected)
+    const sizeButtons = document.querySelectorAll('.size-options .size-btn');
+    sizeButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            sizeButtons.forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+        });
     });
-    
-    if (!response.ok) {
-        throw new Error(`Telegram API lỗi: ${response.status}`);
-    }
-    return response;
-}
 
-// Khởi chạy khi trang tải xong tải toàn bộ tài nguyên
-window.onload = () => {
-    renderProducts(); // Tự động hiển thị sản phẩm khi load trang
-    updateCartUI();
-    showSection(0); 
-};
+    const colorButtons = document.querySelectorAll('.color-options .color-btn');
+    colorButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            colorButtons.forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    // Bộ tăng/giảm số lượng (Quantity Picker) chuyên nghiệp
+    const qtyInput = document.querySelector('.qty-input');
+    const qtyMinus = document.querySelector('.qty-btn.minus');
+    const qtyPlus = document.querySelector('.qty-btn.plus');
+
+    if(qtyInput && qtyMinus && qtyPlus) {
+        qtyMinus.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value);
+            if(val > 1) qtyInput.value = val - 1;
+        });
+        qtyPlus.addEventListener('click', () => {
+            let val = parseInt(qtyInput.value);
+            qtyInput.value = val + 1;
+        });
+    }
+
+
+    // ==========================================================================
+    // 4. HỆ THỐNG QUẢN LÝ GIỎ HÀNG (MINI CART SYSTEM INTERACTIVE)
+    // ==========================================================================
+    const btnAddCart = document.querySelector('.btn-add-cart');
+    const cartBadge = document.querySelector('.cart-trigger .badge');
+
+    if(btnAddCart) {
+        btnAddCart.addEventListener('click', () => {
+            // Tăng số lượng Badge giỏ hàng tượng trưng tạo hiệu ứng phản hồi nhanh
+            let currentCount = parseInt(cartBadge.textContent) || 0;
+            cartBadge.textContent = currentCount + 1;
+            
+            // Đưa ra thông báo Toast xác nhận
+            showToastNotification("Hệ Thống Thượng Lưu", "Đã thêm sản phẩm vào giỏ hàng đặc quyền thành công.");
+        });
+    }
+
+    // Nút mua ngay (Chuyển thẳng đến trang checkout)
+    const btnBuyNow = document.querySelector('.btn-buy-now');
+    if(btnBuyNow) {
+        btnBuyNow.addEventListener('click', () => {
+            window.location.hash = '#checkout';
+        });
+    }
+
+
+    // ==========================================================================
+    // 5. XỬ LÝ THANH TOÁN (CHECKOUT FORM VALIDATION)
+    // ==========================================================================
+    const checkoutForm = document.getElementById('checkoutForm');
+    if(checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Giả lập hiệu ứng xử lý bảo mật ngân hàng
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "ĐANG MÃ HÓA GIAO DỊCH BẢO MẬT...";
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                alert("Kính thưa Quý khách, Đơn hàng hoàng gia đã được tiếp nhận thành công! Chuyên viên Stylist riêng của Elysium sẽ gọi điện xác nhận lịch trình giao hàng VIP của Quý khách trong ít phút.");
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                checkoutForm.reset();
+                window.location.hash = '#home';
+            }, 2000);
+        });
+    }
+
+
+    // ==========================================================================
+    // 6. PHÂN HỆ KHÁCH HÀNG (USER PORTAL ACCOUNTS TABS)
+    // ==========================================================================
+    const accountTabs = document.querySelectorAll('.account-nav-tabs li');
+    const accountContents = document.querySelectorAll('.acc-tab-content');
+
+    accountTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            accountTabs.forEach(t => t.classList.remove('active'));
+            accountContents.forEach(c => c.classList.remove('active-tab'));
+
+            this.classList.add('active');
+            const targetContentId = this.getAttribute('data-account-tab');
+            const targetContent = document.getElementById(targetContentId);
+            if(targetContent) targetContent.classList.add('active-tab');
+        });
+    });
+
+
+    // ==========================================================================
+    // 7. BẢNG ĐIỀU KHIỂN HỆ THỐNG QUẢN TRỊ (ADMIN DASHBOARD CONTROLLER)
+    // ==========================================================================
+    const adminTabs = document.querySelectorAll('.admin-nav-links li');
+    const adminContents = document.querySelectorAll('.admin-panel-tab-content');
+
+    adminTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            adminTabs.forEach(t => t.classList.remove('active-admin-tab'));
+            adminContents.forEach(c => c.classList.remove('active-panel'));
+
+            this.classList.add('active-admin-tab');
+            const targetPanelId = this.getAttribute('data-admin-panel');
+            const targetPanel = document.getElementById(targetPanelId);
+            if(targetPanel) targetPanel.classList.add('active-panel');
+        });
+    });
+
+
+    // ==========================================================================
+    // 8. TÍNH NĂNG CHUYÊN NGHIỆP: NOTIFICATION TOAST POPUP (ĐƠN HÀNG GIẢ LẬP)
+    // ==========================================================================
+    const orderToast = document.getElementById('order-toast');
+    const closeNotiBtn = document.querySelector('.close-noti');
+
+    function showToastNotification(title, message) {
+        if(!orderToast) return;
+        
+        const titleEl = orderToast.querySelector('.noti-title');
+        const itemEl = orderToast.querySelector('.noti-item');
+        const timeEl = orderToast.querySelector('.noti-time');
+        
+        if(title) titleEl.textContent = title;
+        if(message) itemEl.textContent = message;
+        timeEl.textContent = "Vừa xong";
+
+        orderToast.style.display = 'table';
+        orderToast.style.opacity = '1';
+        orderToast.style.transform = 'translateY(0)';
+        orderToast.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+
+        // Tự động ẩn thông báo sau 6 giây để không gây phiền khách hàng
+        setTimeout(() => {
+            closeToast();
+        }, 6000);
+    }
+
+    function closeToast() {
+        if(orderToast) {
+            orderToast.style.opacity = '0';
+            orderToast.style.transform = 'translateY(20px)';
+            setTimeout(() => { orderToast.style.display = 'none'; }, 500);
+        }
+    }
+
+    if(closeNotiBtn) {
+        closeNotiBtn.addEventListener('click', closeToast);
+    }
+
+    // Kích hoạt chu kỳ chạy thông báo mua hàng ảo ngẫu nhiên sau mỗi 25 giây để kích cầu (Social Proof)
+    const buyersPool = ["Nguyễn Hoàng K.", "Phạm Minh T.", "Trần Lady D.", "Đặng Vương L."];
+    const itemsPool = ["Áo khoác Blazer Noir Gold", "Đồng hồ nạm vàng Heritage", "Đầm dạ hội Velvet Burgundy"];
+    
+    setInterval(() => {
+        const randomBuyer = buyersPool[Math.floor(Math.random() * buyersPool.length)];
+        const randomItem = itemsPool[Math.floor(Math.random() * itemsPool.length)];
+        
+        // Chỉ đẩy thông báo nếu người dùng đang ở Trang Chủ để giữ tính tinh tế tối giản
+        if(window.location.hash === '#home' || window.location.hash === '') {
+            showToastNotification(`Khách hàng ${randomBuyer} vừa mua`, randomItem);
+        }
+    }, 25000);
+
+
+    // ==========================================================================
+    // 9. CHAT TRỰC TIẾP FLOATING WIDGET & LIÊN HỆ FORM
+    // ==========================================================================
+    const chatWidgetBtn = document.getElementById('chatWidgetBtn');
+    if(chatWidgetBtn) {
+        chatWidgetBtn.addEventListener('click', () => {
+            alert("Trợ lý phong cách riêng (Personal Stylist) của Elysium đang chuẩn bị kết nối mã hóa an toàn với bạn qua cổng thông tin nội bộ.");
+        });
+    }
+
+    const contactFormElement = document.getElementById('contactFormElement');
+    if(contactFormElement) {
+        contactFormElement.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Tin nhắn của Quý khách đã được bảo mật gửi đến Thư ký hội đồng quản trị. Chúng tôi phản hồi lại qua Email trong vòng 15 phút.");
+            this.reset();
+        });
+    }
+
+
+    // ==========================================================================
+    // 10. BỘ LỌC CHUYÊN NGHIỆP TRANG SẢN PHẨM (SHOP FILTERS DEMO)
+    // ==========================================================================
+    const priceSlider = document.querySelector('.price-slider');
+    const priceRangeText = document.querySelector('.price-range-text');
+
+    if(priceSlider && priceRangeText) {
+        priceSlider.addEventListener('input', function() {
+            // Định dạng tiền tệ VNĐ chuẩn xác trực quan
+            let formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(this.value);
+            priceRangeText.textContent = `Giá tối đa dưới: ${formattedValue}`;
+        });
+    }
+
+    // Tìm kiếm chuyên nghiệp thanh Search Bar đầu trang (Kích hoạt nhanh khi bấm Kính lúp)
+    const searchTrigger = document.querySelector('.search-trigger');
+    if(searchTrigger) {
+        searchTrigger.addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const searchInput = document.querySelector('.sidebar-search input');
+            
+            // Mở menu thanh bên và focus trực tiếp vào ô tìm kiếm
+            if(mobileMenu && overlay && searchInput) {
+                mobileMenu.classList.add('open');
+                overlay.classList.add('active');
+                setTimeout(() => searchInput.focus(), 400);
+            }
+        });
+    }
+});
