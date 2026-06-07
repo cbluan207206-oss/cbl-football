@@ -20,147 +20,808 @@
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     
-    <link rel="stylesheet" href="style.css?v=1.4">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
+
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <nav class="navbar">
-        <div class="menu-links">
-            <button onclick="showSection(0)">Trang Chủ</button>
-            <button onclick="showSection(1)">Sản Phẩm</button>
-            <button onclick="showSection(2)">Thông Tin</button>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Elysium Luxury",
+      "image": "https://cdn.elysium.com/logo.png",
+      "description": "Cửa hàng thời trang phong cách tối giản sang trọng.",
+      "telephone": "19001234",
+      "priceRange": "$$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Đồng Khởi, Quận 1",
+        "addressLocality": "Hồ Chí Minh",
+        "addressCountry": "VN"
+      }
+    }
+    </script>
+</head>
+<body class="dark-theme">
+
+    <div id="loader" class="global-loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="notification-popup" id="order-toast">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=150" alt="Sản phẩm" class="lazy-img">
+        <div class="noti-content">
+            <p class="noti-title">Khách hàng vừa mua thành công</p>
+            <p class="noti-item">Giày Oxford Burgundy Gold-Edged</p>
+            <span class="noti-time">2 phút trước</span>
         </div>
-        
-        <div class="search-container">
-            <input type="text" id="product-search" placeholder="Tìm giày..." oninput="searchProduct()">
-            <i class="fas fa-search" aria-hidden="true"></i>
+        <button class="close-noti">&times;</button>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <button class="menu-toggle" aria-label="Mở menu điều hướng">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <div class="logo">
+                <a href="#home">ELYSIUM</a>
+            </div>
+
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#home" class="active">Trang Chủ</a></li>
+                    <li><a href="#shop">Sản Phẩm</a></li>
+                    <li><a href="#about">Giới Thiệu</a></li>
+                    <li><a href="#news">Tin Tức</a></li>
+                    <li><a href="#contact">Liên Hệ</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="action-btn search-trigger" aria-label="Tìm kiếm"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="#account" class="action-btn" aria-label="Tài khoản"><i class="fa-solid fa-user"></i></a>
+                <a href="#wishlist" class="action-btn" aria-label="Yêu thích"><i class="fa-solid fa-heart"></i><span class="badge">2</span></a>
+                <a href="#cart" class="action-btn cart-trigger" aria-label="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i><span class="badge">3</span></a>
+                <button id="theme-switch" class="action-btn" aria-label="Đổi giao diện"><i class="fa-solid fa-moon"></i></button>
+                <a href="#admin" class="admin-quick-link" title="Quản trị viên"><i class="fa-solid fa-user-gear"></i></a>
+            </div>
         </div>
+    </header>
 
-        <button class="cart-icon" onclick="toggleCart()" aria-label="Giỏ hàng">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
-        </button>
-    </nav>
+    <div class="mobile-sidebar" id="mobileMenu">
+        <div class="sidebar-header">
+            <span class="sidebar-title">MENU</span>
+            <button class="close-sidebar">&times;</button>
+        </div>
+        <div class="sidebar-search">
+            <input type="text" placeholder="Tìm kiếm sản phẩm đẳng cấp...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#home"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+            <li><a href="#shop"><i class="fa-solid fa-gem"></i> Sản phẩm</a></li>
+            <li><a href="#about"><i class="fa-solid fa-feather"></i> Giới thiệu</a></li>
+            <li><a href="#news"><i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li><a href="#contact"><i class="fa-solid fa-address-book"></i> Liên hệ</a></li>
+            <li><a href="#cart"><i class="fa-solid fa-bag-shopping"></i> Giỏ hàng</a></li>
+            <li><a href="#account"><i class="fa-solid fa-user-lock"></i> Đăng nhập / Đăng ký</a></li>
+            <li><a href="#policies"><i class="fa-solid fa-shield-halved"></i> Chính sách</a></li>
+            <li><a href="#track-order"><i class="fa-solid fa-truck-ramp-box"></i> Theo dõi đơn hàng</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay"></div>
 
-    <main class="container">
-        
-        <section class="page active" id="section-home">
-            <div class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('1images.png');">
-                <h1>NÂNG TẦM CẢM GIÁC BÓNG</h1>
-                <p>Khám phá bộ sưu tập giày thể thao chuyên nghiệp nhất.</p>
-                <button onclick="showSection(1)">Mua Ngay</button>
+
+    <main>
+
+        <section id="home" class="page-section active-section">
+            <div class="hero-banner">
+                <div class="hero-overlay"></div>
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1920" alt="Elysium Luxury Banner Collection" class="hero-bg lazy-img">
+                <div class="hero-content">
+                    <p class="hero-subtitle">Mùa Thu - Đông 2026</p>
+                    <h1 class="hero-slogan">Sự Sang Trọng Bắt Đầu Từ Tối Giản</h1>
+                    <p class="hero-description">Sự kết hợp hoàng gia giữa sắc đen huyền bí, đỏ rượu vang quyến rũ và ánh vàng đồng thượng lưu.</p>
+                    <a href="#shop" class="btn btn-gold">KHÁM PHÁ BỘ SƯU TẬP</a>
+                </div>
+            </div>
+
+            <div class="section-container quick-categories">
+                <h2 class="section-title">Danh Mục Thượng Lưu</h2>
+                <div class="grid-categories">
+                    <div class="category-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600" alt="Quần áo nữ cao cấp" class="lazy-img">
+                        <div class="cate-info"><h3>Quý Cô (Burgundy Velvet)</h3></div>
+                    </div>
+                    <div class="category-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600" alt="Thời trang nam quý phái" class="lazy-img">
+                        <div class="cate-info"><h3>Quý Ông (Noir & Gold)</h3></div>
+                    </div>
+                    <div class="category-card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600" alt="Phụ kiện xa xỉ" class="lazy-img">
+                        <div class="cate-info"><h3>Phụ Kiện Tinh Hoa</h3></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-container premium-products">
+                <div class="tabs-header">
+                    <button class="tab-link active">Sản Phẩm Nổi Bật</button>
+                    <button class="tab-link">Bộ Sưu Tập Mới</button>
+                    <button class="tab-link">Ưu Đãi Đặc Biệt (-40%)</button>
+                </div>
+
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="badge-tag gold">Hot</div>
+                        <div class="prod-img-wrap">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=500" alt="Cao gót Velvet đỏ rượu" class="lazy-img">
+                            <div class="prod-actions">
+                                <button title="Thêm vào giỏ"><i class="fa-solid fa-bag-shopping"></i></button>
+                                <button class="view-detail-trigger" title="Xem nhanh"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="prod-details">
+                            <h3 class="prod-name"><a href="#product-detail">Burgundy Velvet Heels Platinum</a></h3>
+                            <div class="prod-prices">
+                                <span class="price-old">15,500,000₫</span>
+                                <span class="price-current">12,900,000₫</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="badge-tag burgundy">New</div>
+                        <div class="prod-img-wrap">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 4'%3E%3C/svg%3E" data-src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?q=80&w=500" alt="Áo khoác Blazer Noir Gold" class="lazy-img">
+                            <div class="prod-actions">
+                                <button title="Thêm vào giỏ"><i class="fa-solid fa-bag-shopping"></i></button>
+                                <button class="view-detail-trigger" title="Xem nhanh"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="prod-details">
+                            <h3 class="prod-name"><a href="#product-detail">Classic Noir Blazer with Gold Buttons</a></h3>
+                            <div class="prod-prices">
+                                <span class="price-current">24,000,000₫</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-video-section">
+                <div class="section-container">
+                    <h2 class="section-title">The Art Of Elysium</h2>
+                    <div class="video-wrapper">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Elysium Brand Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-container testimonials">
+                <h2 class="section-title">Cảm Nhận Từ Giới Thượng Lưu</h2>
+                <div class="testimonial-slider">
+                    <blockquote class="review-item">
+                        <p class="review-text">"Đường may thêu vàng đồng tinh tế trên nền vải đỏ rượu vang thực sự khiến tôi là tâm điểm của mọi bữa tiệc tối thượng lưu. Đẳng cấp hoàn toàn khác biệt."</p>
+                        <cite class="review-author">— Doanh nhân Nguyễn Minh H.</cite>
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="purchase-benefits">
+                <div class="section-container benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h4>Vận Chuyển Hỏa Tốc</h4>
+                        <p>Miễn phí giao hàng bảo mật tận tay trong 2h tại nội thành.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-gem"></i></div>
+                        <h4>Bảo Hành Hoàng Gia</h4>
+                        <p>Đổi mới sản phẩm trong vòng 30 ngày không cần lý do.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h4>Trợ Lý Cá Nhân 24/7</h4>
+                        <p>Chuyên viên tư vấn phong cách riêng phục vụ trọn đời.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="page" id="section-products">
-            <h2 class="section-title">Tất Cả Sản Phẩm</h2>
-            <div class="product-grid" id="product-grid-container"></div>
+
+        <section id="shop" class="page-section">
+            <div class="section-container shop-layout">
+                <aside class="shop-filter-sidebar">
+                    <div class="filter-group">
+                        <h3>Danh mục sản phẩm</h3>
+                        ul
+                        <ul>
+                            <li><label><input type="checkbox"> Áo khoác quý tộc</label></li>
+                            <li><label><input type="checkbox"> Đầm dạ hội Burgundy</label></li>
+                            <li><label><input type="checkbox"> Đồng hồ nạm vàng</label></li>
+                        </ul>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Bộ lọc giá (VNĐ)</h3>
+                        <input type="range" min="1000000" max="100000000" step="500000" class="price-slider">
+                        <div class="price-range-text">Từ 1,000,000đ - 100,000,000đ</div>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Kích Thước (Size)</h3>
+                        <div class="size-filter-boxes">
+                            <button class="size-box">XS</button>
+                            <button class="size-box active">S</button>
+                            <button class="size-box">M</button>
+                            <button class="size-box">L</button>
+                            <button class="size-box">XL</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Sắc Màu Thượng Lưu</h3>
+                        <div class="color-filter-circles">
+                            <button class="color-circle bg-black" title="Nền Đen"></button>
+                            <button class="color-circle bg-burgundy" title="Đỏ Rượu"></button>
+                            <button class="color-circle bg-gold" title="Vàng Đồng"></button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h3>Thương Hiệu Tinh Hoa</h3>
+                        <ul>
+                            <li><label><input type="checkbox"> Elysium Atelier</label></li>
+                            <li><label><input type="checkbox"> Heritage Gold</label></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="shop-main-content">
+                    <div class="shop-sorting-bar">
+                        <p>Hiển thị 1–12 của 140 kết quả</p>
+                        <select class="luxury-select" aria-label="Sắp xếp sản phẩm">
+                            <option>Mới nhất trước</option>
+                            <option>Giá từ thấp đến cao</option>
+                            <option>Giá từ cao đến thấp</option>
+                            <option>Sản phẩm bán chạy nhất</option>
+                        </select>
+                    </div>
+                    
+                    <div class="product-grid columns-3">
+                        </div>
+                </div>
+            </div>
         </section>
 
-        <section class="page" id="section-info">
-            <div class="contact-info">
-                <h2>VỀ CHÚNG TÔI</h2>
-                <p><strong>Địa chỉ:</strong> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
-                <p><strong>Liên hệ:</strong> <a href="tel:0984169335">0984.169.335</a></p>
-                <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1H5czPAx3n/" target="_blank" rel="noopener noreferrer">CBL Soccer Page</a></p>
-                <p><strong>Tiktok:</strong> <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" target="_blank" rel="noopener noreferrer">DLS-ONLY FOOTBALL⚽️ Page</a></p>
-                
-                <div class="commitment">
-                    <h3>Cam kết của cửa hàng:</h3>
-                    <ul>
-                        <li>Đúng Với Hình Ảnh 100%</li>
-                        <li>Bảo hành lỗi 1 đổi 1 trong 30 ngày</li>
-                        <li>Giao hàng nhanh toàn quốc</li>
+
+        <section id="product-detail" class="page-section">
+            <div class="section-container detail-layout">
+                <div class="detail-gallery">
+                    <div class="main-image-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800" alt="Ảnh gốc lớn" id="mainDetailImg" class="zoomable-img">
+                    </div>
+                    <div class="thumbnail-list">
+                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=150" alt="Góc 1" class="thumb active">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=150" alt="Góc 2" class="thumb">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=150" alt="Góc 3" class="thumb">
+                    </div>
+                </div>
+
+                <div class="detail-info-panel">
+                    <nav class="breadcrumb"><a href="#home">Home</a> / <a href="#shop">Quý Cô</a> / Chi tiết</nav>
+                    <h1 class="product-title-main">Burgundy Velvet Heels Platinum Special</h1>
+                    <div class="detail-price-row">
+                        <span class="old-price-spec">15,500,000₫</span>
+                        <span class="current-price-spec">12,900,000₫</span>
+                    </div>
+
+                    <div class="option-select-group">
+                        <label class="option-label">Chọn Màu Sắc:</label>
+                        <div class="color-options">
+                            <button class="color-btn selected" style="background-color: #800020;"></button>
+                            <button class="color-btn" style="background-color: #000000;"></button>
+                        </div>
+                    </div>
+
+                    <div class="option-select-group">
+                        <label class="option-label">Chọn Kích Thước (Size):</label>
+                        <div class="size-options">
+                            <button class="size-btn">36</button>
+                            <button class="size-btn selected">37</button>
+                            <button class="size-btn">38</button>
+                        </div>
+                        <a href="#size-chart-modal" class="size-chart-link"><i class="fa-solid fa-ruler-horizontal"></i> Xem bảng Size Chart chuẩn</a>
+                    </div>
+
+                    <div class="option-select-group quantity-row">
+                        <label class="option-label">Số Lượng:</label>
+                        <div class="quantity-picker">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" value="1" min="1" class="qty-input" aria-label="Số lượng sản phẩm">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons-group">
+                        <button class="btn btn-burgundy btn-add-cart"><i class="fa-solid fa-bag-shopping"></i> THÊM VÀO GIỎ HÀNG</button>
+                        <button class="btn btn-gold btn-buy-now">MUA NGAY HỎA TỐC</button>
+                    </div>
+
+                    <div class="detail-accordion">
+                        <div class="accordion-item active">
+                            <div class="accordion-header"><h4>Mô Tả Chi Tiết</h4><i class="fa-solid fa-chevron-down"></i></div>
+                            <div class="accordion-content">
+                                <p>Được dệt bằng chất liệu nhung đỏ rượu vang cao cấp nhập khẩu từ Ý, gót giày mạ vàng đồng 18k chống trầy xước tôn vinh đôi chân vương giả.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header"><h4>Thông Số Kỹ Thuật</h4><i class="fa-solid fa-chevron-down"></i></div>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>Chất liệu chính: Nhung thượng hạng & Gót mạ vàng 18K</li>
+                                    <li>Độ cao gót: 9cm chuẩn công học</li>
+                                    <li>Bộ sưu tập: Royal Burgundy Concept</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header"><h4>Hướng Dẫn Sử Dụng & Bảo Quản</h4><i class="fa-solid fa-chevron-down"></i></div>
+                            <div class="accordion-content">
+                                <p>Tránh tiếp xúc trực tiếp với nước mưa. Sử dụng bàn chải mềm chuyên dụng cho chất liệu nhung quý hiếm.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header"><h4>Chính Sách Đổi Trả & FAQ</h4><i class="fa-solid fa-chevron-down"></i></div>
+                            <div class="accordion-content">
+                                <p>Đổi size miễn phí tại nhà trong vòng 7 ngày kể từ ngày nhận sản phẩm bảo mật.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-container related-products">
+                <h2 class="section-sub-title">Sản Phẩm Phối Hợp Tuyệt Hảo</h2>
+                <div class="product-grid columns-4">
+                    </div>
+            </div>
+        </section>
+
+
+        <section id="cart" class="page-section">
+            <div class="section-container cart-page-wrapper">
+                <h1 class="page-title-luxury">Kiểm Tra Giỏ Hàng</h1>
+                <div class="cart-table-layout">
+                    <div class="cart-items-list">
+                        <div class="cart-item-row">
+                            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=100" alt="Sản phẩm giỏ hàng">
+                            <div class="cart-item-meta">
+                                <h3>Burgundy Velvet Heels</h3>
+                                <p>Size: 37 | Màu: Đỏ Rượu</p>
+                            </div>
+                            <div class="cart-item-qty">
+                                <button class="qty-btn">-</button>
+                                <input type="number" value="1" aria-label="Số lượng">
+                                <button class="qty-btn">+</button>
+                            </div>
+                            <div class="cart-item-subtotal">12,900,000₫</div>
+                            <button class="remove-cart-item-btn" title="Xóa mặt hàng"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="cart-summary-card">
+                        <h3>Tóm Tắt Đơn Hàng</h3>
+                        <div class="coupon-section">
+                            <input type="text" placeholder="Nhập mã ưu đãi đặc quyền..." id="couponInput">
+                            <button class="btn btn-gold-outline">ÁP DỤNG</button>
+                        </div>
+                        <div class="summary-row"><span>Tạm tính:</span><span>12,900,000₫</span></div>
+                        <div class="summary-row"><span>Phí vận chuyển:</span><span class="gold-text">Miễn phí (Hỏa tốc)</span></div>
+                        <hr class="luxury-hr">
+                        <div class="summary-row total-row"><span>Tổng thanh toán:</span><span class="total-price-text">12,900,000₫</span></div>
+                        <a href="#checkout" class="btn btn-burgundy btn-block-center">TIẾN HÀNH THANH TOÁN</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="checkout" class="page-section">
+            <div class="section-container checkout-wrapper">
+                <form class="checkout-form" id="checkoutForm" onsubmit="return false;">
+                    <div class="checkout-billing-section">
+                        <h3>1. Thông Tin Nhận Hàng Bảo Mật</h3>
+                        <div class="form-row-double">
+                            <div class="form-group"><input type="text" placeholder="Họ và tên *" required class="luxury-input"></div>
+                            <div class="form-group"><input type="tel" placeholder="Số điện thoại cá nhân *" required class="luxury-input"></div>
+                        </div>
+                        <div class="form-group"><input type="email" placeholder="Địa chỉ Email (Nhận hóa đơn điện tử) *" required class="luxury-input"></div>
+                        <div class="form-group"><input type="text" placeholder="Địa chỉ giao hàng hỏa tốc (Số nhà, Tên đường) *" required class="luxury-input"></div>
+                        
+                        <h3 class="space-top">2. Hình Thức Giao Nhận</h3>
+                        <div class="shipping-options-list">
+                            <label class="shipping-method-card">
+                                <input type="radio" name="shipping" checked>
+                                <span class="method-details"><strong>Giao hàng Hỏa tốc VIP (2h)</strong> - Miễn Phí Toàn Quốc</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-payment-section">
+                        <h3>3. Phương Thức Thanh Toán</h3>
+                        <div class="payment-methods-list">
+                            <label class="payment-card">
+                                <input type="radio" name="payment" checked>
+                                <span><i class="fa-solid fa-building-columns"></i> Chuyển khoản ngân hàng qua mã QR (Ưu tiên)</span>
+                            </label>
+                            <label class="payment-card">
+                                <input type="radio" name="payment">
+                                <span><i class="fa-solid fa-credit-card"></i> Thanh toán bằng thẻ tín dụng quốc tế (Visa/Mastercard)</span>
+                            </label>
+                            <label class="payment-card">
+                                <input type="radio" name="payment">
+                                <span><i class="fa-solid fa-hand-holding-dollar"></i> Thanh toán khi nhận hàng bảo mật (COD)</span>
+                            </label>
+                        </div>
+
+                        <div class="order-review-summary-box">
+                            <h4>Đơn Hàng Của Bạn</h4>
+                            <div class="review-row"><span>Sản phẩm x1</span><span>12,900,000₫</span></div>
+                            <div class="review-row total-gold"><span>Tổng cộng</span><span>12,900,000₫</span></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-gold btn-block">XÁC NHẬN ĐẶT ĐƠN HÀNG HOÀNG GIA</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <section id="account" class="page-section">
+            <div class="section-container account-portal-layout">
+                <aside class="account-sidebar-nav">
+                    <div class="user-avatar-block">
+                        <div class="avatar-circle">U</div>
+                        <h4>Thành Viên Vương Giả</h4>
+                    </div>
+                    <ul class="account-nav-tabs">
+                        <li class="active" data-account-tab="acc-login-reg">Đăng nhập / Đăng ký</li>
+                        <li data-account-tab="acc-history">Lịch sử đơn hàng</li>
+                        <li data-account-tab="acc-track">Theo dõi đơn hỏa tốc</li>
+                        <li data-account-tab="acc-address">Sổ địa chỉ cá nhân</li>
+                        <li data-account-tab="acc-wishlist">Danh sách ước nguyện (Wishlist)</li>
                     </ul>
-                </div>
+                </aside>
 
-                <div class="commitment">
-                    <h3>Quyền Lợi Nhận Được:</h3>
-                    <ul>
-                        <li><strong>Vận Chuyển:</strong> Giao Hàng Siêu Tốc, Tiết Kiệm Thời Gian.</li>
-                        <li><strong>Chính Sách Đổi Trả & Bảo Hành:</strong> Đổi Trả Hàng Trong 30 Ngày. Bảo Hành Keo Đế Trong 12 Tháng.</li>
-                        <li><strong>Hỗ Trợ Khách Hàng:</strong> Tư Vấn Size Chuẩn Xác, Luôn Hỗ Trợ Nhiệt Tình Nếu Gặp Vấn Đề.</li>
-                    </ul>
-                </div>
-            </div>
+                <div class="account-content-display">
+                    <div id="acc-login-reg" class="acc-tab-content active-tab">
+                        <div class="auth-grid">
+                            <div class="auth-box-login">
+                                <h3>Đăng Nhập Khách Hàng</h3>
+                                <div class="form-group"><input type="email" placeholder="Email đăng nhập *" class="luxury-input"></div>
+                                <div class="form-group"><input type="password" placeholder="Mật mã *" class="luxury-input"></div>
+                                <a href="#forgot" class="forgot-pass-link">Quên mật khẩu? Phục hồi tài khoản</a>
+                                <button class="btn btn-burgundy space-top">ĐĂNG NHẬP</button>
+                            </div>
+                            <div class="auth-box-register">
+                                <h3>Đăng Ký Thành Viên VIP</h3>
+                                <div class="form-group"><input type="text" placeholder="Họ và tên *" class="luxury-input"></div>
+                                <div class="form-group"><input type="email" placeholder="Địa chỉ Email *" class="luxury-input"></div>
+                                <div class="form-group"><input type="password" placeholder="Tạo mật mã mật khẩu *" class="luxury-input"></div>
+                                <button class="btn btn-gold space-top">TẠO TÀI KHOẢN ĐẶC QUYỀN</button>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="brands-section">
-                <h2 class="brands-title">Thương Hiệu</h2>
-                <div class="brand-logos">
-                    <div class="brand"><img src="nike.png" alt="Nike Logo"><p>Nike</p></div>
-                    <div class="brand"><img src="adidas.jpg" alt="Adidas Logo"><p>Adidas</p></div>
-                    <div class="brand"><img src="mizuno.png" alt="Mizuno Logo"><p>Mizuno</p></div>
-                    <div class="brand"><img src="wika.jpg" alt="Wika Logo"><p>Wika</p></div>
-                    <div class="brand"><img src="zocker.png" alt="Zocker Logo"><p>Zocker</p></div>
-                    <div class="brand"><img src="kamito.jpg" alt="Kamito Logo"><p>Kamito</p></div>
+                    <div id="acc-history" class="acc-tab-content">
+                        <h3>Lịch Sử Đơn Hàng Hoàn Tất</h3>
+                        <table class="luxury-table">
+                            <thead>
+                                <tr><th>Mã Đơn</th><th>Thời Gian</th><th>Trạng Thái</th><th>Giá Trị</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>#ELS-9981</td><td>12/04/2026</td><td><span class="status-badge success">Đã nhận hàng</span></td><td>48,000,000₫</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="acc-track" class="acc-tab-content">
+                        <h3>Theo Dõi Đơn Hàng Thời Gian Thực</h3>
+                        <div class="tracking-search-bar">
+                            <input type="text" placeholder="Mã vận đơn của bạn (VD: ELS-9981)..." class="luxury-input">
+                            <button class="btn btn-gold">TRA CỨU VỊ TRÍ</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+
+        <section id="about" class="page-section">
+            <div class="section-container static-content-page">
+                <h1 class="about-main-title">Hành Trình Kiến Tạo Đẳng Cấp</h1>
+                <div class="brand-story-row">
+                    <div class="story-text">
+                        <h3>Câu Chuyện Thương Hiệu Elysium</h3>
+                        <p>Thành lập từ khát vọng định hình lại chuẩn mực xa xỉ đương đại, Elysium không chạy theo xu hướng đám đông. Chúng tôi tập trung vào sự hoàn hảo của chất liệu và chiều sâu của hệ màu quyền lực Đen - Đỏ Rượu - Vàng Đồng.</p>
+                        <h3>Cam Kết Tuyệt Đối</h3>
+                        <p>100% sản phẩm có nguồn gốc minh bạch, nghệ nhân khâu tay tinh xảo và số lượng phiên bản giới hạn hoàn toàn trên toàn thế giới.</p>
+                    </div>
+                    <div class="story-img-frame">
+                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=600" alt="Không gian xưởng may Elysium">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="contact" class="page-section">
+            <div class="section-container contact-layout-grid">
+                <div class="contact-form-side">
+                    <h2>Gửi Thư Ký Tín Hiệu</h2>
+                    <p>Hãy để lại yêu cầu đặc biệt của bạn, chuyên viên tư vấn sẽ liên hệ lại trong tối đa 15 phút.</p>
+                    <form id="contactFormElement" class="luxury-form-element">
+                        <div class="form-group"><input type="text" placeholder="Danh xưng & Họ tên của bạn *" required class="luxury-input"></div>
+                        <div class="form-group"><input type="email" placeholder="Hộp thư điện tử liên hệ *" required class="luxury-input"></div>
+                        <div class="form-group"><textarea placeholder="Nội dung yêu cầu hoặc lịch hẹn tư vấn trực tiếp..." rows="6" class="luxury-textarea"></textarea></div>
+                        <button type="submit" class="btn btn-gold">GỬI YÊU CẦU ĐẶC QUYỀN</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-side">
+                    <div class="luxury-contact-card">
+                        <h3>Trụ Sở Chính</h3>
+                        <p><i class="fa-solid fa-location-dot gold-text"></i> 123 Đồng Khởi, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
+                        <p><i class="fa-solid fa-phone-volume gold-text"></i> Hotline: <strong>1900 1234</strong></p>
+                        <p><i class="fa-solid fa-envelope gold-text"></i> Hòm thư: concierge@elysium.com</p>
+                    </div>
+                    
+                    <div class="social-chat-buttons">
+                        <a href="https://zalo.me" target="_blank" rel="noopener" class="chat-btn-link zalo"><i class="fa-solid fa-comment-sms"></i> Kết nối Zalo OA VIP</a>
+                        <a href="https://messenger.com" target="_blank" rel="noopener" class="chat-btn-link messenger"><i class="fa-brands fa-facebook-messenger"></i> Trực tuyến Messenger</a>
+                    </div>
+
+                    <div class="map-embed-holder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4602287958253!2d106.70005707592473!3d10.776019359199342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f464016b8bf%3A0x6b4c194e803dbd!2zxJDhu5NuZytoxbZpLCBRdeG6rW4gMSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1710000000000!3m2!1svi!2s" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Map Vị trí cửa hàng"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="policies" class="page-section">
+            <div class="section-container static-content-page">
+                <h1 class="page-title-luxury">Hệ Thống Điều Khoản & Đảm Bảo Pháp Lý</h1>
+                <div class="policy-accordion-tabs">
+                    <details class="policy-wrapper-detail" open>
+                        <summary>Chính sách vận chuyển bảo mật cao cấp</summary>
+                        <div class="policy-body"><p>Mọi đơn hàng giá trị cao từ Elysium đều được vận chuyển bằng vali bảo mật có mã khóa số hóa và giao tận tay người đặt tên trong vận đơn...</p></div>
+                    </details>
+                    <details class="policy-wrapper-detail">
+                        <summary>Chính sách đổi trả hoàn kim hoàng gia</summary>
+                        <div class="policy-body"><p>Sản phẩm chưa qua sử dụng, còn nguyên tem nhãn niêm phong mạ vàng sẽ được đổi mới kích thước hoàn toàn miễn phí...</p></div>
+                    </details>
+                    <details class="policy-wrapper-detail">
+                        <summary>Chính sách bảo mật quyền riêng tư cá nhân</summary>
+                        <div class="policy-body"><p>Chúng tôi tuyệt đối bảo mật dữ liệu chi tiêu, danh tính của quý khách hàng, không cung cấp bên thứ 3 dưới mọi hình thức...</p></div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="admin" class="page-section">
+            <div class="admin-dashboard-container">
+                <aside class="admin-menu-sidebar">
+                    <div class="admin-profile">
+                        <i class="fa-solid fa-crown gold-text"></i>
+                        <span>Elysium Director</span>
+                    </div>
+                    <ul class="admin-nav-links">
+                        <li class="active-admin-tab" data-admin-panel="adm-products"><i class="fa-solid fa-box"></i> Quản lý sản phẩm</li>
+                        <li data-admin-panel="adm-orders"><i class="fa-solid fa-receipt"></i> Quản lý đơn hàng</li>
+                        <li data-admin-panel="adm-users"><i class="fa-solid fa-users"></i> Quản lý khách hàng</li>
+                        <li data-admin-panel="adm-revenues"><i class="fa-solid fa-chart-line"></i> Báo cáo doanh thu</li>
+                        <li data-admin-panel="adm-banners"><i class="fa-solid fa-images"></i> Cấu hình Banner/Bài viết</li>
+                    </ul>
+                </aside>
+
+                <div class="admin-core-display">
+                    <div id="adm-products" class="admin-panel-tab-content active-panel">
+                        <div class="panel-action-header">
+                            <h2>Kho Sản Phẩm Hiện Có</h2>
+                            <button class="btn btn-gold-outline"><i class="fa-solid fa-plus"></i> Thêm Sản Phẩm Mới</button>
+                        </div>
+                        <table class="admin-table-luxury">
+                            <thead>
+                                <tr><th>Hình</th><th>Tên sản phẩm</th><th>Mã sản phẩm</th><th>Giá kho</th><th>Số lượng tồn</th><th>Hành động</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=50" alt="Thumb"></td>
+                                    <td>Burgundy Velvet Heels</td>
+                                    <td>ELS-HEEL-01</td>
+                                    <td>12,900,000₫</td>
+                                    <td>42 đôi</td>
+                                    <td><button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> Sửa</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="adm-revenues" class="admin-panel-tab-content">
+                        <h2>Thống Kê Kế Toán Qúy 2/2026</h2>
+                        <div class="admin-stats-summary-grid">
+                            <div class="stat-box"><h4>Doanh số hôm nay</h4><p>145,000,000₫</p></div>
+                            <div class="stat-box"><h4>Đơn hàng chờ xử lý</h4><p>5 Đơn hàng</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <div id="product-detail-modal" class="modal" style="display:none;">
-        <div class="modal-content" style="background:white; margin:auto; padding:20px; width:90%; max-width:500px; border-radius:15px; position:relative; max-height: 85vh; display: flex; flex-direction: column;">
-            <button onclick="closeProductDetail()" class="close-x" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:30px; z-index: 10; background:none; border:none;">&times;</button>
-            <div id="detail-content" style="overflow-y: auto; flex-grow: 1; padding: 10px; text-align: left;"></div>
-        </div>
-    </div>
 
-    <div id="cart-modal" class="modal" style="display:none;">
-        <div class="modal-content" style="background:white; padding:20px; width:90%; max-width:450px; border-radius:15px; position:relative; margin: auto;">
-            <button onclick="toggleCart()" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:25px; background:none; border:none;">&times;</button>
-            <h2 style="margin-bottom: 15px; text-align: center;">Giỏ hàng của bạn</h2>
-            <div id="cart-items-list" style="max-height: 45vh; overflow-y: auto; margin-bottom: 15px;">
-                <p style="text-align: center; color: #888; padding: 20px;">Giỏ hàng đang trống...</p>
+    <footer class="luxury-footer">
+        <div class="section-container footer-grid-layout">
+            <div class="footer-column brand-summary-col">
+                <div class="footer-logo">ELYSIUM</div>
+                <p class="footer-brand-desc">Thương hiệu thời trang xa xỉ tối giản phong cách hoàng gia, định hình đẳng cấp cho quý tộc hiện đại.</p>
+                <div class="security-badges-row">
+                    <span><i class="fa-solid fa-lock text-gold"></i> SSL Secured 256-Bit</span>
+                </div>
             </div>
-            <hr style="margin: 10px 0;">
-            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
-                <span>Tổng cộng:</span>
-                <span id="total-price" style="color: #ff4757;">0đ</span>
+
+            <div class="footer-column">
+                <h3>Danh Mục Nhanh</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#shop">Sản Phẩm Mới Về</a></li>
+                    <li><a href="#shop">Bộ Sưu Tập Áo Choàng Noir</a></li>
+                    <li><a href="#shop">Trang Sức Vàng Đồng Khắc Bản Gợi Ý</a></li>
+                </ul>
             </div>
-            <button onclick="checkout()" style="width:100%; padding:15px; background:#27ae60; color:white; border:none; border-radius:10px; font-weight:bold; margin-top: 15px; cursor:pointer;">
-                ĐẶT HÀNG NGAY
-            </button>
+
+            <div class="footer-column">
+                <h3>Chính Sách Đặc Quyền</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#policies">Quy trình vận chuyển VIP</a></li>
+                    <li><a href="#policies">Bảo hành trọn đời hạt mạ vàng</a></li>
+                    <li><a href="#policies">Điều khoản mua sắm quý tộc</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Liên Hệ Với Hội Đồng Stylist</h3>
+                <p>Hotline: 1900 1234 (24/7)</p>
+                <p>Địa chỉ: 123 Đồng Khởi, Quận 1, TPHCM</p>
+                <div class="footer-social-icons-row">
+                    <a href="https://facebook.com" aria-label="Facebook Elysium" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" aria-label="Instagram Elysium" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com" aria-label="Youtube Channel Elysium" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
         </div>
+
+        <div class="footer-bottom-copyright">
+            <div class="section-container copyright-flex-bar">
+                <p>&copy; 2026 Elysium Luxury Store. Toàn bộ quyền sở hữu trí tuệ được bảo lưu.</p>
+                <p>Thiết kế tinh xảo bởi Premium Dev Team.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="floating-live-chat-widget">
+        <button class="chat-toggle-badge" id="chatWidgetBtn" aria-label="Mở cửa sổ trò chuyện tư vấn viên">
+            <i class="fa-solid fa-crown"></i>
+            <span>Stylist Online</span>
+        </button>
     </div>
 
-    <div id="checkout-modal" class="modal" style="display:none;">
-        <div class="modal-content" style="background:white; padding:25px; width:90%; max-width:400px; border-radius:15px; position:relative; margin: auto;">
-            <button onclick="closeCheckout()" style="position:absolute; right:15px; top:10px; cursor:pointer; font-size:25px; background:none; border:none;">&times;</button>
-            <h2 style="text-align:center; margin-bottom:20px;">Thông Tin Nhận Hàng</h2>
-            
-            <label for="cus-size" style="font-weight: bold; margin-bottom: 5px; display: block;">Chọn Size Giày:</label>
-            <select id="cus-size" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; font-size: 16px; background: #fff;">
-                <option value="">-- Nhấn để chọn Size --</option>
-                <option value="38">Size 38</option>
-                <option value="39">Size 39</option>
-                <option value="40">Size 40</option>
-                <option value="41">Size 41</option>
-                <option value="42">Size 42</option>
-                <option value="43">Size 43</option>
-                <option value="44">Size 44</option>
-                <option value="45">Size 45</option>
-            </select>
 
-            <input type="text" id="cus-name" placeholder="Họ và tên người nhận" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px; box-sizing: border-box;">
-            <input type="tel" id="cus-phone" placeholder="Số điện thoại" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px; box-sizing: border-box;">
-            <input type="text" id="cus-address" placeholder="Địa chỉ nhận hàng đầy đủ" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px; box-sizing: border-box;">
-            <textarea id="cus-note" placeholder="Ghi chú thêm (ví dụ: giao giờ hành chính...)" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; height:70px; box-sizing: border-box;"></textarea>
-            
-            <button onclick="confirmOrder()" style="width:100%; padding:15px; background:#e67e22; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
-                XÁC NHẬN ĐẶT HÀNG
-            </button>
-        </div>
-    </div>
-    
-    <div id="bill-modal" class="modal" style="display:none;">
-        <div class="modal-content" style="background:white; padding:20px; width:85%; max-width:320px; border-radius:10px; border: 2px dashed #333; font-family: monospace; margin: auto;">
-            <h2 style="text-align:center; border-bottom: 1px solid #ddd; padding-bottom:10px;">CBL SOCCER</h2>
-            <div id="bill-detail" style="margin: 15px 0; font-size: 13px;"></div>
-            <p style="text-align:center; font-weight:bold;">Cảm ơn quý khách!</p>
-        </div>
-    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // A. Khởi tạo hiệu ứng tắt màn hình chờ Loading Animation chuyên nghiệp
+            const loader = document.getElementById('loader');
+            if(loader) {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }, 600); // Giả lập luồng tải tài nguyên tăng trải nghiệm người dùng
+            }
 
-    <script src="script.js?v=1.4"></script>
+            // B. Kỹ thuật Lazy Loading Ảnh hiệu năng cao tối ưu điểm SEO Google Lighthouse
+            const lazyImages = document.querySelectorAll('img.lazy-img');
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            image.src = image.dataset.src;
+                            image.classList.remove('lazy-img');
+                            imageObserver.unobserve(image);
+                        }
+                    });
+                });
+                lazyImages.forEach(image => imageObserver.observe(image));
+            } else {
+                // Cơ chế dự phòng cho trình duyệt cũ lỗi thời
+                lazyImages.forEach(img => img.src = img.dataset.src);
+            }
+
+            // C. Bộ điều tuyến Router SPA đơn giản điều khiển bật tắt 11 Trang qua Hash liên kết
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('.desktop-nav a, .sidebar-links a, .logo a, .prod-name a');
+
+            function handleRouting() {
+                let hash = window.location.hash || '#home';
+                
+                // Trường hợp đặc biệt nếu click vào các link nhỏ trong tài khoản hoặc trang phụ
+                if(!document.querySelector(hash)) hash = '#home';
+
+                sections.forEach(sec => {
+                    if('#' + sec.id === hash) {
+                        sec.classList.add('active-section');
+                    } else {
+                        sec.classList.remove('active-section');
+                    }
+                });
+
+                // Cuộn mượt lên đỉnh đầu trang khi đổi tab nội dung
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            window.addEventListener('hashchange', handleRouting);
+            if(window.location.hash) handleRouting(); // Gọi kích hoạt nếu người dùng tải lại trang có sẵn hash
+
+            // D. Bật Tắt Menu 3 Gạch Mobile Sidebar
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileSidebar = document.getElementById('mobileMenu');
+            const sidebarOverlay = document.querySelector('.sidebar-overlay');
+            const closeSidebar = document.querySelector('.close-sidebar');
+
+            if(menuToggle && mobileSidebar) {
+                const toggleMenuFunc = () => {
+                    mobileSidebar.classList.toggle('open');
+                    sidebarOverlay.classList.toggle('active');
+                };
+                menuToggle.addEventListener('click', toggleMenuFunc);
+                closeSidebar.addEventListener('click', toggleMenuFunc);
+                sidebarOverlay.addEventListener('click', toggleMenuFunc);
+                // Đóng menu khi bấm vào link di chuyển trang bất kì
+                document.querySelectorAll('.sidebar-links a').forEach(l => l.addEventListener('click', toggleMenuFunc));
+            }
+
+            // E. Logic Đóng/Mở khối Accordion trang Chi Tiết Sản Phẩm
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    item.classList.toggle('active');
+                });
+            });
+
+            // F. Darkmode/Lightmode cơ bản chuyển đổi màu chủ đạo hoàng gia
+            const themeBtn = document.getElementById('theme-switch');
+            if(themeBtn) {
+                themeBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('light-theme');
+                    const icon = themeBtn.querySelector('i');
+                    if(document.body.classList.contains('light-theme')) {
+                        icon.className = 'fa-solid fa-sun';
+                    } else {
+                        icon.className = 'fa-solid fa-moon';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
