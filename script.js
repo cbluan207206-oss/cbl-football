@@ -445,4 +445,77 @@ function showSection(index) {
     // Đóng toàn bộ các modal đang mở nếu có điều hướng xảy ra
     document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
 }
+/* ==========================================================================
+   10. KÍCH HOẠT CÁC NÚT TƯƠNG TÁC TRÊN HEADER & HERO BANNER
+   ========================================================================== */
+function initHeaderInteractions() {
+    // 1. Nút 3 gạch (Menu Mobile)
+    const menuBtn = document.querySelector('.header-left i, .fa-bars, #menu-toggle');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            // Tùy thuộc vào class sidebar của bạn, ví dụ: .mobile-drawer hoặc .sidebar
+            const sidebar = document.querySelector('.mobile-drawer, .sidebar, #mobile-menu');
+            if (sidebar) {
+                sidebar.classList.toggle('active');
+                sidebar.style.display = sidebar.style.display === 'flex' ? 'none' : 'flex';
+            } else {
+                alert("Menu đang được tối ưu hóa cho phiên bản tiếp theo!");
+            }
+        });
+    }
 
+    // 2. Nút Mặt trăng (Đổi màu giao diện Sáng / Tối)
+    const themeBtn = document.querySelector('.fa-moon, .theme-toggle');
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            const htmlTag = document.documentElement;
+            if (htmlTag.getAttribute('data-theme') === 'light') {
+                htmlTag.removeAttribute('data-theme');
+                themeBtn.className = 'fas fa-moon'; // Đổi lại thành mặt trăng
+            } else {
+                htmlTag.setAttribute('data-theme', 'light');
+                themeBtn.className = 'fas fa-sun';  // Đổi thành mặt trời khi ở chế độ sáng
+            }
+        });
+    }
+
+    // 3. Nút Hình người (Tài khoản / Admin)
+    const userBtn = document.querySelector('.fa-user, .account-toggle');
+    if (userBtn) {
+        userBtn.addEventListener('click', () => {
+            // Chuyển sang trang danh mục hoặc hiển thị form đăng nhập tùy ý bạn
+            // Tạm thời cho chuyển hướng mượt đến khu vực quản trị hoặc thông báo:
+            alert("Tính năng đăng nhập tài khoản thành viên đang được bảo mật!");
+        });
+    }
+
+    // 4. Nút Giỏ hàng (Gọi hàm toggleCart đã có sẵn trong code của bạn)
+    const cartBtn = document.querySelector('.fa-shopping-cart, .fa-shopping-bag, .cart-icon-wrapper');
+    if (cartBtn) {
+        cartBtn.setAttribute('onclick', 'toggleCart()'); // Gán trực tiếp lệnh bật giỏ hàng
+    }
+
+    // 5. Nút "MUA NGAY" ở Banner chính (Cuộn mượt xuống danh sách sản phẩm)
+    const heroBuyBtn = document.querySelector('.btn-primary-gold, button:contains("MUA NGAY")') || document.querySelectorAll('.product-card - index button')[0];
+    // Tìm chính xác nút MUA NGAY dựa vào bộ chọn class hoặc text
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach(btn => {
+        if (btn.textContent.trim() === 'MUA NGAY') {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const productGrid = document.getElementById('product-grid-container');
+                if (productGrid) {
+                    productGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+    });
+}
+
+// Cập nhật lại hàm onload để kích hoạt toàn bộ tính năng
+window.onload = () => {
+    renderProducts();
+    updateCartUI();
+    showSection(0);
+    initHeaderInteractions(); // Chạy trình kết nối nút bấm ở đây
+};
