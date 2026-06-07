@@ -42,8 +42,8 @@
 
     <div id="mobile-menu-drawer" class="mobile-drawer">
         <div class="drawer-header">
-            <div class="drawer-logo">CBL SOCCER</div>
-            <button class="close-drawer" onclick="toggleMobileMenu()">&times;</button>
+            <div class="drawer-logo" style="color: #d4af37; font-weight: bold; letter-spacing: 1px;">CBL SOCCER</div>
+            <button class="close-drawer-btn" onclick="toggleMobileMenu()">&times;</button>
         </div>
         <div class="drawer-search">
             <input type="text" placeholder="Tìm kiếm sản phẩm..." oninput="searchProduct()">
@@ -51,15 +51,13 @@
         </div>
         <nav class="drawer-nav">
             <ul>
-                <li><a href="#" onclick="showSection('home')"><i class="fas fa-home"></i> Trang Chủ</a></li>
-                <li><a href="#" onclick="showSection('products')"><i class="fas fa-shoe-prints"></i> Sản Phẩm</a></li>
-                <li><a href="#" onclick="showSection('about')"><i class="fas fa-info-circle"></i> Giới Thiệu</a></li>
-                <li><a href="#" onclick="showSection('news')"><i class="fas fa-newspaper"></i> Tin Tức</a></li>
-                <li><a href="#" onclick="showSection('contact')"><i class="fas fa-phone-alt"></i> Liên Hệ</a></li>
-                <li><a href="#" onclick="showSection('account')"><i class="fas fa-user"></i> Tài Khoản</a></li>
-                <li><a href="#" onclick="showSection('wishlist')"><i class="fas fa-heart"></i> Sản phẩm yêu thích</a></li>
-                <li><a href="#" onclick="showSection('order-tracking')"><i class="fas fa-route"></i> Theo Dõi Đơn Hàng</a></li>
-                <li><a href="#" onclick="showSection('policies')"><i class="fas fa-shield-alt"></i> Chính Sách Mua Hàng</a></li>
+                <li><a href="#" onclick="showSection('home'); toggleMobileMenu();"><i class="fas fa-home"></i> Trang Chủ</a></li>
+                <li><a href="#" onclick="showSection('products'); toggleMobileMenu();"><i class="fas fa-shoe-prints"></i> Sản Phẩm</a></li>
+                <li><a href="#" onclick="showSection('about'); toggleMobileMenu();"><i class="fas fa-info-circle"></i> Giới Thiệu</a></li>
+                <li><a href="#" onclick="showSection('news'); toggleMobileMenu();"><i class="fas fa-newspaper"></i> Tin Tức</a></li>
+                <li><a href="#" onclick="showSection('contact'); toggleMobileMenu();"><i class="fas fa-phone-alt"></i> Liên Hệ</a></li>
+                <li><a href="#" onclick="showSection('account'); toggleMobileMenu();"><i class="fas fa-user"></i> Tài Khoản</a></li>
+                <li><a href="#" onclick="showSection('policies'); toggleMobileMenu();"><i class="fas fa-shield-alt"></i> Chính Sách Mua Hàng</a></li>
             </ul>
         </nav>
         <div class="drawer-footer">
@@ -210,6 +208,47 @@
                     <p>Bảo hành keo chỉ trọn đời sản phẩm</p>
                 </div>
             </div>
+            <div class="brand-partnership-block" style="padding: 50px 20px; background: #0a0a0a; border-top: 1px solid #111; text-align: center; margin-top: 40px;">
+                <h3 style="color: #888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px;">Đối Tác Thương Hiệu</h3>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; opacity: 0.5;">
+                    <span style="color: #fff; font-size: 1.8rem; font-weight: 900; font-style: italic; letter-spacing: 2px;">NIKE</span>
+                    <span style="color: #fff; font-size: 1.8rem; font-weight: 800; letter-spacing: 1px;">MIZUNO</span>
+                    <span style="color: #fff; font-size: 1.8rem; font-weight: bold; letter-spacing: -1px;">adidas</span>
+                    <span style="color: #fff; font-size: 1.8rem; font-weight: 700; letter-spacing: 2px;">PUMA</span>
+                </div>
+            </div>
+        </section> ```
+
+### Bổ sung Giao Diện Giỏ Hàng Modal (Sửa lỗi ảnh 4)
+Hiện tại file HTML của bạn đang thiếu cấu trúc của khung Giỏ hàng nên khi nhấn vào icon không có chỗ xử lý logic nút Đóng, Mã giảm giá hay Đặt hàng. Hãy chèn toàn bộ khối Modal này xuống **dưới cùng trang web** (ngay trước thẻ đóng `</body>`):
+```html
+    <div id="cart-modal-overlay" class="cart-modal-wrapper" style="display: none;">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3><i class="fas fa-shopping-cart"></i> Giỏ Hàng Của Bạn</h3>
+                <button class="cart-close-btn" onclick="toggleCartModal()">&times;</button>
+            </div>
+            
+            <div class="cart-modal-body">
+                <div id="cart-items-list">
+                    <p style="text-align:center; color:#888; padding: 20px 0;">Giỏ hàng hiện tại đang trống.</p>
+                </div>
+                
+                <div class="coupon-section" style="margin-top: 20px; display: flex; gap: 10px;">
+                    <input type="text" id="cart-coupon-input" placeholder="Nhập mã giảm giá (Ví dụ: CBL2026)" style="flex: 1; padding: 10px; background: #111; border: 1px solid #333; color: #fff; border-radius: 4px;">
+                    <button onclick="applyCartCoupon()" style="padding: 10px 15px; background: #d4af37; color: #000; font-weight: bold; border: none; border-radius: 4px; cursor: pointer;">Áp Dụng</button>
+                </div>
+            </div>
+            
+            <div class="cart-modal-footer" style="margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold;">
+                    <span>Tổng Tiền:</span>
+                    <span id="cart-total-price" style="color: #d4af37;">0đ</span>
+                </div>
+                <button onclick="proceedToCheckout()" style="width: 100%; padding: 12px; background: #800020; color: #fff; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Tiến Hành Đặt Hàng</button>
+            </div>
+        </div>
+    </div>
         </section>
 
 
