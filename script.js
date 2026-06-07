@@ -449,8 +449,20 @@ function showSection(index) {
 /* ==========================================================================
    10. KHỞI CHẠY KHỐI HỆ THỐNG KHI TẢI TRANG WIDGET
    ========================================================================== */
+/* ==========================================================================
+   10. KHỞI CHẠY KHỐI HỆ THỐNG KHI TẢI TRANG WIDGET
+   ========================================================================== */
 window.addEventListener('load', () => {
     renderProducts();
     updateCartUI();
     showSection(0); // Mặc định hiển thị trang chủ đầu tiên
+
+    // LỆNH SỬA LỖI: Tự động ẩn màn hình Loading khi mọi thứ đã tải xong
+    const loader = document.querySelector('.loader-wrapper');
+    if (loader) {
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+        }, 600); // Tạo độ trễ hiệu ứng 0.6 giây cực kỳ sang trọng và mượt mà
+    }
 });
