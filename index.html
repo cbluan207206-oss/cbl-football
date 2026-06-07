@@ -217,11 +217,8 @@
                     <span style="color: #fff; font-size: 1.8rem; font-weight: 700; letter-spacing: 2px;">PUMA</span>
                 </div>
             </div>
-        </section> ```
-
-### Bổ sung Giao Diện Giỏ Hàng Modal (Sửa lỗi ảnh 4)
-Hiện tại file HTML của bạn đang thiếu cấu trúc của khung Giỏ hàng nên khi nhấn vào icon không có chỗ xử lý logic nút Đóng, Mã giảm giá hay Đặt hàng. Hãy chèn toàn bộ khối Modal này xuống **dưới cùng trang web** (ngay trước thẻ đóng `</body>`):
-```html
+        </section>
+        
     <div id="cart-modal-overlay" class="cart-modal-wrapper" style="display: none;">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
