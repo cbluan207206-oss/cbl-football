@@ -22,262 +22,173 @@
     
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-
-    <div id="notification-popup" class="noti-popup hide">
-        <div class="noti-img">
-            <img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" alt="Sản phẩm vừa mua" width="50" height="50">
+    <div id="app-loading-screen" class="loading-overlay">
+        <div class="luxury-spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
         </div>
-        <div class="noti-content">
-            <p class="noti-title"><strong>Nguyễn Văn A</strong> vừa đặt mua</p>
-            <p class="noti-product">Giày Nike Mercurial Air Zoom Vapor 15</p>
-            <span class="noti-time">2 phút trước</span>
-        </div>
-        <button class="noti-close" onclick="closeNotification()">&times;</button>
+        <p class="loading-text">CBL SOCCER</p>
     </div>
 
-    <div id="mobile-menu-drawer" class="mobile-drawer">
-        <div class="drawer-header">
-            <div class="drawer-logo" style="color: #d4af37; font-weight: bold; letter-spacing: 1px;">CBL SOCCER</div>
-            <button class="close-drawer-btn" onclick="toggleMobileMenu()">&times;</button>
+    <header class="site-header">
+        <div class="header-top-bar">
+            <p>🔥 HOÀN TIỀN 100% NẾU KHÔNG ĐÚNG CHẤT LƯỢNG - HOTLINE: 0984.169.335</p>
+            <div class="header-top-actions">
+                <button onclick="showSection('section-admin')" class="btn-admin-panel"><i class="fas fa-user-shield"></i> Admin Panel</button>
+                <button id="theme-toggle-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+            </div>
         </div>
-        <div class="drawer-search">
-            <input type="text" placeholder="Tìm kiếm sản phẩm..." oninput="searchProduct()">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-        <nav class="drawer-nav">
-            <ul>
-                <li><a href="#" onclick="showSection('home'); toggleMobileMenu();"><i class="fas fa-home"></i> Trang Chủ</a></li>
-                <li><a href="#" onclick="showSection('products'); toggleMobileMenu();"><i class="fas fa-shoe-prints"></i> Sản Phẩm</a></li>
-                <li><a href="#" onclick="showSection('about'); toggleMobileMenu();"><i class="fas fa-info-circle"></i> Giới Thiệu</a></li>
-                <li><a href="#" onclick="showSection('news'); toggleMobileMenu();"><i class="fas fa-newspaper"></i> Tin Tức</a></li>
-                <li><a href="#" onclick="showSection('contact'); toggleMobileMenu();"><i class="fas fa-phone-alt"></i> Liên Hệ</a></li>
-                <li><a href="#" onclick="showSection('account'); toggleMobileMenu();"><i class="fas fa-user"></i> Tài Khoản</a></li>
-                <li><a href="#" onclick="showSection('policies'); toggleMobileMenu();"><i class="fas fa-shield-alt"></i> Chính Sách Mua Hàng</a></li>
-            </ul>
-        </nav>
-        <div class="drawer-footer">
-            <p>Hotline: 0984.169.335</p>
-        </div>
-    </div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <button class="hamburger-btn" onclick="toggleMobileMenu()">
-                <i class="fas fa-bars"></i>
+        <nav class="navbar">
+            <button class="hamburger-menu-btn" onclick="toggleMobileMenu()" aria-label="Mở menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
 
-            <div class="logo-container" onclick="showSection('home')">
-                <span class="logo-text-gold">CBL</span>
-                <span class="logo-text-sub">SOCCER</span>
+            <div class="logo-brand" onclick="showSection('section-home')">
+                <span class="gold-text">CBL</span> <span class="wine-text">SOCCER</span>
             </div>
 
-            <div class="menu-links">
-                <button class="nav-item active" onclick="showSection('home')">Trang Chủ</button>
-                <button class="nav-item" onclick="showSection('products')">Sản Phẩm</button>
-                <button class="nav-item" onclick="showSection('about')">Giới Thiệu</button>
-                <button class="nav-item" onclick="showSection('news')">Tin Tức</button>
-                <button class="nav-item" onclick="showSection('contact')">Liên Hệ</button>
-                <button class="nav-item admin-link-btn" onclick="showSection('admin')"><i class="fas fa-user-shield"></i> Admin</button>
+            <div class="menu-links" id="main-nav-links">
+                <button class="nav-item active" onclick="showSection('section-home')"><i class="fas fa-home"></i> Trang Chủ</button>
+                <button class="nav-item" onclick="showSection('section-products')"><i class="fas fa-shoe-prints"></i> Sản Phẩm</button>
+                <button class="nav-item" onclick="showSection('section-info')"><i class="fas fa-info-circle"></i> Giới Thiệu</button>
+                <button class="nav-item" onclick="showSection('section-news')"><i class="fas fa-newspaper"></i> Tin Tức</button>
+                <button class="nav-item" onclick="showSection('section-contact-page')"><i class="fas fa-envelope"></i> Liên Hệ</button>
+                <button class="nav-item" onclick="showSection('section-account')"><i class="fas fa-user"></i> Tài Khoản</button>
+                <button class="nav-item" onclick="showSection('section-policies')"><i class="fas fa-shield-alt"></i> Chính Sách</button>
             </div>
 
             <div class="search-container">
-                <input type="text" id="product-search" placeholder="Tìm giày Nike, Mizuno..." oninput="searchProduct()">
-                <i class="fas fa-search"></i>
-                <div id="search-suggestions" class="search-suggestions-box style-hidden"></div>
+                <input type="text" id="product-search" placeholder="Tìm kiếm giày bóng đá..." oninput="searchProduct()">
+                <i class="fas fa-search search-icon-trigger"></i>
+                <div class="search-suggestions-box" id="search-suggestions"></div>
             </div>
 
-            <div class="nav-actions">
-                <button class="action-icon-btn" id="theme-toggle" onclick="toggleTheme()" title="Đổi giao diện">
-                    <i class="fas fa-moon"></i>
+            <div class="header-right-icons">
+                <button class="wishlist-icon-btn" onclick="showSection('section-account')">
+                    <i class="fas fa-heart"></i>
+                    <span id="wishlist-count">0</span>
                 </button>
-                
-                <button class="action-icon-btn" onclick="showSection('account')" title="Tài khoản">
-                    <i class="fas fa-user"></i>
-                </button>
-
-                <button class="cart-icon" onclick="toggleCartModal()" title="Giỏ hàng">
+                <button class="cart-icon" onclick="toggleCart()">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
                 </button>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <main class="container">
 
         <section class="page active" id="section-home">
             <div class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('1images.png');">
                 <div class="hero-content">
-                    <span class="hero-tag">BỘ SƯU TẬP CAO CẤP 2026</span>
-                    <h1 class="hero-title">NÂNG TẦM CẢM GIÁC BÓNG</h1>
-                    <p class="hero-slogan">Sự kết hợp hoàn hảo giữa quyền lực sắc Đỏ Rượu Vang, huyền bí của Đen và đẳng cấp của Vàng Đồng.</p>
-                    <div class="hero-buttons">
-                        <button class="btn-gold" onclick="showSection('products')">MUA NGAY</button>
-                        <button class="btn-outline" onclick="scrollToElement('#section-home-video')">XEM VIDEO</button>
+                    <h1 class="animate-tracking">NÂNG TẦM CẢM GIÁC BÓNG</h1>
+                    <p class="brand-slogan">CBL SOCCER — Kiến tạo đẳng cấp trên mọi mặt sân cỏ.</p>
+                    <div class="hero-cta-buttons">
+                        <button class="btn-luxury-gold" onclick="showSection('section-products')">MUA NGAY BÂY GIỜ</button>
+                        <button class="btn-luxury-outline" onclick="scrollToElement('featured-collection')">BỘ SƯU TẬP</button>
                     </div>
                 </div>
             </div>
 
-            <div class="quick-categories">
-                <h3 class="sub-section-title">DANH MỤC ĐỘC QUYỀN</h3>
-                <div class="category-grid">
-                    <div class="category-card" onclick="filterByBrand('Nike')">
-                        <div class="cat-img-placeholder"><i class="fab fa-kickstarter-k"></i></div>
-                        <h4>NIKE FOOTBALL</h4>
-                    </div>
-                    <div class="category-card" onclick="filterByBrand('Mizuno')">
-                        <div class="cat-img-placeholder"><i class="fas fa-star"></i></div>
-                        <h4>MIZUNO PREMIUM</h4>
-                    </div>
-                    <div class="category-card" onclick="filterByBrand('Adidas')">
-                        <div class="cat-img-placeholder"><i class="fas fa-bolt"></i></div>
-                        <h4>ADIDAS PERFORMANCE</h4>
-                    </div>
+            <div class="quick-categories-section">
+                <h3 class="sub-title-gold">DANH MỤC CẤP TỐC</h3>
+                <div class="categories-grid">
+                    <div class="cat-card" onclick="filterByQuickBrand('Nike')">Giày Thượng Hạng Nike</div>
+                    <div class="cat-card" onclick="filterByQuickBrand('Mizuno')">Giày Đỉnh Cao Mizuno</div>
+                    <div class="cat-card" onclick="filterByQuickBrand('Adidas')">Siêu Phẩm Adidas</div>
                 </div>
             </div>
 
-            <div class="home-products-block">
-                <div class="block-header">
-                    <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
-                    <span class="decor-line"></span>
-                </div>
-                <div class="product-grid" id="featured-products-container">
+            <div class="promo-banner-flash">
+                <div class="flash-deal-badge">HOT DEAL</div>
+                <p>Ưu đãi đặc quyền: Giảm ngay 10% cho đơn hàng đầu tiên qua Techcombank VietQR Pro!</p>
+            </div>
+
+            <div id="featured-collection" class="products-showcase-wrapper">
+                <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
+                <div class="product-grid" id="homepage-featured-products">
                     </div>
             </div>
 
-            <div class="promo-banner-section">
-                <div class="promo-box">
-                    <div class="promo-text">
-                        <h3>FLASH SALE - GIỚI HẠN</h3>
-                        <p>Giảm ngay lên tới 30% cho các dòng giày sân cỏ nhân tạo cao cấp.</p>
-                        <div class="countdown-timer">
-                            <div><span id="days">00</span>Ngày</div>
-                            <div><span id="hours">00</span>Giờ</div>
-                            <div><span id="minutes">00</span>Phút</div>
-                            <div><span id="seconds">00</span>Giây</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="home-products-block">
-                <div class="block-header">
-                    <h2 class="section-title">SẢN PHẨM MỚI NHẤT</h2>
-                    <span class="decor-line"></span>
-                </div>
-                <div class="product-grid" id="new-arrivals-container"></div>
-            </div>
-
-            <div id="section-home-video" class="video-intro-section">
-                <h2 class="section-title">TRẢI NGHIỆM ĐẲNG CẤP CBL SOCCER</h2>
+            <div class="brand-video-container">
+                <h2 class="section-title">TRAILER THƯƠNG HIỆU</h2>
                 <div class="video-wrapper">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="CBL Soccer Introduction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/placeholder" title="CBL Soccer Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
             <div class="testimonials-section">
-                <h2 class="section-title">KHÁCH HÀNG NÓI VỀ CHÚNG TÔI</h2>
+                <h2 class="section-title">KHÁCH HÀNG NÓI VỀ CBL SOCCER</h2>
                 <div class="testimonials-slider">
-                    <div class="testimonial-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="review-text">"Giày đi êm, form ôm chân cực kỳ bám sân. Dịch vụ bảo hành của shop chu đáo, nhiệt tình lắm anh em."</p>
-                        <h4 class="review-author">- Anh Tuấn (TP.HCM)</h4>
+                    <div class="testimonial-item">
+                        <div class="stars-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="review-text">"Giày đá ôm chân cực kỳ, đặt mua size đúp được shop tư vấn đổi trả siêu nhanh. Uy tín vô cùng!"</p>
+                        <h4 class="review-author">- Hoàng Long (Hà Nội) -</h4>
                     </div>
                 </div>
             </div>
 
-            <div class="quick-policies-grid">
-                <div class="policy-item">
-                    <i class="fas fa-shipping-fast"></i>
-                    <h4>GIAO HÀNG TOÀN QUỐC</h4>
-                    <p>Freeship đơn hàng từ 200k nhanh chóng</p>
-                </div>
-                <div class="policy-item">
-                    <i class="fas fa-undo-alt"></i>
-                    <h4>ĐỔI TRẢ 7 NGÀY</h4>
-                    <p>Đổi size linh hoạt nếu không vừa vặn</p>
-                </div>
-                <div class="policy-item">
-                    <i class="fas fa-award"></i>
-                    <h4>BẢO HÀNH TRỌN ĐỜI</h4>
-                    <p>Bảo hành keo chỉ trọn đời sản phẩm</p>
-                </div>
-            </div>
-            <div class="brand-partnership-block" style="padding: 50px 20px; background: #0a0a0a; border-top: 1px solid #111; text-align: center; margin-top: 40px;">
-                <h3 style="color: #888; font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px;">Đối Tác Thương Hiệu</h3>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; opacity: 0.5;">
-                    <span style="color: #fff; font-size: 1.8rem; font-weight: 900; font-style: italic; letter-spacing: 2px;">NIKE</span>
-                    <span style="color: #fff; font-size: 1.8rem; font-weight: 800; letter-spacing: 1px;">MIZUNO</span>
-                    <span style="color: #fff; font-size: 1.8rem; font-weight: bold; letter-spacing: -1px;">adidas</span>
-                    <span style="color: #fff; font-size: 1.8rem; font-weight: 700; letter-spacing: 2px;">PUMA</span>
-                </div>
+            <div class="quick-trust-policies">
+                <div class="policy-box"><i class="fas fa-shipping-fast"></i> <h4>Giao hàng siêu tốc</h4><p>Free Ship từ đơn 200k</p></div>
+                <div class="policy-box"><i class="fas fa-undo"></i> <h4>Đổi trả chuẩn chỉ</h4><p>7 ngày linh hoạt đổi size</p></div>
+                <div class="policy-box"><i class="fas fa-ribbon"></i> <h4>Bảo hành vàng</h4><p>Bảo hành keo chỉ trọn đời</p></div>
             </div>
         </section>
-        
+
+
         <section class="page" id="section-products">
-            <div class="products-layout">
+            <h2 class="section-title">TẤT CẢ SẢN PHẨM CHUYÊN NGHIỆP</h2>
+            
+            <div class="products-layout-wrapper">
                 <aside class="filter-sidebar">
-                    <h3><i class="fas fa-filter"></i> BỘ LỌC TÌM KIẾM</h3>
-                    
                     <div class="filter-group">
-                        <h4>Thương hiệu</h4>
-                        <label><input type="checkbox" name="brand" value="Nike"> Nike</label>
-                        <label><input type="checkbox" name="brand" value="Mizuno"> Mizuno</label>
-                        <label><input type="checkbox" name="brand" value="Adidas"> Adidas</label>
+                        <h4><i class="fas fa-tags"></i> Thương Hiệu</h4>
+                        <label class="custom-checkbox"><input type="checkbox" value="Nike" class="filter-brand"> Nike</label>
+                        <label class="custom-checkbox"><input type="checkbox" value="Mizuno" class="filter-brand"> Mizuno</label>
+                        <label class="custom-checkbox"><input type="checkbox" value="Adidas" class="filter-brand"> Adidas</label>
                     </div>
 
                     <div class="filter-group">
-                        <h4>Khoảng Giá (VNĐ)</h4>
+                        <h4><i class="fas fa-money-bill"></i> Khoảng Giá</h4>
                         <select id="filter-price-range">
                             <option value="all">Tất cả mức giá</option>
-                            <option value="0-500000">Dưới 500.000đ</option>
-                            <option value="500000-1500000">500.000đ - 1.500.000đ</option>
-                            <option value="1500000-max">Trên 1.500.000đ</option>
+                            <option value="under-500">Dưới 500.000đ</option>
+                            <option value="500-1000">500.000đ - 1.000.000đ</option>
+                            <option value="over-1000">Trên 1.000.000đ</option>
                         </select>
                     </div>
 
                     <div class="filter-group">
-                        <h4>Kích cỡ (Size)</h4>
-                        <div class="size-filter-options">
-                            <button class="btn-size-filter">39</button>
-                            <button class="btn-size-filter">40</button>
-                            <button class="btn-size-filter">41</button>
-                            <button class="btn-size-filter">42</button>
-                            <button class="btn-size-filter">43</button>
+                        <h4><i class="fas fa-cut"></i> Chọn Size Giày</h4>
+                        <div class="size-filter-grid">
+                            <button class="btn-size-filter" onclick="setFilterSize(39)">39</button>
+                            <button class="btn-size-filter" onclick="setFilterSize(40)">40</button>
+                            <button class="btn-size-filter" onclick="setFilterSize(41)">41</button>
+                            <button class="btn-size-filter" onclick="setFilterSize(42)">42</button>
+                            <button class="btn-size-filter" onclick="setFilterSize(43)">43</button>
                         </div>
                     </div>
 
                     <div class="filter-group">
-                        <h4>Màu sắc chủ đạo</h4>
+                        <h4><i class="fas fa-palette"></i> Màu Sắc</h4>
                         <div class="color-filter-options">
-                            <button class="btn-color-filter bg-black" title="Đen"></button>
-                            <button class="btn-color-filter bg-wine" title="Đỏ Rượu Vang"></button>
-                            <button class="btn-color-filter bg-gold" title="Vàng Đồng"></button>
+                            <button class="color-dot filter-black" title="Đen"></button>
+                            <button class="color-dot filter-wine" title="Đỏ rượu vang"></button>
+                            <button class="color-dot filter-gold" title="Vàng đồng"></button>
                         </div>
                     </div>
 
-                    <button class="btn-apply-filters" onclick="applyProductFilters()">ÁP DỤNG BỘ LỌC</button>
+                    <button class="btn-apply-filters" onclick="applyAdvancedFilters()">ÁP DỤNG BỘ LỌC</button>
                 </aside>
 
                 <div class="products-display-area">
-                    <div class="display-sorting-header">
-                        <h2 class="section-title">TẤT CẢ SẢN PHẨM</h2>
-                        <div class="sort-select-wrapper">
-                            <label for="sort-products">Sắp xếp: </label>
-                            <select id="sort-products" onchange="sortProductsData()">
-                                <option value="default">Mặc định</option>
-                                <option value="price-asc">Giá: Thấp đến Cao</option>
-                                <option value="price-desc">Giá: Cao đến Thấp</option>
-                                <option value="newest">Mới nhất</option>
-                            </select>
-                        </div>
-                    </div>
-                    
                     <div class="product-grid" id="product-grid-container">
                         </div>
                 </div>
@@ -285,53 +196,55 @@
         </section>
 
 
-        <section class="page" id="section-product-detail">
-            <div class="detail-container">
-                <div class="detail-gallery-wrapper">
+        <section class="page" id="section-product-detail-view">
+            <div class="detail-view-container">
+                <div class="detail-left-gallery">
                     <div class="main-image-zoom-container">
-                        <img id="main-detail-img" src="https://cbluan207206-oss.github.io/cbl-football/1images.png" alt="Ảnh sản phẩm lớn" class="zoom-image">
+                        <img id="detail-main-img" src="1images.png" alt="Ảnh sản phẩm gốc" class="zoomable-image">
                     </div>
-                    <div class="thumbnail-angles-list">
-                        <img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" class="thumb-angle active" onclick="changeDetailImage(this.src)">
-                        <img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" class="thumb-angle" onclick="changeDetailImage(this.src)">
-                        <img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" class="thumb-angle" onclick="changeDetailImage(this.src)">
+                    <div class="thumbnail-images-list">
+                        <img src="1images.png" onclick="changeDetailImage(this.src)" alt="Góc 1">
+                        <img src="1images.png" onclick="changeDetailImage(this.src)" alt="Góc 2">
+                        <img src="1images.png" onclick="changeDetailImage(this.src)" alt="Góc 3">
+                    </div>
+                    <div class="product-intrinsic-video">
+                        <h5><i class="fab fa-youtube"></i> Video thực tế sản phẩm:</h5>
+                        <div class="video-mini-box">🔔 Video trên chân đang được cập nhật...</div>
                     </div>
                 </div>
 
-                <div class="detail-info-order-block">
-                    <span class="detail-brand-tag">NIKE FOOTBALL</span>
-                    <h1 id="detail-product-name" class="detail-title-name">Giày Đá Bóng Nike Mercurial Air Zoom Pro</h1>
-                    
-                    <div class="detail-pricing-row">
-                        <span id="detail-promo-price" class="price-sale-big">1.850.000đ</span>
-                        <span id="detail-base-price" class="price-original-cross">2.450.000đ</span>
+                <div class="detail-right-info">
+                    <h1 id="view-product-title" class="luxury-title-product">Tên giày bóng đá chuyên nghiệp</h1>
+                    <div class="price-rating-row">
+                        <span id="view-product-price-sale" class="price-sale-big">0đ</span>
+                        <span id="view-product-price-raw" class="price-raw-deleted">0đ</span>
                     </div>
 
-                    <div class="attribute-selection">
-                        <div class="attr-header">
-                            <span>Chọn Kích cỡ (Size):</span>
-                            <button class="btn-text-link" onclick="openSizeChartModal()">Bảng Size chuẩn</button>
-                        </div>
-                        <div class="size-options-row">
-                            <label class="size-box"><input type="radio" name="prod-size" value="39"><span>39</span></label>
-                            <label class="size-box"><input type="radio" name="prod-size" value="40" checked><span>40</span></label>
-                            <label class="size-box"><input type="radio" name="prod-size" value="41"><span>41</span></label>
-                            <label class="size-box"><input type="radio" name="prod-size" value="42"><span>42</span></label>
+                    <hr class="luxury-separator">
+
+                    <div class="attribute-select-box">
+                        <label class="attr-label">Màu Sắc:</label>
+                        <div class="color-variants-selectors">
+                            <label><input type="radio" name="detail_color" value="Đen" checked> <span>Đen Huyền Bí</span></label>
+                            <label><input type="radio" name="detail_color" value="Đỏ rượu"> <span>Đỏ Rượu Vang</span></label>
+                            <label><input type="radio" name="detail_color" value="Vàng đồng"> <span>Vàng Đồng</span></label>
                         </div>
                     </div>
 
-                    <div class="attribute-selection">
-                        <span>Chọn Màu sắc:</span>
-                        <div class="color-options-row">
-                            <label class="color-radio-box bg-black"><input type="radio" name="prod-color" value="Đen" checked><span></span></label>
-                            <label class="color-radio-box bg-wine"><input type="radio" name="prod-color" value="Đỏ Rượu Vang"><span></span></label>
-                            <label class="color-radio-box bg-gold"><input type="radio" name="prod-color" value="Vàng Đồng"><span></span></label>
+                    <div class="attribute-select-box">
+                        <label class="attr-label">Kích thước (Size):</label>
+                        <div class="size-variants-selectors">
+                            <label><input type="radio" name="detail_size" value="39"> <span>39</span></label>
+                            <label><input type="radio" name="detail_size" value="40" checked> <span>40</span></label>
+                            <label><input type="radio" name="detail_size" value="41"> <span>41</span></label>
+                            <label><input type="radio" name="detail_size" value="42"> <span>42</span></label>
+                            <label><input type="radio" name="detail_size" value="43"> <span>43</span></label>
                         </div>
                     </div>
 
-                    <div class="attribute-selection quantity-selector-row">
-                        <span>Số lượng:</span>
-                        <div class="qty-counter">
+                    <div class="attribute-select-box">
+                        <label class="attr-label">Số lượng:</label>
+                        <div class="quantity-picker-wrapper">
                             <button onclick="alterDetailQty(-1)">-</button>
                             <input type="number" id="detail-qty-input" value="1" min="1">
                             <button onclick="alterDetailQty(1)">+</button>
@@ -339,206 +252,182 @@
                     </div>
 
                     <div class="action-buttons-group">
-                        <button class="btn-add-cart" onclick="addCurrentToCart()"><i class="fas fa-shopping-bag"></i> THÊM VÀO GIỎ HÀNG</button>
-                        <button class="btn-buy-now" onclick="buyNowCurrent()">MUA NGAY CHÂN LƯU</button>
+                        <button class="btn-add-cart-luxury" onclick="addSelectedToCart()"><i class="fas fa-cart-plus"></i> THÊM VÀO GIỎ HÀNG</button>
+                        <button class="btn-buy-now-luxury" onclick="buyNowSelected()"><i class="fas fa-bolt"></i> MUA NGAY LẬP TỨC</button>
                     </div>
-                </div>
-            </div>
 
-            <div class="product-tabs-wrapper">
-                <div class="tabs-nav">
-                    <button class="tab-btn active" onclick="switchDetailTab(event, 'tab-desc')">Mô tả sản phẩm</button>
-                    <button class="tab-btn" onclick="switchDetailTab(event, 'tab-specs')">Thông số kỹ thuật</button>
-                    <button class="tab-btn" onclick="switchDetailTab(event, 'tab-guide')">Hướng dẫn sử dụng</button>
-                    <button class="tab-btn" onclick="switchDetailTab(event, 'tab-faq')">FAQ / Câu hỏi</button>
-                </div>
-                
-                <div class="tabs-content-container">
-                    <div id="tab-desc" class="tab-panel active">
-                        <p>Dòng sản phẩm cao cấp chuyên dụng cho sân cỏ nhân tạo, tối ưu khả năng bứt tốc và tạo cảm giác bóng chân thực đỉnh cao...</p>
-                    </div>
-                    <div id="tab-specs" class="tab-panel">
-                        <ul>
-                            <li><strong>Chất liệu:</strong> Da tổng hợp thế hệ mới phủ lớp dính Grip</li>
-                            <li><strong>Trọng lượng:</strong> 210g / chiếc (Size 40)</li>
-                            <li><strong>Loại đế:</strong> TF (Đinh dăm sân cỏ nhân tạo)</li>
-                        </ul>
-                    </div>
-                    <div id="tab-guide" class="tab-panel">
-                        <p>Không giặt máy, không phơi trực tiếp dưới ánh nắng gay gắt khi giày bị ướt. Nên lau bằng khăn ẩm ẩm sau trận đấu.</p>
-                    </div>
-                    <div id="tab-faq" class="tab-panel">
-                        <p><strong>Q: Giày có ôm chân không?</strong><br>A: Sản phẩm có thiết kế ôm khít cổ thun định hình tốt bàn chân Việt.</p>
+                    <div class="product-accordion-details">
+                        <details open>
+                            <summary>Mô tả chi tiết sản phẩm</summary>
+                            <p id="view-product-desc">CBL Soccer mang tới cấu trúc Upper dệt cao cấp, hỗ trợ bám bóng hoàn hảo, tăng cường uy lực cho những cú sút xa.</p>
+                        </details>
+                        <details>
+                            <summary>Thông số sản phẩm</summary>
+                            <ul>
+                                <li><strong>Trọng lượng:</strong> ~210g / chiếc siêu nhẹ</li>
+                                <li><strong>Mặt sân phù hợp:</strong> Sân cỏ nhân tạo (Đế TF), Sân cỏ tự nhiên (Đế FG)</li>
+                                <li><strong>Công nghệ:</strong> Đệm giảm chấn êm ái, chống lật cổ chân</li>
+                            </ul>
+                        </details>
+                        <details>
+                            <summary>Bảng Size (Size Chart)</summary>
+                            <div class="size-chart-table-holder">
+                                <table>
+                                    <thead><tr><th>Size VN</th><th>Chiều dài bàn chân (cm)</th></tr></thead>
+                                    <tbody><tr><td>39</td><td>24.5</td></tr><tr><td>40</td><td>25.0</td></tr><tr><td>41</td><td>25.5</td></tr><tr><td>42</td><td>26.0</td></tr><tr><td>43</td><td>26.5</td></tr></tbody>
+                                </table>
+                            </div>
+                        </details>
+                        <details>
+                            <summary>Hướng dẫn sử dụng & Bảo hành đổi trả</summary>
+                            <p>Tránh phơi trực tiếp dưới ánh nắng gắt. Vệ sinh bằng khăn mềm ẩm. Đổi size thoải mái trong 7 ngày nếu chưa qua sân lăn bóng.</p>
+                        </details>
                     </div>
                 </div>
             </div>
 
             <div class="related-products-section">
-                <h3 class="sub-section-title">SẢN PHẨM LIÊN QUAN</h3>
+                <h3 class="section-title">SẢN PHẨM LIÊN QUAN</h3>
                 <div class="product-grid" id="related-products-container"></div>
             </div>
         </section>
 
 
-        <section class="page" id="section-about">
-            <div class="about-us-container">
-                <div class="about-hero">
-                    <h2>CÂU CHUYỆN THƯƠNG HIỆU CBL SOCCER</h2>
-                    <p class="luxury-quote">"Nâng tầm cảm giác bóng - Cháy hết mình trên sân cỏ"</p>
-                </div>
-                <div class="about-content-text">
-                    <p>Được thành lập từ niềm đam mê tột cùng với bộ môn thể thao vua, CBL Soccer không đơn thuần là một cửa hàng bán giày, mà là nơi định hình phong cách, mang lại sự tự tin cho mỗi cầu thủ khi ra sân.</p>
-                    
-                    <h3>Cam kết vàng từ chúng tôi:</h3>
-                    <ul class="luxury-checked-list">
-                        <li><i class="fas fa-check-circle text-gold"></i> Toàn bộ sản phẩm chính hãng 100%.</li>
-                        <li><i class="fas fa-check-circle text-gold"></i> Bảo hành lỗi keo chỉ trọn đời sản phẩm uy tín.</li>
-                        <li><i class="fas fa-check-circle text-gold"></i> Tư vấn đúng form, đúng size, phù hợp lối chơi.</li>
-                    </ul>
-
-                    <h3>Hình ảnh cửa hàng sang trọng:</h3>
-                    <div class="store-gallery-grid">
-                        <div class="store-img-box"><img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" alt="Cửa hàng 1"></div>
-                        <div class="store-img-box"><img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" alt="Cửa hàng 2"></div>
+        <section class="page" id="section-account">
+            <div class="account-grid-dashboard">
+                <div class="auth-box-panel" id="auth-forms-wrapper">
+                    <h3>HỆ THỐNG ĐẲNG CẤP THÀNH VIÊN</h3>
+                    <div class="tabs-auth-headers">
+                        <button class="tab-auth-btn active" onclick="switchAuthTab('login')">Đăng Nhập</button>
+                        <button class="tab-auth-btn" onclick="switchAuthTab('register')">Đăng Ký</button>
                     </div>
-                </div>
-            </div>
-        </section>
+                    
+                    <form id="login-form" class="auth-inner-form" onsubmit="handleUserAuth(event, 'login')">
+                        <input type="text" placeholder="Tên đăng nhập hoặc Email" required>
+                        <input type="password" placeholder="Mật khẩu bảo mật" required>
+                        <p class="forgot-pass-link" onclick="forgotPasswordNotify()">Quên mật khẩu?</p>
+                        <button type="submit" class="btn-luxury-gold">ĐĂNG NHẬP NGAY</button>
+                    </form>
 
-
-        <section class="page" id="section-news">
-            <div class="news-page-container">
-                <h2 class="section-title">TIN TỨC & KINH NGHIỆM SÂN CỎ</h2>
-                <div class="news-grid">
-                    <article class="news-card">
-                        <div class="news-img-holder"><img src="https://cbluan207206-oss.github.io/cbl-football/1images.png" alt="Tin tức"></div>
-                        <div class="news-info">
-                            <span class="news-date">08/06/2026</span>
-                            <h4>Cách chọn giày đá bóng chuẩn cho tiền đạo cánh bứt tốc</h4>
-                            <p>Hướng dẫn chi tiết lựa chọn đinh dăm và trọng lượng giày tối ưu tốc độ chạy...</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-
-        <section class="page" id="section-contact">
-            <div class="contact-page-layout">
-                <div class="contact-form-block">
-                    <h3>GỬI TIN NHẮN CHO CBL SOCCER</h3>
-                    <form id="main-contact-form" onsubmit="handleContactSubmit(event)">
-                        <div class="form-group-row">
-                            <input type="text" placeholder="Họ và tên của bạn" required>
-                        </div>
-                        <div class="form-group-row">
-                            <input type="email" placeholder="Địa chỉ Email" required>
-                        </div>
-                        <div class="form-group-row">
-                            <textarea placeholder="Nội dung cần hỗ trợ, tư vấn sản phẩm..." rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-gold-submit">GỬI YÊU CẦU</button>
+                    <form id="register-form" class="auth-inner-form style-hidden" onsubmit="handleUserAuth(event, 'register')">
+                        <input type="text" placeholder="Họ và tên của bạn" required>
+                        <input type="email" placeholder="Địa chỉ Email chính chủ" required>
+                        <input type="password" placeholder="Tạo mật khẩu mạnh" required>
+                        <button type="submit" class="btn-luxury-gold">KHỞI TẠO TÀI KHOẢN</button>
                     </form>
                 </div>
 
-                <div class="contact-details-map-block">
-                    <h3>THÔNG TIN LIÊN HỆ CHI TIẾT</h3>
-                    <p><strong><i class="fas fa-map-marker-alt text-gold"></i> Địa chỉ:</strong> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
-                    <p><strong><i class="fas fa-phone-alt text-gold"></i> Hotline:</strong> 0984.169.335</p>
-                    <p><strong><i class="fas fa-envelope text-gold"></i> Email:</strong> contact@cblsoccer.com</p>
+                <div class="user-dashboard-profile style-hidden" id="user-profile-panel">
+                    <h3>XIN CHÀO ANH EM CẦU THỦ, <span id="user-display-name">Khách Quý</span></h3>
                     
-                    <div class="google-map-wrapper">
-                        <iframe src="https://www.google.com/maps/embed?..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="profile-tabs">
+                        <div class="p-tab">
+                            <h4><i class="fas fa-history"></i> Lịch Sử Đơn Hàng / Theo dõi đơn</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th>Mã Đơn</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead>
+                                    <tbody id="user-orders-history-rows">
+                                        <tr><td>#CBL-9921</td><td>08/06/2026</td><td>850.000đ</td><td><span class="status-badge shipping">Đang giao hàng</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="p-tab">
+                            <h4><i class="fas fa-map-marked-alt"></i> Sổ Địa Chỉ Mặc Định</h4>
+                            <p id="profile-address-text">Chưa cấu hình địa chỉ giao hàng.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <section class="page" id="section-account">
-            <div id="account-auth-forms" class="auth-box-wrapper">
-                <div class="auth-tabs">
-                    <button class="auth-tab-btn active" onclick="switchAuthForm('login')">Đăng Nhập</button>
-                    <button class="auth-tab-btn" onclick="switchAuthForm('register')">Đăng Ký</button>
-                </div>
+        <section class="page" id="section-info">
+            <div class="contact-info">
+                <h2 class="section-title">VỀ CHÚNG TÔI - CÂU CHUYỆN THƯƠNG HIỆU</h2>
+                <p class="brand-story-paragraph">
+                    **CBL Soccer** ra đời với sứ mệnh tiếp lửa đam mê cho các cầu thủ phủi và chuyên nghiệp trên khắp lãnh thổ Việt Nam. Chúng tôi tin rằng mỗi đôi giày không chỉ là phụ kiện, mà là một vũ khí tối thượng giúp bạn làm chủ trận đấu, làm chủ những pha kiến tạo xuất thần.
+                </p>
 
-                <form id="form-login" class="auth-form-panel active" onsubmit="handleLogin(event)">
-                    <div class="input-field-group">
-                        <input type="text" placeholder="Tên đăng nhập hoặc Email" required>
-                    </div>
-                    <div class="input-field-group">
-                        <input type="password" placeholder="Mật khẩu" required>
-                    </div>
-                    <div class="forgot-pass-row">
-                        <a href="#" onclick="switchAuthForm('forgot')">Quên mật khẩu?</a>
-                    </div>
-                    <button type="submit" class="btn-wine-auth">ĐĂNG NHẬP</button>
-                </form>
-
-                <form id="form-register" class="auth-form-panel" onsubmit="handleRegister(event)">
-                    <div class="input-field-group"><input type="text" placeholder="Họ và tên của bạn" required></div>
-                    <div class="input-field-group"><input type="email" placeholder="Địa chỉ Email" required></div>
-                    <div class="input-field-group"><input type="password" placeholder="Mật khẩu bảo mật" required></div>
-                    <button type="submit" class="btn-wine-auth">TẠO TÀI KHOẢN</button>
-                </form>
-
-                <form id="form-forgot" class="auth-form-panel" onsubmit="handleForgotPass(event)">
-                    <p>Nhập email đăng ký để lấy lại liên kết khôi phục mật khẩu cá nhân.</p>
-                    <div class="input-field-group"><input type="email" placeholder="Nhập địa chỉ Email" required></div>
-                    <button type="submit" class="btn-wine-auth">GỬI YÊU CẦU KHÔI PHỤC</button>
-                </form>
-            </div>
-
-            <div id="account-dashboard-panel" class="user-dashboard style-hidden">
-                <div class="dashboard-sidebar">
-                    <div class="user-welcome">
-                        <i class="fas fa-user-circle"></i>
-                        <h4>Xin chào, Luan CBL</h4>
-                    </div>
-                    <ul class="dash-menu">
-                        <li class="active" onclick="switchDashTab('history')"><i class="fas fa-shopping-bag"></i> Lịch sử đơn hàng</li>
-                        <li onclick="switchDashTab('tracking')"><i class="fas fa-route"></i> Theo dõi đơn hàng</li>
-                        <li onclick="switchDashTab('addresses')"><i class="fas fa-map-marked-alt"></i> Sổ địa chỉ</li>
-                        <li onclick="switchDashTab('wishlist')"><i class="fas fa-heart"></i> Danh sách ước nguyện</li>
-                        <li onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+                <p><strong><i class="fas fa-map-marker-alt"></i> Địa chỉ tổng kho:</strong> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
+                <p><strong><i class="fas fa-phone-alt"></i> Hotline hỗ trợ:</strong> 0984.169.335</p>
+                <p><strong><i class="fab fa-facebook"></i> Facebook chính thức:</strong> <a href="https://www.facebook.com/share/1H5czPAx3n/" target="_blank" rel="noopener noreferrer" class="gold-text">CBL Soccer Page</a></p>
+                <p><strong><i class="fab fa-tiktok"></i> Kênh giải trí Tiktok:</strong> <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" target="_blank" rel="noopener noreferrer" class="gold-text">DLS-ONLY FOOTBALL⚽️ Page</a></p>
+                
+                <div class="commitment">
+                    <h3>Cam kết kim cương từ CBL Soccer:</h3>
+                    <ul>
+                        <li><i class="fas fa-check-double text-gold"></i> Sản phẩm chính hãng 100%</li>
+                        <li><i class="fas fa-check-double text-gold"></i> Bảo hành keo chỉ trọn đời</li>
+                        <li><i class="fas fa-check-double text-gold"></i> Đổi trả size linh hoạt chuẩn chỉ trong vòng 7 ngày</li>
                     </ul>
                 </div>
 
-                <div class="dashboard-main-content">
-                    <div id="dash-tab-history" class="dash-panel active">
-                        <h3>LỊCH SỬ GIAO DỊCH ĐƠN HÀNG</h3>
-                        <table class="luxury-table">
-                            <thead>
-                                <tr><th>Mã đơn</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Trạng thái</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>#CBL-9921</td><td>05/06/2026</td><td>1.850.000đ</td><td><span class="status-badge deliverying">Đang giao</span></td></tr>
-                            </tbody>
-                        </table>
+                <div class="store-gallery-showcase">
+                    <h3>Không gian trải nghiệm đẳng cấp</h3>
+                    <div class="store-images-grid">
+                        <div class="store-img-placeholder" style="background-image: url('1images.png');">Tổng kho trung tâm</div>
+                        <div class="store-img-placeholder" style="background-image: url('1images.png');">Đội ngũ kỹ thuật viên giày</div>
                     </div>
+                </div>
+            </div>
 
-                    <div id="dash-tab-tracking" class="dash-panel">
-                        <h3>THEO DÕI HÀNH TRÌNH ĐƠN HÀNG</h3>
-                        <div class="tracking-timeline">
-                            <div class="step completed"><span>1</span><p>Đã tiếp nhận đơn</p></div>
-                            <div class="step completed"><span>2</span><p>Đã đóng gói xong</p></div>
-                            <div class="step active"><span>3</span><p>Đang vận chuyển</p></div>
-                            <div class="step"><span>4</span><p>Giao thành công</p></div>
+            <div class="brands-section">
+                <div class="brands-title">THƯƠNG HIỆU ĐỐI TÁC CHIẾN LƯỢC</div>
+                <div class="brand-logos">
+                    <div class="brand">
+                        <img src="https://upload.vi.wikipedia.org/wiki/Nike,_Inc" alt="Nike">
+                        <p>Nike</p>
+                    </div>
+                    <div class="brand">
+                        <img src="https://upload.vi.wikipedia.org/wiki/Adidas" alt="Adidas">
+                        <p>Adidas</p>
+                    </div>
+                    <div class="brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Mizuno_logo.svg" alt="Mizuno">
+                        <p>Mizuno</p>
+                    </div>
+                    <div class="brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Wika_logo.svg" alt="Wika">
+                        <p>Wika</p>
+                    </div>
+                    <div class="brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Zocker_logo.svg" alt="Zocker">
+                        <p>Zocker</p>
+                    </div>
+                    <div class="brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Kamito_logo.svg" alt="Kamito">
+                        <p>Kamito</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="page" id="section-contact-page">
+            <h2 class="section-title">LIÊN HỆ VỚI CHÚNG TÔI</h2>
+            <div class="contact-page-layout">
+                <div class="contact-form-side">
+                    <form id="main-contact-form" onsubmit="sendContactMessage(event)">
+                        <div class="input-group">
+                            <input type="text" placeholder="Họ tên của bạn" required>
                         </div>
-                    </div>
-
-                    <div id="dash-tab-addresses" class="dash-panel">
-                        <h3>SỔ ĐỊA CHỈ NHẬN HÀNG</h3>
-                        <div class="address-card default">
-                            <p><strong>Luan CBL</strong> (Mặc định)</p>
-                            <p>SĐT: 0984.169.335</p>
-                            <p>Địa chỉ: 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
+                        <div class="input-group">
+                            <input type="email" placeholder="Email nhận phản hồi" required>
                         </div>
-                    </div>
-
-                    <div id="dash-tab-wishlist" class="dash-panel">
-                        <h3>DANH SÁCH SẢN PHẨM YÊU THÍCH</h3>
-                        <div class="product-grid" id="wishlist-items-container"></div>
+                        <div class="input-group">
+                            <textarea placeholder="Nội dung cần hỗ trợ (Tư vấn size, đặt đội, bảo hành...)" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-luxury-gold">GỬI YÊU CẦU ĐẾN HỆ THỐNG</button>
+                    </form>
+                </div>
+                <div class="contact-map-side">
+                    <div class="map-iframe-container">
+                        <div class="map-placeholder-box">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p>Bản đồ vị trí cửa hàng: 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -546,260 +435,250 @@
 
 
         <section class="page" id="section-policies">
-            <div class="policies-container">
-                <h2>CHÍNH SÁCH VÀ ĐIỀU KHOẢN HOẠT ĐỘNG</h2>
-                <div class="policy-block">
-                    <h3>1. Chính sách vận chuyển</h3>
-                    <p>CBL SOCCER áp dụng chính sách FREE SHIP với các đơn hàng có giá trị từ 200.000đ trở lên phạm vi toàn quốc...</p>
+            <h2 class="section-title">CHÍNH SÁCH & ĐIỀU KHOẢN ĐIỀU HÀNH</h2>
+            <div class="policies-vertical-tabs">
+                <div class="policy-block-item">
+                    <h4>1. Chính sách vận chuyển toàn quốc</h4>
+                    <p>CBL SOCCER áp dụng chính sách giao hàng siêu tốc. Mọi đơn hàng giá trị lớn hoặc từ 200k trở lên đều được hưởng chính sách FREE SHIP hoàn toàn.</p>
                 </div>
-                <div class="policy-block">
-                    <h3>2. Chính sách đổi trả sản phẩm</h3>
-                    <p>Khách hàng được hỗ trợ đổi size linh hoạt trong vòng 7 ngày kể từ lúc nhận hàng nếu sản phẩm giữ nguyên tem mác...</p>
+                <div class="policy-block-item">
+                    <h4>2. Quy trình đổi trả trong vòng 7 ngày</h4>
+                    <p>Sản phẩm giữ nguyên tem mác, chưa qua sử dụng trên sân đấu thực tế sẽ được hỗ trợ đổi size, đổi mẫu linh hoạt vô điều kiện.</p>
                 </div>
-                <div class="policy-block">
-                    <h3>3. Chính sách bảo hành trọn đời</h3>
-                    <p>Bảo hành khâu chỉ và dán keo hoàn toàn miễn phí trọn đời vòng đời sản phẩm giày đá bóng mua tại hệ thống.</p>
+                <div class="policy-block-item">
+                    <h4>3. Chế độ bảo hành keo chỉ trọn đời</h4>
+                    <p>Cam kết đồng hành lâu dài cùng anh em. Bung keo, đứt chỉ mang trực tiếp qua tổng kho hỗ trợ xử lý kỹ thuật miễn phí.</p>
                 </div>
-                <div class="policy-block">
-                    <h3>4. Điều khoản và Bảo mật thông tin</h3>
-                    <p>Cam kết bảo mật tuyệt đối thông tin cá nhân và thông tin giao dịch của khách hàng trực tuyến.</p>
+                <div class="policy-block-item">
+                    <h4>4. Điều khoản bảo mật dữ liệu</h4>
+                    <p>Thông tin số điện thoại, địa chỉ nhận hàng của quý khách được mã hóa tối tân qua cổng SSL bảo mật tuyệt đối.</p>
                 </div>
             </div>
         </section>
 
 
+        <section class="page" id="section-news">
+            <h2 class="section-title">TIN TỨC GIÀY BÓNG ĐÁ & MẸO CHỌN GIÀY</h2>
+            <div class="news-articles-grid">
+                <article class="news-card">
+                    <div class="news-thumb" style="background-image: url('1images.png')"></div>
+                    <div class="news-body">
+                        <h4>Cách chọn giày đá bóng sân cỏ nhân tạo phù hợp phom chân bè</h4>
+                        <p>Hướng dẫn chi tiết lựa chọn giữa dòng Nike Mercurial và Mizuno cho anh em chân bè...</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
         <section class="page" id="section-admin">
-            <div class="admin-dashboard-layout">
-                <header class="admin-topbar">
-                    <h2><i class="fas fa-user-shield text-gold"></i> BÀN LÀM VIỆC CỦA HỆ THỐNG QUẢN TRỊ</h2>
-                    <button class="btn-exit-admin" onclick="showSection('home')">Thoát Admin</button>
-                </header>
-
-                <div class="admin-main-body">
-                    <aside class="admin-nav-sidebar">
-                        <ul>
-                            <li class="active" onclick="switchAdminPanel('kpi')"><i class="fas fa-chart-line"></i> Báo cáo doanh thu</li>
-                            <li onclick="switchAdminPanel('products')"><i class="fas fa-boxes"></i> Quản lý Sản Phẩm</li>
-                            <li onclick="switchAdminPanel('orders')"><i class="fas fa-shopping-cart"></i> Quản lý Đơn Hàng</li>
-                            <li onclick="switchAdminPanel('customers')"><i class="fas fa-users"></i> Quản lý Khách Hàng</li>
-                            <li onclick="switchAdminPanel('banners')"><i class="fas fa-images"></i> Quản lý Banner/Bài viết</li>
-                        </ul>
-                    </aside>
-
-                    <div class="admin-content-view">
-                        <div id="admin-panel-kpi" class="admin-sub-panel active">
-                            <h3>TỔNG QUAN DOANH THU & KHO HÀNG</h3>
-                            <div class="kpi-cards-row">
-                                <div class="kpi-card"><h4>Tổng Doanh Thu</h4><p class="text-gold">150.000.000đ</p></div>
-                                <div class="kpi-card"><h4>Đơn hàng mới</h4><p class="text-wine">12 Đơn</p></div>
-                                <div class="kpi-card"><h4>Hàng tồn kho</h4><p>340 Đôi</p></div>
-                            </div>
-                        </div>
-
-                        <div id="admin-panel-products" class="admin-sub-panel">
-                            <div class="panel-action-header">
-                                <h3>DANH SÁCH HÀNG TRONG KHO</h3>
-                                <button class="btn-add-new-item" onclick="openAddProductForm()"><i class="fas fa-plus"></i> Thêm sản phẩm mới</button>
-                            </div>
-                            <table class="luxury-table">
-                                <thead><tr><th>ID</th><th>Ảnh</th><th>Tên sản phẩm</th><th>Giá bán</th><th>Thao tác</th></tr></thead>
-                                <tbody>
-                                    <tr><td>#01</td><td><i class="fas fa-shoe-prints"></i></td><td>Giày Nike Zoom Mercurial TF</td><td>1.850.000đ</td><td><button class="btn-edit"><i class="fas fa-edit"></i></button> <button class="btn-delete"><i class="fas fa-trash"></i></button></td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div id="admin-panel-orders" class="admin-sub-panel">
-                            <h3>XỬ LÝ ĐƠN HÀNG TOÀN HỆ THỐNG</h3>
-                            <table class="luxury-table">
-                                <thead><tr><th>Đơn hàng</th><th>Khách hàng</th><th>Tổng tiền</th><th>Xử lý trạng thái</th></tr></thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#CBL-9921</td><td>Nguyễn Văn A</td><td>1.850.000đ</td>
-                                        <td>
-                                            <select onchange="updateOrderStatus('CBL-9921', this.value)">
-                                                <option value="pending">Chờ xác nhận</option>
-                                                <option value="processing" selected>Đang giao hàng</option>
-                                                <option value="success">Đã hoàn thành</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div id="admin-panel-customers" class="admin-sub-panel">
-                            <h3>DANH SÁCH THÀNH VIÊN ĐĂNG KÝ</h3>
-                            <table class="luxury-table">
-                                <thead><tr><th>Tên KH</th><th>Email</th><th>Số điện thoại</th><th>Quyền</th></tr></thead>
-                                <tbody><tr><td>Luan CBL</td><td>luan@cblsoccer.com</td><td>0984.169.335</td><td>Khách hàng VIP</td></tr></tbody>
-                            </table>
-                        </div>
-
-                        <div id="admin-panel-banners" class="admin-sub-panel">
-                            <h3>CÀI ĐẶT BANNER QUẢNG CÁO & TIN TỨC</h3>
-                            <p>Chức năng tải lên và thay thế hình ảnh quảng cáo chính diện website.</p>
-                        </div>
+            <div class="admin-dashboard-container">
+                <div class="admin-header-title">
+                    <h2><i class="fas fa-tools"></i> TRUNG TÂM KIỂM SOÁT HỆ THỐNG — ADMIN</h2>
+                    <button class="btn-logout-admin" onclick="showSection('section-home')">Thoát Admin</button>
+                </div>
+                <div class="admin-stats-grid">
+                    <div class="stat-card"><h5>Doanh thu tháng này</h5><p class="gold-text">145.200.000đ</p></div>
+                    <div class="stat-card"><h5>Đơn hàng chờ duyệt</h5><p class="wine-text">12 đơn hàng</p></div>
+                    <div class="stat-card"><h5>Sản phẩm trong kho</h5><p>450 đôi</p></div>
+                </div>
+                <div class="admin-management-tabs">
+                    <div class="admin-control-box">
+                        <h4>Quản lý sản phẩm & Kho hàng</h4>
+                        <button onclick="alert('Tính năng thêm sản phẩm mới')" class="btn-luxury-gold">+ Thêm sản phẩm mới</button>
+                    </div>
+                    <div class="admin-control-box">
+                        <h4>Quản lý đơn hàng & Khách hàng</h4>
+                        <p>Xử lý danh sách hóa đơn từ Techcombank VietQR Pro và COD.</p>
+                    </div>
+                    <div class="admin-control-box">
+                        <h4>Quản lý Banner & Bài viết bài đăng</h4>
+                        <p>Cập nhật banner chính `1images.png` và các chiến dịch khuyến mãi.</p>
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
-   <div id="cart-modal-overlay" class="cart-modal-wrapper" style="display: none;">
-        <div class="cart-modal-content">
-            <div class="cart-modal-header">
-                <h3><i class="fas fa-shopping-cart"></i> Giỏ Hàng Của Bạn</h3>
-                <button class="cart-close-btn" onclick="toggleCartModal()">&times;</button>
-            </div>
-    <div id="cart-modal" class="modal" style="display:none;">
-        <div class="modal-content cart-pop">
-            <button onclick="toggleCartModal()" class="close-x">&times;</button>
-            <h2>Giỏ hàng của bạn</h2>
-            <div id="cart-items-list">
-                <p class="empty-cart-text">Giỏ hàng đang trống.</p>
-            </div>
-            
-            <div class="cart-coupon-row">
-                <input type="text" id="coupon-code-input" placeholder="Nhập mã giảm giá (Mã: CBL2026)">
-                <button onclick="applyDiscountCoupon()">ÁP DỤNG</button>
-            </div>
 
-            <div class="cart-summary-total">
-                <div class="summary-line"><span>Tạm tính:</span><span id="subtotal-price">0đ</span></div>
-                <div class="summary-line"><span>Mã giảm giá:</span><span id="coupon-discount-value">-0đ</span></div>
-                <div class="summary-line"><span>Phí vận chuyển:</span><span id="shipping-fee-value">0đ</span></div>
-                <hr>
-                <div class="summary-line final-total-row"><span>TỔNG CỘNG:</span><span id="total-price">0đ</span></div>
-            </div>
-            <button onclick="proceedToCheckout()" class="btn-checkout">TIẾN HÀNH ĐẶT HÀNG NGAY</button>
+    <div id="product-detail-modal" class="modal" style="display:none;">
+        <div class="modal-content product-detail-pop">
+            <button onclick="closeProductDetail()" class="close-x" aria-label="Đóng">×</button>
+            <div id="detail-content"></div>
         </div>
     </div>
 
+    <div id="add-success-modal" class="modal" style="display:none;">
+        <div class="modal-content success-pop">
+            <button onclick="closeSuccessModal()" class="close-x" aria-label="Đóng">×</button>
+            <div class="success-header">
+                <i class="fas fa-check-circle"></i> Sản phẩm vừa được thêm thành công!
+            </div>
+            <div class="success-product-info" id="success-pop-info"></div>
+            <div class="success-summary">
+                <p>Giỏ hàng hiện tại (<span id="success-cart-count">0</span> sản phẩm)</p>
+                <div class="total-row">
+                    <span>Tổng tiền tạm tính:</span>
+                    <span id="success-cart-total" class="gold-text">0đ</span>
+                </div>
+            </div>
+            <button class="btn-primary-luxury" onclick="goToCartFromSuccess()">TIẾN HÀNH THANH TOÁN NGAY</button>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="modal" style="display:none;">
+        <div class="modal-content cart-pop">
+            <button onclick="toggleCart()" class="close-x" aria-label="Đóng">×</button>
+            <h2 class="cart-title-luxury"><i class="fas fa-shopping-basket"></i> Giỏ hàng thượng lưu của bạn</h2>
+            
+            <div id="cart-items-list" class="cart-items-scroll-area">
+                </div>
+
+            <div class="promo-coupon-input-wrapper">
+                <input type="text" id="cart-coupon-code" placeholder="Nhập mã giảm giá (CBLSOCCER10)">
+                <button onclick="applyCouponCode()">Áp dụng</button>
+            </div>
+
+            <div class="cart-summary-total">
+                <div class="summary-line"><span>Phí vận chuyển:</span> <span id="shipping-fee-text" class="gold-text">Miễn phí</span></div>
+                <div class="summary-line main-total"><span>Tổng cộng thanh toán:</span> <span id="total-price">0đ</span></div>
+            </div>
+            <button onclick="checkout()" class="btn-checkout">TIẾN HÀNH ĐẶT HÀNG NGAY <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
 
     <div id="checkout-modal" class="modal" style="display:none;">
         <div class="modal-content checkout-page-pop">
-            <button onclick="closeCheckoutModal()" class="close-x">&times;</button>
+            <button onclick="closeCheckout()" class="close-x" aria-label="Đóng">×</button>
             
             <div class="checkout-header">
-                <h2>THÔNG TIN XÁC NHẬN ĐƠN HÀNG</h2>
+                <h2><i class="fas fa-map-marker-alt"></i> Thông tin nhận hàng của chiến hữu</h2>
             </div>
 
             <div class="checkout-form">
-                <h3><i class="fas fa-user-edit"></i> 1. Thông tin khách hàng</h3>
-                <div class="input-group"><input type="text" id="cus-name" placeholder="Họ và tên người nhận" required></div>
-                <div class="input-group"><input type="tel" id="cus-phone" placeholder="Số điện thoại di động" required></div>
-                <div class="input-group"><input type="text" id="cus-email" placeholder="Địa chỉ Email nhận hóa đơn (tùy chọn)"></div>
-                
-                <h3><i class="fas fa-map-marker-alt"></i> 2. Địa chỉ nhận hàng chi tiết</h3>
                 <div class="input-group">
-                    <select id="cus-city" onchange="calculateShippingFee(this.value)">
-                        <option value="">--- Chọn Tỉnh / Thành ---</option>
+                    <input type="text" id="cus-email" placeholder="Địa chỉ Email của bạn (Tùy chọn)">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="cus-name" placeholder="Họ và tên người nhận hàng" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="cus-phone" placeholder="Số điện thoại liên hệ giao hàng" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="cus-address" placeholder="Địa chỉ chi tiết (Số nhà, tên tòa nhà, tên đường)" required>
+                </div>
+                
+                <div class="input-group">
+                    <select id="cus-city" required>
+                        <option value="">--- Chọn Tỉnh / Thành phố ---</option>
                         <option value="Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
                         <option value="Hà Nội">Thành phố Hà Nội</option>
                         <option value="Đà Nẵng">Thành phố Đà Nẵng</option>
                         <option value="Khác">Tỉnh thành khác</option>
                     </select>
                 </div>
-                <div class="input-group"><input type="text" id="cus-district" placeholder="Quận / Huyện"></div>
-                <div class="input-group"><input type="text" id="cus-ward" placeholder="Phường / Xã"></div>
-                <div class="input-group"><input type="text" id="cus-address" placeholder="Số nhà, tên đường, ngõ hẻm chi tiết"></div>
-                <div class="input-group"><textarea id="cus-note" placeholder="Ghi chú thời gian giao hàng (tùy chọn)"></textarea></div>
-
-                <h3><i class="fas fa-truck"></i> 3. Phương thức vận chuyển</h3>
-                <div class="shipping-notice-box" id="ship-box">
-                    Nhập Tỉnh/Thành phố để tính cước phí vận chuyển chính xác nhất.
+                <div class="input-group">
+                    <input type="text" id="cus-district" placeholder="Quận / Huyện" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="cus-ward" placeholder="Phường / Xã" required>
+                </div>
+                <div class="input-group">
+                    <textarea id="cus-note" placeholder="Ghi chú đơn hàng đặc biệt (Ví dụ: Giao giờ hành chính, gọi trước khi giao...)"></textarea>
                 </div>
 
-                <h3><i class="fas fa-credit-card"></i> 4. Phương thức thanh toán bảo mật</h3>
-                <label class="payment-method-option">
-                    <input type="radio" name="payment_method" value="VietQR" checked>
-                    <span class="custom-radio"></span>
-                    <div class="method-desc">
-                        <span>Thanh toán qua Techcombank VietQR Pro (Tự động nhận diện)</span>
-                        <span class="badge-qr">VietQR</span>
+                <div class="section-block">
+                    <h3><i class="fas fa-truck"></i> Vận chuyển hàng hóa</h3>
+                    <div class="shipping-notice" id="ship-box">
+                        Hệ thống tự động đồng bộ tuyến đường vận chuyển...
                     </div>
-                </label>
+                </div>
 
-                <label class="payment-method-option">
-                    <input type="radio" name="payment_method" value="COD">
-                    <span class="custom-radio"></span>
-                    <div class="method-desc">
-                        <span>Thanh toán bằng tiền mặt khi nhận hàng (COD)</span>
-                        <i class="fas fa-money-bill-wave icon-money text-gold"></i>
-                    </div>
-                </label>
+                <div class="section-block">
+                    <h3><i class="fas fa-credit-card"></i> Phương thức thanh toán</h3>
+                    
+                    <label class="payment-method-option">
+                        <input type="radio" name="payment_method" value="VietQR" checked>
+                        <span class="custom-radio"></span>
+                        <div class="method-desc">
+                            <span>Thanh toán quét mã qua Techcombank VietQR Pro</span>
+                            <span class="badge-qr">Khuyên Dùng</span>
+                        </div>
+                    </label>
+
+                    <label class="payment-method-option">
+                        <input type="radio" name="payment_method" value="COD">
+                        <span class="custom-radio"></span>
+                        <div class="method-desc">
+                            <span>Thanh toán trực tiếp khi nhận hàng (COD)</span>
+                            <i class="fas fa-money-bill-wave icon-money"></i>
+                        </div>
+                    </label>
+                </div>
 
                 <div class="free-ship-policy">
-                    <i class="fas fa-info-circle"></i> CBL SOCCER miễn phí vận chuyển cho mọi đơn hàng giá trị từ 200k trở lên.
+                    CBL SOCCER có chính sách FREE SHIP với các đơn hàng từ 200k trở lên. Vì thế, shop khuyến khích anh em nên mua thêm các sản phẩm để được hưởng ưu đãi.
                 </div>
 
-                <button onclick="confirmOrderSubmit()" class="btn-submit-order">HOÀN TẤT ĐẶT HÀNG</button>
+                <button onclick="confirmOrder()" class="btn-submit-order">XÁC NHẬN ĐẶT HÀNG HOÀN TẤT</button>
             </div>
         </div>
     </div>
-
-
+    
     <div id="bill-modal" class="modal" style="display:none;">
         <div class="modal-content bill-pop">
-            <div class="success-icon-animation">
-                <i class="fas fa-check-circle text-gold"></i>
+            <h2 class="bill-title"><i class="fas fa-check-double text-gold"></i> ĐƠN HÀNG THÀNH CÔNG</h2>
+            <div id="bill-detail"></div>
+            <div id="vietqr-payment-area-placeholder" class="qr-payment-zone style-hidden">
+                <p class="qr-instruction">Quét mã QR Techcombank dưới đây để hoàn tất thanh toán tự động:</p>
+                <div class="qr-box-mock">[Hệ Thống VietQR Pro Auto-Generate QR]</div>
             </div>
-            <h2 class="bill-title">ĐẶT HÀNG THÀNH CÔNG</h2>
-            <div id="bill-detail">
-                </div>
-            <div class="bill-footer-buttons">
-                <button class="btn-gold" onclick="closeBillAndHome()">TIẾP TỤC MUA SẮM</button>
-            </div>
+            <p style="text-align:center; font-weight:bold; margin-top:20px; color:#D4AF37;">Cảm ơn quý khách đã ủng hộ shop!</p>
+            <button onclick="closeBillAndReset()" class="btn-luxury-outline" style="width:100%; margin-top:15px;">Quay về Trang chủ</button>
         </div>
     </div>
 
 
-    <footer class="luxury-footer">
-        <div class="footer-container">
-            <div class="footer-brand-col">
-                <div class="footer-logo">CBL SOCCER</div>
-                <p>Nâng tầm cảm giác bóng. Hệ thống cung cấp các thương hiệu giày bóng đá cao cấp chính hãng phân phối toàn quốc.</p>
-                <div class="footer-social-icons">
-                    <a href="https://www.facebook.com/share/1H5czPAx3n/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
+    <footer class="site-footer">
+        <div class="footer-inner-grid">
+            <div class="footer-column-brand">
+                <h3 class="footer-logo"><span class="gold-text">CBL</span> SOCCER</h3>
+                <p>Hệ thống cung cấp giày bóng đá phân khúc cao cấp chuyên nghiệp số 1. Nâng tầm cảm giác bóng, làm chủ cuộc chơi.</p>
+                <p><i class="fas fa-shield-alt gold-text"></i> Bảo mật SSL Đơn Hàng Tuyệt Đối.</p>
             </div>
-
-            <div class="footer-links-col">
+            
+            <div class="footer-column-links">
                 <h4>DANH MỤC NHANH</h4>
                 <ul>
-                    <li><a href="#" onclick="showSection('products')">Giày Nike Mercurial</a></li>
-                    <li><a href="#" onclick="showSection('products')">Giày Mizuno Neo</a></li>
-                    <li><a href="#" onclick="showSection('products')">Giày Sân Cỏ Nhân Tạo</a></li>
+                    <li><button onclick="showSection('section-products')">Giày Nike Mercurial</button></li>
+                    <li><button onclick="showSection('section-products')">Giày Mizuno Neo</button></li>
+                    <li><button onclick="showSection('section-products')">Giày Adidas Predator</button></li>
+                    <li><button onclick="showSection('section-news')">Cẩm nang chọn Size</button></li>
                 </ul>
             </div>
 
-            <div class="footer-links-col">
+            <div class="footer-column-policies">
                 <h4>CHÍNH SÁCH CHUNG</h4>
                 <ul>
-                    <li><a href="#" onclick="showSection('policies')">Chính sách vận chuyển</a></li>
-                    <li><a href="#" onclick="showSection('policies')">Chính sách đổi trả size</a></li>
-                    <li><a href="#" onclick="showSection('policies')">Bảo hành trọn đời</a></li>
-                    <li><a href="#" onclick="showSection('policies')">Điều khoản bảo mật</a></li>
+                    <li><button onclick="showSection('section-policies')">Chính sách vận chuyển</button></li>
+                    <li><button onclick="showSection('section-policies')">Chính sách đổi trả bảo hành</button></li>
+                    <li><button onclick="showSection('section-policies')">Điều khoản bảo mật</button></li>
                 </ul>
             </div>
 
-            <div class="footer-contact-col">
-                <h4>THÔNG TIN SHOP</h4>
-                <p><i class="fas fa-map-marker-alt text-gold"></i> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
-                <p><i class="fas fa-phone-alt text-gold"></i> Hotline: 0984.169.335</p>
-                <p><i class="fas fa-envelope text-gold"></i> support@cblsoccer.com</p>
-                <div class="ssl-badge-placeholder">
-                    <i class="fas fa-lock"></i> SSL Secured Connection
+            <div class="footer-column-contact">
+                <h4>THÔNG TIN LIÊN HỆ</h4>
+                <p><i class="fas fa-home gold-text"></i> 342 Tân Sơn Nhì, Tân Phú, TP. HCM</p>
+                <p><i class="fas fa-phone gold-text"></i> Hotline: 0984.169.335</p>
+                <div class="footer-social-icons">
+                    <a href="https://www.facebook.com/share/1H5czPAx3n/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@ctvdlsbaluan15941?_r=1&_t=ZS-96XKXcPdg6S" target="_blank" rel="noopener" aria-label="Tiktok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
-
-        <div class="footer-copyright">
-            &copy; 2026 CBL SOCCER. Bản quyền được bảo lưu hoàn toàn. Designed with Luxury Style.
+        <div class="footer-copyright-bar">
+            &copy; 2026 CBL SOCCER. All Rights Reserved. Thiết kế bởi lập trình viên giỏi nhất thế giới.
         </div>
     </footer>
 
@@ -807,17 +686,17 @@
     <div class="bottom-contact-bar">
         <a href="tel:0984169335" class="bar-item">
             <i class="fas fa-phone-alt icon-green"></i>
-            <span>Gọi Điện thoại</span>
+            <span>Điện thoại</span>
         </a>
-        <a href="https://zalo.me/0984169335" target="_blank" rel="noopener noreferrer" class="bar-item">
+        <a href="https://zalo.me/0984169335" target="_blank" class="bar-item">
             <i class="fab fa-telegram-plane icon-blue"></i>
             <span>Chat Zalo</span>
         </a>
-        <a href="https://www.facebook.com/share/1FqNWyXwuG/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="bar-item">
+        <a href="https://www.facebook.com/share/1FqNWyXwuG/?mibextid=wwXIfr" target="_blank" class="bar-item">
             <i class="fab fa-facebook-messenger icon-messenger"></i>
-            <span>Page Messenger</span>
+            <span>Page Facebook</span>
         </a>
-        <a href="https://goo.gl/maps/bB3AHevLg4gAor54A" target="_blank" rel="noopener noreferrer" class="bar-item">
+        <a href="https://maps.app.goo.gl/KqX5nYAqhvUEzWSh9?g_st=ic" target="_blank" class="bar-item">
             <i class="fas fa-map-marker-alt icon-orange"></i>
             <span>Chỉ đường</span>
         </a>
