@@ -7,7 +7,7 @@ const DANH_SACH_GIAY = [
         priceSale: 980000,
         color: "Đỏ rượu",
         sizes: [39, 40, 41, 42],
-        image: "1images.png",
+        image: "2_2images.jpeg",
         desc: "Phiên bản đặc biệt phối màu đỏ rượu vang thượng hạng. Cấu trúc Upper dệt sợi cải tiến mang lại cảm giác bóng tối ưu, đệm giảm chấn Air Zoom siêu nhẹ giúp tăng tốc bứt phá trên mặt sân cỏ nhân tạo.",
         featured: true
     },
