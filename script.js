@@ -538,7 +538,9 @@ function checkout() {
 function closeCheckout() {
     document.getElementById("checkout-modal").style.display = "none";
 }
-
+// CẤU HÌNH THÔNG TIN BOT TELEGRAM CỦA CBL SOCCER (ĐÃ KÍCH HOẠT)
+const TELEGRAM_BOT_TOKEN = '8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0'; 
+const TELEGRAM_CHAT_ID = '7901882812';
 /* XÁC NHẬN ĐƠN HÀNG THÀNH CÔNG VÀ XUẤT HÓA ĐƠN ĐIỆN TỬ */
 function confirmOrder() {
     const name = document.getElementById("cus-name").value.trim();
