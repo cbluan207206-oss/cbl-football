@@ -598,10 +598,57 @@ function confirmOrder() {
     } else {
         qrZone.classList.add("style-hidden");
     }
+// 3. KÍCH HOẠT: BẮN THÔNG BÁO ĐƠN HÀNG VỀ TELEGRAM CHAT BOT
+    sendOrderToTelegram(orderId, name, phone, address, city, paymentMethodSelected, stats);
 
-    // Đóng cổng nhập liệu, bung màn hình báo đơn hoàn tất
+    // 4. Đóng cổng nhập liệu và bùng màn hình hoàn tất đơn
     document.getElementById("checkout-modal").style.display = "none";
     document.getElementById("bill-modal").style.display = "flex";
+}
+
+// HÀM BỔ TRỢ XỬ LÝ ĐẨY DỮ LIỆU ĐI API TELEGRAM
+function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod, stats) {
+    // Thiết kế nội dung tin nhắn gửi về điện thoại gọn gàng, đẹp mắt
+    let teleMessage = `🔔 <b>CBL SOCCER - CÓ ĐƠN HÀNG MỚI!</b>\n\n`;
+    teleMessage += `🆔 <b>Mã đơn:</b> <code>${orderId}</code>\n`;
+    teleMessage += `👤 <b>Khách hàng:</b> ${name}\n`;
+    teleMessage += `📞 <b>Điện thoại:</b> ${phone}\n`;
+    teleMessage += `📍 <b>Địa chỉ:</b> ${address}, ${city}\n`;
+    teleMessage += `💳 <b>Hình thức:</b> ${paymentMethod === "VietQR" ? "Techcombank VietQR Pro" : "Thanh toán COD"}\n\n`;
+    teleMessage += `📦 <b>CHI TIẾT CHIẾN HÀI:</b>\n`;
+    
+    globalCart.forEach((item, index) => {
+        teleMessage += `${index + 1}. ${item.name}\n`;
+        teleMessage += `   👉 [Size: ${item.size} | Màu: ${item.color}] x <b>${item.qty} đôi</b>\n`;
+    });
+    
+    teleMessage += `\n💰 <b>TỔNG TIỀN QUYẾT TOÁN:</b> <u>${formatVNCurrency(stats.finalTotal)}</u>`;
+
+    // Gọi API Telegram gửi tin nhắn ngầm
+    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    fetch(telegramUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: teleMessage,
+            parse_mode: 'HTML' // Sử dụng định dạng HTML cho chữ đậm, mã code trực quan
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            console.log('Đã báo đơn về Telegram Bot thành công!');
+        } else {
+            console.error('Lỗi cấu hình Telegram:', data.description);
+        }
+    })
+    .catch(error => {
+        console.error('Không thể kết nối mạng tới API Telegram:', error);
+    });
 }
 
 function closeBillAndReset() {
