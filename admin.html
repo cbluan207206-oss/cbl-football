@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Trị - CBL Soccer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Thêm một vài tùy chỉnh riêng cho trang quản trị nếu cần */
+        body { padding: 20px; }
+        .admin-dashboard-container { max-width: 1200px; margin: 0 auto; display: block !important; }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <section class="page active" id="section-admin">
+            <div class="admin-dashboard-container">
+                <div class="admin-header-title">
+                    <h2><i class="fas fa-tools"></i> TRUNG TÂM KIỂM SOÁT HỆ THỐNG — ADMIN</h2>
+                    <a href="index.html" class="btn-logout-admin" style="text-decoration: none; text-align: center; line-height: 40px;">Quay về Cửa Hàng</a>
+                </div>
+                
+                <div class="admin-stats-grid">
+                    <div class="stat-card"><h5>Doanh thu tháng này</h5><p class="gold-text">145.200.000đ</p></div>
+                    <div class="stat-card"><h5>Đơn hàng chờ duyệt</h5><p class="wine-text">12 đơn hàng</p></div>
+                    <div class="stat-card"><h5>Sản phẩm trong kho</h5><p>450 đôi</p></div>
+                </div>
+                
+                <div class="admin-management-tabs">
+                    <div class="admin-control-box">
+                        <h4>Quản lý sản phẩm & Kho hàng</h4>
+                        <button onclick="alert('Tính năng thêm sản phẩm mới')" class="btn-luxury-gold">+ Thêm sản phẩm mới</button>
+                    </div>
+                    <div class="admin-control-box">
+                        <h4>Quản lý đơn hàng & Khách hàng</h4>
+                        <p>Xử lý danh sách hóa đơn từ Techcombank VietQR Pro và COD.</p>
+                    </div>
+                    <div class="admin-control-box">
+                        <h4>Quản lý Banner & Bài viết bài đăng</h4>
+                        <p>Cập nhật banner chính `1images.png` và các chiến dịch khuyến mãi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        console.log("Hệ thống quản trị CBL Soccer đã sẵn sàng.");
+    </script>
+</body>
+</html>
