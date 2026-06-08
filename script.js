@@ -431,8 +431,12 @@ function goToCartFromSuccess() {
 /* CẬP NHẬT BIỂN ĐẾM SỐ LƯỢNG TRÊN HEADER NAV BAR */
 function updateCartCounters() {
     const stats = calculateCartTotals();
-    document.getElementById("cart-count").textContent = stats.totalQty;
+    const cartCounter = document.getElementById("cart-count");
+    if (cartCounter) {
+        cartCounter.textContent = stats.totalQty;
+    }
 }
+
 
 /* LOGIC TÍNH TOÁN TỔNG TIỀN ĐƠN HÀNG */
 function calculateCartTotals() {
@@ -565,7 +569,7 @@ function confirmOrder() {
     `;
 
     globalCart.forEach(item => {
-        billHTML += `<div style="display:flex; justify-content:between;"><span>• ${item.name} (Size: ${item.size})</span> <span style="margin-left:auto;">x${item.qty}</span></div>`;
+        billHTML += `<div style="display:flex; justify-content: space-between;"><span>• ${item.name} (Size: ${item.size})</span> <span style="margin-left:auto;">x${item.qty}</span></div>`;
     });
 
     billHTML += `
@@ -580,6 +584,9 @@ function confirmOrder() {
     const qrZone = document.getElementById("vietqr-payment-area-placeholder");
     if (paymentMethodSelected === "VietQR") {
         qrZone.classList.remove("style-hidden");
+        // Mã hóa chuỗi data bằng encodeURIComponent đề phòng lỗi ký tự đặc biệt
+        const rawQrData = `STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}`;
+        const encodedQrData = encodeURIComponent(rawQrData);
         // Giả lập API sinh mã QR tự động theo chuẩn VietQR Vietcombank/Techcombank
         qrZone.innerHTML = `
             <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
