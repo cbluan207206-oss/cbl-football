@@ -1058,3 +1058,96 @@ table th { color: var(--color-gold); font-weight: 600; text-transform: uppercase
     .hero-content h1 { font-size: 2rem; }
     .footer-inner-grid { grid-template-columns: 1fr; gap: 30px; }
 }
+/* ==========================================================================
+   CSS ĐỊNH HÌNH LƯỚI THƯƠNG HIỆU ĐỐI TÁC (3 CỘT x 2 HÀNG)
+   ========================================================================== */
+.brands-section-wrapper {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Tiêu đề chính căn giữa, chữ đậm mạnh mẽ */
+.brands-main-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff; /* Tự động đổi màu theo theme nếu cần, mặc định giữ trắng sang trọng */
+    margin-bottom: 40px;
+    letter-spacing: 1.5px;
+}
+
+/* Khung lưới chia chính xác 3 cột đều nhau */
+.brand-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 20px; /* Khoảng cách hàng 40px, khoảng cách cột 20px */
+    justify-items: center;
+    align-items: center;
+}
+
+/* Khối bọc từng thương hiệu */
+.brand-item-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa ô vuông ảnh và chữ bên dưới */
+    width: 100%;
+}
+
+/* Ô vuông chứa logo (Giống hệt các ô vuông viền mỏng trong ảnh mẫu) */
+.brand-img-holder {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444; /* Viền mỏng cao cấp phù hợp Dark Theme, đổi thành #ccc nếu thích sáng */
+    background: #111; /* Nền tối nhẹ làm nổi bật logo */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Hiệu ứng phát sáng nhẹ khi hover chuột vào ô vuông thương hiệu */
+.brand-item-box:hover .brand-img-holder {
+    border-color: #c5a059; /* Viền chuyển sang màu vàng Gold thương hiệu */
+    transform: translateY(-3px);
+}
+
+/* Định dạng ảnh logo bên trong luôn vuông vắn, không móp méo */
+.brand-img-holder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Chữ tên thương hiệu ở dưới */
+.brand-name-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #a4a4a4;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.brand-item-box:hover .brand-name-text {
+    color: #fff; /* Chữ sáng lên khi hover */
+}
+
+/* Tối ưu hiển thị responsive mượt mà trên điện thoại màn hình nhỏ */
+@media (max-width: 480px) {
+    .brands-main-title {
+        font-size: 1.6rem;
+    }
+    .brand-img-holder {
+        width: 85px;
+        height: 85px;
+    }
+    .brand-name-text {
+        font-size: 0.95rem;
+    }
+}
+
