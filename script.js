@@ -1,56 +1,8 @@
 /* ==========================================================================
-   KIẾN TRÚC DỮ LIỆU CỐ ĐỊNH (MOCK DATA - KHỞI TẠO DANH SÁCH SẢN PHẨM)
+   KIẾN TRÚC DỮ LIỆU ĐỘNG (KẾ THỪA TỪ FILE PRODUCTS.JS)
    ========================================================================== */
-const MOCK_PRODUCTS = [
-    {
-        id: 1,
-        name: "Nike Mercurial Vapor 16 Academy TF - Burgundy Edition",
-        brand: "Nike",
-        priceRaw: 1250000,
-        priceSale: 980000,
-        color: "Đỏ rượu",
-        sizes: [39, 40, 41, 42],
-        image: "1images.png",
-        desc: "Phiên bản đặc biệt phối màu đỏ rượu vang thượng hạng. Cấu trúc Upper dệt sợi cải tiến mang lại cảm giác bóng tối ưu, đệm giảm chấn Air Zoom siêu nhẹ giúp tăng tốc bứt phá trên mặt sân cỏ nhân tạo.",
-        featured: true
-    },
-    {
-        id: 2,
-        name: "Mizuno Morelia Neo IV Pro AS - Gold Metallic",
-        brand: "Mizuno",
-        priceRaw: 1750000,
-        priceSale: 1490000,
-        color: "Vàng đồng",
-        sizes: [40, 41, 42, 43],
-        image: "1images.png",
-        desc: "Đỉnh cao phân khúc giày đá bóng phom chân bè. Chất liệu da thật Kangaroo siêu mềm mại đúc nguyên khối kết hợp đường chỉ dập nổi tinh tế mang đậm phong cách hoàng gia sang trọng.",
-        featured: true
-    },
-    {
-        id: 3,
-        name: "Nike Mercurial Vapor 16 Elite TF - Pitch Black Stealth",
-        brand: "Nike",
-        priceRaw: 1900000,
-        priceSale: 1650000,
-        color: "Đen",
-        sizes: [39, 40, 41, 42, 43],
-        image: "1images.png",
-        desc: "Sắc đen Matte huyền bí quyền lực. Trọng lượng siêu nhẹ chỉ ~200g, dòng sản phẩm phân cấp Elite tối thượng dành cho các cầu thủ ưa chuộng lối đá kiểm soát tốc độ và dứt điểm nhanh.",
-        featured: true
-    },
-    {
-        id: 4,
-        name: "Adidas Predator Accuracy.3 TF - Black & Gold Fusion",
-        brand: "Adidas",
-        priceRaw: 1100000,
-        priceSale: 850000,
-        color: "Đen",
-        sizes: [39, 41, 42],
-        image: "1images.png",
-        desc: "Kiểm soát đường bóng xoáy hoàn hảo với hệ thống vân cao su High Definition Grip. Sự kết hợp tinh tế giữa nền đen và sọc vàng đồng tạo điểm nhấn đẳng cấp trên sân phủi.",
-        featured: false
-    }
-];
+// Hệ thống tự động lấy danh sách từ products.js sang để nuôi toàn bộ tính năng bên dưới
+const MOCK_PRODUCTS = DANH_SACH_GIAY;
 
 /* THÀNH PHẦN QUẢN LÝ TRẠNG THÁI HỆ THỐNG (APPLICATION STATE LOGIC) */
 let globalCart = [];
@@ -137,7 +89,8 @@ function showSection(sectionId) {
     // Cập nhật trạng thái Active trên thanh Menu chính
     const navButtons = document.querySelectorAll(".nav-item");
     navButtons.forEach(btn => {
-        if (btn.getAttribute("onclick").includes(sectionId)) {
+        const onclickAttr = btn.getAttribute("onclick");
+        if (onclickAttr && onclickAttr.includes(sectionId)) {
             btn.classList.add("active");
         } else {
             btn.classList.remove("active");
@@ -538,9 +491,11 @@ function checkout() {
 function closeCheckout() {
     document.getElementById("checkout-modal").style.display = "none";
 }
+
 // CẤU HÌNH THÔNG TIN BOT TELEGRAM CỦA CBL SOCCER (ĐÃ KÍCH HOẠT)
 const TELEGRAM_BOT_TOKEN = '8711185097:AAGNpNiha-FaDf-mZB9HtiBON1rW0iSz_K0'; 
 const TELEGRAM_CHAT_ID = '7901882812';
+
 /* XÁC NHẬN ĐƠN HÀNG THÀNH CÔNG VÀ XUẤT HÓA ĐƠN ĐIỆN TỬ */
 function confirmOrder() {
     const name = document.getElementById("cus-name").value.trim();
@@ -586,21 +541,19 @@ function confirmOrder() {
     const qrZone = document.getElementById("vietqr-payment-area-placeholder");
     if (paymentMethodSelected === "VietQR") {
         qrZone.classList.remove("style-hidden");
-        // Mã hóa chuỗi data bằng encodeURIComponent đề phòng lỗi ký tự đặc biệt
-        const rawQrData = `STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}`;
-        const encodedQrData = encodeURIComponent(rawQrData);
-        // Giả lập API sinh mã QR tự động theo chuẩn VietQR Vietcombank/Techcombank
+        // Giả lập API sinh mã QR tự động theo chuẩn VietQR Techcombank
         qrZone.innerHTML = `
             <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
                 <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">TECHCOMBANK VIETQR PRO</p>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
-                <p style="color:#6b1724; font-size:0.7rem; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
+                <p style="color:#6b1724; font-size:0.7 Rar; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
             </div>
         `;
     } else {
         qrZone.classList.add("style-hidden");
     }
-// 3. KÍCH HOẠT: BẮN THÔNG BÁO ĐƠN HÀNG VỀ TELEGRAM CHAT BOT
+
+    // 3. KÍCH HOẠT: BẮN THÔNG BÁO ĐƠN HÀNG VỀ TELEGRAM CHAT BOT
     sendOrderToTelegram(orderId, name, phone, address, city, paymentMethodSelected, stats);
 
     // 4. Đóng cổng nhập liệu và bùng màn hình hoàn tất đơn
@@ -610,7 +563,6 @@ function confirmOrder() {
 
 // HÀM BỔ TRỢ XỬ LÝ ĐẨY DỮ LIỆU ĐI API TELEGRAM
 function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod, stats) {
-    // Thiết kế nội dung tin nhắn gửi về điện thoại gọn gàng, đẹp mắt
     let teleMessage = `🔔 <b>CBL SOCCER - CÓ ĐƠN HÀNG MỚI!</b>\n\n`;
     teleMessage += `🆔 <b>Mã đơn:</b> <code>${orderId}</code>\n`;
     teleMessage += `👤 <b>Khách hàng:</b> ${name}\n`;
@@ -626,7 +578,6 @@ function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod,
     
     teleMessage += `\n💰 <b>TỔNG TIỀN QUYẾT TOÁN:</b> <u>${formatVNCurrency(stats.finalTotal)}</u>`;
 
-    // Gọi API Telegram gửi tin nhắn ngầm
     const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     
     fetch(telegramUrl, {
@@ -637,7 +588,7 @@ function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod,
         body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
             text: teleMessage,
-            parse_mode: 'HTML' // Sử dụng định dạng HTML cho chữ đậm, mã code trực quan
+            parse_mode: 'HTML'
         })
     })
     .then(response => response.json())
@@ -655,7 +606,6 @@ function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod,
 
 function closeBillAndReset() {
     document.getElementById("bill-modal").style.display = "none";
-    // Giải phóng bộ nhớ và làm sạch giỏ hàng sau khi chốt đơn thành công
     globalCart = [];
     updateCartCounters();
     showSection('section-home');
