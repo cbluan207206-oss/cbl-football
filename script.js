@@ -546,7 +546,7 @@ function confirmOrder() {
             <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
                 <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">TECHCOMBANK VIETQR PRO</p>
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
-                <p style="color:#6b1724; font-size:0.7 Rar; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
+                <p style="color:#6b1724; font-size:0.7rem; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
             </div>
         `;
     } else {
