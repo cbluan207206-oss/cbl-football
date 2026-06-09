@@ -220,8 +220,8 @@ function filterByQuickBrand(brandName) {
    VÙNG 4: TRANG CHI TIẾT SẢN PHẨM & CÁC HOẠT ẢNH TƯƠNG TÁC (IMAGE ZOOM)
    ========================================================================== */
 function navigateToProductDetail(productId) {
-    // Dùng toán tử == để so sánh linh hoạt cả số lẫn chuỗi ID
-    const product = MOCK_PRODUCTS.find(p => p.id == productId);
+    // Dùng toán tử === để so sánh linh hoạt cả số lẫn chuỗi ID
+    const product = MOCK_PRODUCTS.find(p => p.id === productId);
     if (!product) return;
 
     currentActiveProduct = product;
