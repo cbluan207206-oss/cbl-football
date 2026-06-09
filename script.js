@@ -220,7 +220,8 @@ function filterByQuickBrand(brandName) {
    VÙNG 4: TRANG CHI TIẾT SẢN PHẨM & CÁC HOẠT ẢNH TƯƠNG TÁC (IMAGE ZOOM)
    ========================================================================== */
 function navigateToProductDetail(productId) {
-    const product = MOCK_PRODUCTS.find(p => p.id === productId);
+    // Dùng toán tử == để so sánh linh hoạt cả số lẫn chuỗi ID
+    const product = MOCK_PRODUCTS.find(p => p.id == productId);
     if (!product) return;
 
     currentActiveProduct = product;
@@ -235,6 +236,20 @@ function navigateToProductDetail(productId) {
     // Reset lại số lượng đặt mua mặc định về 1
     document.getElementById("detail-qty-input").value = 1;
 
+    /* ==========================================================================
+       XỬ LÝ SỬA LỖI: Tự động đúc danh sách Ảnh nhỏ (Thumbnails) động
+       ========================================================================== */
+    const thumbnailContainer = document.getElementById("detail-thumbnails-list");
+    if (thumbnailContainer) {
+        // Nếu trong file products.js có mảng danh sách ảnh phụ (product.images) thì lấy, 
+        // nếu không có hệ thống sẽ tự lấy ảnh chính (product.image) làm thumbnail để tránh lỗi web.
+        const albumImages = (product.images && Array.isArray(product.images)) ? product.images : [product.image];
+        
+        thumbnailContainer.innerHTML = albumImages.map((imgUrl, idx) => `
+            <img src="${imgUrl}" onclick="changeDetailImage(this.src)" alt="${product.name} - Góc ${idx + 1}">
+        `).join('');
+    }
+
     // Tạo cấu trúc phân mảnh Size Chart động dựa trên kho hàng sản phẩm sở hữu
     const sizeSelectorsContainer = document.querySelector(".size-variants-selectors");
     if (sizeSelectorsContainer) {
@@ -245,6 +260,7 @@ function navigateToProductDetail(productId) {
             </label>
         `).join('');
     }
+    
     // Tự động đúc danh sách Màu Sắc động dựa trên thuộc tính của đôi giày đang xem
     const colorSelectorsContainer = document.querySelector(".color-variants-selectors");
     if (colorSelectorsContainer && product.colors) {
