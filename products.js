@@ -5,9 +5,14 @@ const DANH_SACH_GIAY = [
         brand: "Nike",
         priceRaw: 1250000,
         priceSale: 980000,
-        color: ["Đỏ rượu"],
+        colors: ["Đỏ rượu"],
         sizes: [39, 40, 41, 42],
         image: "2_2images.jpeg",
+        images: [
+            "adidas-main.jpg",
+             "adidas-side.jpg",
+             "adidas-sole.jpg",
+        ],
         desc: "Phiên bản đặc biệt phối màu đỏ rượu vang thượng hạng. Cấu trúc Upper dệt sợi cải tiến mang lại cảm giác bóng tối ưu, đệm giảm chấn Air Zoom siêu nhẹ giúp tăng tốc bứt phá trên mặt sân cỏ nhân tạo.",
         featured: true
     },
@@ -17,9 +22,14 @@ const DANH_SACH_GIAY = [
         brand: "Mizuno",
         priceRaw: 1750000,
         priceSale: 1490000,
-        color: ["Vàng đồng"],
+        colors: ["Vàng đồng"],
         sizes: [40, 41, 42, 43],
         image: "1images.png",
+        images: [
+            "adidas-main.jpg",
+             "adidas-side.jpg",
+             "adidas-sole.jpg",
+        ],
         desc: "Đỉnh cao phân khúc giày đá bóng phom chân bè. Chất liệu da thật Kangaroo siêu mềm mại đúc nguyên khối kết hợp đường chỉ dập nổi tinh tế mang đậm phong cách hoàng gia sang trọng.",
         featured: true
     },
@@ -29,9 +39,14 @@ const DANH_SACH_GIAY = [
         brand: "Nike",
         priceRaw: 1900000,
         priceSale: 1650000,
-        color: ["Đen"],
+        colors: ["Đen"],
         sizes: [39, 40, 41, 42, 43],
         image: "1images.png",
+        images: [
+            "adidas-main.jpg",
+             "adidas-side.jpg",
+             "adidas-sole.jpg",
+        ],
         desc: "Sắc đen Matte huyền bí quyền lực. Trọng lượng siêu nhẹ chỉ ~200g, dòng sản phẩm phân cấp Elite tối thượng dành cho các cầu thủ ưa chuộng lối đá kiểm soát tốc độ và dứt điểm nhanh.",
         featured: true
     },
@@ -41,9 +56,14 @@ const DANH_SACH_GIAY = [
         brand: "Adidas",
         priceRaw: 1100000,
         priceSale: 850000,
-        color: ["Đen"],
+        colors: ["Đen"],
         sizes: [39, 41, 42],
         image: "1images.png",
+        images: [
+            "adidas-main.jpg",
+             "adidas-side.jpg",
+             "adidas-sole.jpg",
+        ],
         desc: "Kiểm soát đường bóng xoáy hoàn hảo với hệ thống vân cao su High Definition Grip. Sự kết hợp tinh tế giữa nền đen và sọc vàng đồng tạo điểm nhấn đẳng cấp trên sân phủi.",
         featured: false
     }
