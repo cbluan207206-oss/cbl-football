@@ -44,7 +44,11 @@ function initAppProducts() {
 function formatVNCurrency(amount) {
     return amount.toLocaleString('vi-VN') + 'đ';
 }
-
+/* HÀM XÁC THỰC SỐ ĐIỆN THOẠI - PHẢI CÓ ĐÚNG 10 SỐ, BẮT ĐẦU TỪ 1-9 */
+function validatePhoneNumber(phone) {
+    const phoneRegex = /^[1-9]\d{9}$/;
+    return phoneRegex.test(phone);
+}
 /* CORES: MÁY ĐÚC TEMPLATE HTML CHO CARD SẢN PHẨM */
 function generateProductGridHTML(productsArray) {
     if (productsArray.length === 0) {
@@ -539,7 +543,12 @@ function confirmOrder() {
         alert("Vui lòng hoàn thành đầy đủ các trường thông tin bắt buộc có dấu sao để CBL Soccer giao hàng chính xác!");
         return;
     }
-
+    // ✅ KIỂM TRA SỐ ĐIỆN THOẠI - PHẢI ĐÚNG 10 SỐ, BẮT ĐẦU TỪ 1-9
+    if (!validatePhoneNumber(phone)) {
+        alert("❌ Số điện thoại không hợp lệ!\n\n📞 Yêu cầu:\n• Phải có ĐÚNG 10 chữ số\n• Chữ số đầu tiên từ 1-9\n\nVí dụ: 0984169335 hoặc 0901234567");
+        document.getElementById("cus-phone").focus();
+        return;
+    }
     const paymentMethodSelected = document.querySelector('input[name="payment_method"]:checked').value;
     const stats = calculateCartTotals();
     const orderId = `CBL-${Math.floor(100000 + Math.random() * 900000)}`;
