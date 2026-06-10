@@ -33,7 +33,7 @@ const DANH_SACH_GIAY = [
         priceSale: 169000,
         colors: ["Xanh Chuối"],
         sizes: [39, 40, 41, 42, 43, 44, 45],
-        image: "fly11.jpn",
+        image: "fly11.jpg",
         images: ["fly11.jpg", "fly11_1.jpg", "fly11_2.jpg", "fly11_3.jpg"],
         desc: "Giày Bóng Đá Việt Nam Superfly 11 Xanh Chuối Gót Bạc TF gây ấn tượng với phối màu nổi bật, năng động và cá tính. Đế TF bám sân tốt, thân giày ôm chân giúp tăng sự ổn định, hỗ trợ bứt tốc và xử lý bóng hiệu quả trên sân cỏ nhân tạo.",
         featured: true
