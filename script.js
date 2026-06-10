@@ -241,7 +241,7 @@ function navigateToProductDetail(productId) {
     /* ==========================================================================
        XỬ LÝ SỬA LỖI: Tự động đúc danh sách Ảnh nhỏ (Thumbnails) động
        ========================================================================== */
-    const thumbnailContainer = document.getElementById("detail-thumbnails-list");
+    const thumbnailContainer = document.getElementById("detail-thumbnail-list");
     if (thumbnailContainer) {
         // Nếu trong file products.js có mảng danh sách ảnh phụ (product.images) thì lấy, 
         // nếu không có hệ thống sẽ tự lấy ảnh chính (product.image) làm thumbnail để tránh lỗi web.
