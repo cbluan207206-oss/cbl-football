@@ -99,7 +99,9 @@ function showSection(sectionId) {
 
     // Tự động khép Menu di động nếu đang mở
     const menuLinks = document.getElementById("main-nav-links");
-    if (menuLinks) menuLinks.classList.remove("mobile-open");
+   if (menuLinks && menuLinks.classList.contains("mobile-open")) {
+        menuLinks.classList.remove("mobile-open");
+        }
 }
 
 /* 2. ĐIỀU HÀNH MENU 3 GẠCH TRÊN DI ĐỘNG (HAMBURGER MENU TOGGLE) */
@@ -485,16 +487,20 @@ function removeCartItem(cartKey) {
 }
 
 /* ÁP DỤNG MÃ GIẢM GIÁ (COUPON CODE MOCKUP SYSTEM) */
+const COUPONS = {
+    "CBLSOCCER10": 50000,
+    "WELCOME20": 10000,
+    "BIGFAN50": 25000
+};
+
 function applyCouponCode() {
     const code = document.getElementById("cart-coupon-code").value.trim().toUpperCase();
-    if (code === "CBLSOCCER10") {
-        activeCouponDiscount = 50000; // Giảm ngay 50k tri ân anh em
-        alert("Áp dụng mã giảm giá CBLSOCCER10 thành công! Bạn được giảm 50.000đ.");
+    if (code in COUPONS) {
+        activeCouponDiscount = COUPONS[code];
+        alert(`✅ Áp dụng mã ${code}! Giảm ${formatVNCurrency(COUPONS[code])}`);
         renderCartItems();
-    } else if (code === "") {
-        alert("Vui lòng nhập mã ưu đãi nếu có!");
     } else {
-        alert("Mã giảm giá không tồn tại hoặc đã hết hạn sử dụng trên hệ thống!");
+        alert("❌ Mã không hợp lệ!");
     }
 }
 
@@ -693,6 +699,23 @@ function toggleTheme() {
 
 function sendContactMessage(event) {
     event.preventDefault();
-    alert("Yêu cầu tư vấn của bạn đã được chuyển thẳng tới bộ phận chăm sóc khách hàng CBL Soccer. Hotline 0984.169.335 sẽ liên hệ bạn ngay lập tức!");
-    document.getElementById("main-contact-form").reset();
+    const formData = new FormData(document.getElementById("main-contact-form"));
+    const name = formData.get("name") || "Không rõ";
+    const email = document.querySelector('#main-contact-form input[type="email"]')?.value || "N/A";
+    const message = document.querySelector('#main-contact-form textarea')?.value || "";
+
+    const teleMessage = `📧 <b>LIÊN HỆ MỚI từ Website CBL SOCCER</b>\n👤 ${name}\n📧 ${email}\n💬 ${message}`;
+
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: teleMessage,
+            parse_mode: 'HTML'
+        })
+    }).then(() => {
+        alert("✅ Cảm ơn! Tin nhắn đã được gửi đến CBL Soccer.");
+        document.getElementById("main-contact-form").reset();
+    }).catch(err => console.error("Lỗi gửi:", err));
 }
