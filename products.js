@@ -67,4 +67,17 @@ const DANH_SACH_GIAY = [
         desc: "Kiểm soát đường bóng xoáy hoàn hảo với hệ thống vân cao su High Definition Grip. Sự kết hợp tinh tế giữa nền đen và sọc vàng đồng tạo điểm nhấn đẳng cấp trên sân phủi.",
         featured: false
     }
+    {
+    id: 5,
+    name: "Nike Mercurial Vapor 17 - Classic",
+    brand: "Nike",
+    priceRaw: 1200000,
+    priceSale: 950000,
+    colors: ["Đỏ rượu", "Đen"],
+    sizes: [39, 40, 41, 42, 43],
+    image: "vapor17.jpg",
+    images: ["vapor17.jpg", "vapor17_1.jpg", "vapor17_2.jpg", "vapor17_3.jpg"],
+    desc: "Dòng Vapor kinh điển với thiết kế năng động...",
+    featured: true
+}
 ];
