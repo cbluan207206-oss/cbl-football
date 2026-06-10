@@ -11,7 +11,7 @@ const DANH_SACH_GIAY = [
         images: [
             "adidas-main.jpg",
              "adidas-side.jpg",
-             "adidas-sole.jpg",
+             "adidas-sole.jpg"
         ],
         desc: "Phiên bản đặc biệt phối màu đỏ rượu vang thượng hạng. Cấu trúc Upper dệt sợi cải tiến mang lại cảm giác bóng tối ưu, đệm giảm chấn Air Zoom siêu nhẹ giúp tăng tốc bứt phá trên mặt sân cỏ nhân tạo.",
         featured: true
@@ -28,7 +28,7 @@ const DANH_SACH_GIAY = [
         images: [
             "adidas-main.jpg",
              "adidas-side.jpg",
-             "adidas-sole.jpg",
+             "adidas-sole.jpg"
         ],
         desc: "Đỉnh cao phân khúc giày đá bóng phom chân bè. Chất liệu da thật Kangaroo siêu mềm mại đúc nguyên khối kết hợp đường chỉ dập nổi tinh tế mang đậm phong cách hoàng gia sang trọng.",
         featured: true
@@ -45,7 +45,7 @@ const DANH_SACH_GIAY = [
         images: [
             "adidas-main.jpg",
              "adidas-side.jpg",
-             "adidas-sole.jpg",
+             "adidas-sole.jpg"
         ],
         desc: "Sắc đen Matte huyền bí quyền lực. Trọng lượng siêu nhẹ chỉ ~200g, dòng sản phẩm phân cấp Elite tối thượng dành cho các cầu thủ ưa chuộng lối đá kiểm soát tốc độ và dứt điểm nhanh.",
         featured: true
