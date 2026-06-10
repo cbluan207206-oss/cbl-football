@@ -66,7 +66,7 @@ const DANH_SACH_GIAY = [
         ],
         desc: "Kiểm soát đường bóng xoáy hoàn hảo với hệ thống vân cao su High Definition Grip. Sự kết hợp tinh tế giữa nền đen và sọc vàng đồng tạo điểm nhấn đẳng cấp trên sân phủi.",
         featured: false
-    }
+    },
     {
     id: 5,
     name: "Nike Mercurial Vapor 17 - Classic",
