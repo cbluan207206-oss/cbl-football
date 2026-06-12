@@ -63,5 +63,5 @@ const DANH_SACH_GIAY = [
     images: ["vapor17.jpg", "vapor17_1.jpg", "vapor17_2.jpg", "vapor17_3.jpg"],
     desc: "Dòng Vapor kinh điển với thiết kế năng động...",
     featured: true
-}
+    }
 ];
