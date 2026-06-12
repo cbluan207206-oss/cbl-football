@@ -46,7 +46,7 @@ function formatVNCurrency(amount) {
 }
 /* HÀM XÁC THỰC SỐ ĐIỆN THOẠI - PHẢI CÓ ĐÚNG 10 SỐ, BẮT ĐẦU TỪ 1-9 */
 function validatePhoneNumber(phone) {
-    const phoneRegex = /^[1-9]\d{9}$/;
+    const phoneRegex = /^0\d{9}$/;
     return phoneRegex.test(phone);
 }
 /* CORES: MÁY ĐÚC TEMPLATE HTML CHO CARD SẢN PHẨM */
