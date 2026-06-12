@@ -535,80 +535,82 @@ const TELEGRAM_CHAT_ID = '7901882812';
 /* XÁC NHẬN ĐƠN HÀNG THÀNH CÔNG VÀ XUẤT HÓA ĐƠN ĐIỆN TỬ */
 function confirmOrder() {
     const name = document.getElementById("cus-name").value.trim();
-    const phone = document.getElementById("cus-phone").value.trim();
-    const address = document.getElementById("cus-address").value.trim();
-    const city = document.getElementById("cus-city").value;
+const phone = document.getElementById("cus-phone").value.trim();
+const address = document.getElementById("cus-address").value.trim();
+const district = document.getElementById("cus-district").value.trim(); // Lấy thêm quận huyện
+const ward = document.getElementById("cus-ward").value.trim();         // Lấy thêm phường xã
+const city = document.getElementById("cus-city").value;
 
-    if (!name || !phone || !address || !city) {
-        alert("Vui lòng hoàn thành đầy đủ các trường thông tin bắt buộc có dấu sao để CBL Soccer giao hàng chính xác!");
-        return;
-    }
-    // ✅ KIỂM TRA SỐ ĐIỆN THOẠI - PHẢI ĐÚNG 10 SỐ, BẮT ĐẦU TỪ 1-9
-    if (!validatePhoneNumber(phone)) {
-        alert("❌ Số điện thoại không hợp lệ!\n\n📞 Yêu cầu:\n• Phải có ĐÚNG 10 chữ số\n• Chữ số đầu tiên từ 1-9\n\nVí dụ: 0984169335 hoặc 0901234567");
-        document.getElementById("cus-phone").focus();
-        return;
-    }
-    const paymentMethodSelected = document.querySelector('input[name="payment_method"]:checked').value;
-    const stats = calculateCartTotals();
-    const orderId = `CBL-${Math.floor(100000 + Math.random() * 900000)}`;
-
-    // Tạo cấu trúc Template hóa đơn điện tử cho Bill Modal công chiếu công khai
-    const billDetailContainer = document.getElementById("bill-detail");
-    let billHTML = `
-        <div class="invoice-box-luxury" style="font-size:0.85rem; color:#f5f5f5; line-height:1.8;">
-            <p><strong>Mã đơn hàng:</strong> <span style="color:#c5a059; font-weight:bold;">${orderId}</span></p>
-            <p><strong>Khách hàng nhận hàng:</strong> ${name}</p>
-            <p><strong>Số điện thoại:</strong> ${phone}</p>
-            <p><strong>Tỉnh/Thành giao:</strong> ${city}</p>
-            <p><strong>Hình thức thanh toán:</strong> ${paymentMethodSelected === "VietQR" ? "Techcombank VietQR Pro Auto" : "Thanh toán khi nhận hàng (COD)"}</p>
-            <hr style="border-color:#222; margin:10px 0;">
-            <h4 style="color:#c5a059; margin-bottom:5px;">DANH SÁCH SẢN PHẨM:</h4>
-    `;
-
-    globalCart.forEach(item => {
-        billHTML += `<div style="display:flex; justify-content: space-between;"><span>• ${item.name} (Size: ${item.size})</span> <span style="margin-left:auto;">x${item.qty}</span></div>`;
-    });
-
-    billHTML += `
-            <hr style="border-color:#222; margin:10px 0;">
-            <p style="font-size:1rem; font-weight:bold;">Tổng số tiền quyết toán: <span style="color:#c5a059;">${formatVNCurrency(stats.finalTotal)}</span></p>
-        </div>
-    `;
-
-    billDetailContainer.innerHTML = billHTML;
-
-    // Chức năng nâng cao: Nếu chọn VietQR Pro thì tự động mở cổng quét mã trực quan
-    const qrZone = document.getElementById("vietqr-payment-area-placeholder");
-    if (paymentMethodSelected === "VietQR") {
-        qrZone.classList.remove("style-hidden");
-        // Giả lập API sinh mã QR tự động theo chuẩn VietQR Techcombank
-        qrZone.innerHTML = `
-            <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
-                <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">TECHCOMBANK VIETQR PRO</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
-                <p style="color:#6b1724; font-size:0.7rem; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
-            </div>
-        `;
-    } else {
-        qrZone.classList.add("style-hidden");
-    }
-
-    // 3. KÍCH HOẠT: BẮN THÔNG BÁO ĐƠN HÀNG VỀ TELEGRAM CHAT BOT
-    sendOrderToTelegram(orderId, name, phone, address, city, paymentMethodSelected, stats);
-
-    // 4. Đóng cổng nhập liệu và bùng màn hình hoàn tất đơn
-    document.getElementById("checkout-modal").style.display = "none";
-    document.getElementById("bill-modal").style.display = "flex";
+// Đưa thêm district và ward vào bộ lọc bắt buộc điền
+if (!name || !phone || !address || !district || !ward || !city) {
+    alert("Vui lòng hoàn thành đầy đủ các trường thông tin nhận hàng để CBL Soccer giao hàng chính xác!");
+    return;
 }
 
+// Kiểm tra số điện thoại (đã sửa đầu số 0 chuẩn Việt Nam)
+if (!validatePhoneNumber(phone)) {
+    alert("❌ Số điện thoại không hợp lệ! Yêu cầu gồm 10 chữ số và bắt đầu bằng số 0.");
+    document.getElementById("cus-phone").focus();
+    return;
+}
+
+const paymentMethodSelected = document.querySelector('input[name="payment_method"]:checked').value;
+const stats = calculateCartTotals();
+const orderId = `CBL-${Math.floor(100000 + Math.random() * 900000)}`;
+
+// Tạo cấu trúc Template hóa đơn hiển thị trên màn hình web (Bill Modal)
+const billDetailContainer = document.getElementById("bill-detail");
+let billHTML = `
+    <div class="invoice-box-luxury" style="font-size:0.85rem; color:#f5f5f5; line-height:1.8;">
+        <p><strong>Mã đơn hàng:</strong> <span style="color:#c5a059; font-weight:bold;">${orderId}</span></p>
+        <p><strong>Khách hàng nhận hàng:</strong> ${name}</p>
+        <p><strong>Số điện thoại:</strong> ${phone}</p>
+        <p><strong>Địa chỉ giao hàng:</strong> ${address}, P. ${ward}, Q. ${district}, ${city}</p>
+        <p><strong>Hình thức thanh toán:</strong> ${paymentMethodSelected === "VietQR" ? "Techcombank VietQR Pro Auto" : "Thanh toán khi nhận hàng (COD)"}</p>
+        <hr style="border-color:#222; margin:10px 0;">
+        <h4 style="color:#c5a059; margin-bottom:5px;">DANH SÁCH SẢN PHẨM:</h4>
+`;
+
+globalCart.forEach(item => {
+    billHTML += `<div style="display:flex; justify-content: space-between;"><span>• ${item.name} (Size: ${item.size})</span> <span style="margin-left:auto;">x${item.qty}</span></div>`;
+});
+
+billHTML += `
+        <hr style="border-color:#222; margin:10px 0;">
+        <p style="font-size:1rem; font-weight:bold;">Tổng số tiền quyết toán: <span style="color:#c5a059;">${formatVNCurrency(stats.finalTotal)}</span></p>
+    </div>
+`;
+billDetailContainer.innerHTML = billHTML;
+
+// Cổng quét mã QR tự động
+const qrZone = document.getElementById("vietqr-payment-area-placeholder");
+if (paymentMethodSelected === "VietQR") {
+    qrZone.classList.remove("style-hidden");
+    qrZone.innerHTML = `
+        <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
+            <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">TECHCOMBANK VIETQR PRO</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
+            <p style="color:#6b1724; font-size:0.7 gram; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
+        </div>
+    `;
+} else {
+    qrZone.classList.add("style-hidden");
+}
+
+// Truyền đầy đủ cả biến district và ward sang cho hàm Telegram nhận diện
+sendOrderToTelegram(orderId, name, phone, address, district, ward, city, paymentMethodSelected, stats);
+
+document.getElementById("checkout-modal").style.display = "none";
+document.getElementById("bill-modal").style.display = "flex";
+}
 // HÀM BỔ TRỢ XỬ LÝ ĐẨY DỮ LIỆU ĐI API TELEGRAM
-function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod, stats) {
+function sendOrderToTelegram(orderId, name, phone, address, district, ward, city, paymentMethod, stats) {
     let teleMessage = `🔔 <b>CBL SOCCER - CÓ ĐƠN HÀNG MỚI!</b>\n\n`;
     teleMessage += `🆔 <b>Mã đơn:</b> <code>${orderId}</code>\n`;
     teleMessage += `👤 <b>Khách hàng:</b> ${name}\n`;
     teleMessage += `📞 <b>Điện thoại:</b> ${phone}\n`;
-    teleMessage += `📍 <b>Địa chỉ:</b> ${address}, ${city}\n`;
+    // Cập nhật dòng địa chỉ đầy đủ 4 cấp ở đây:
+    teleMessage += `📍 <b>Địa chỉ:</b> ${address}, Phường/Xã: ${ward}, Quận/Huyện: ${district}, ${city}\n`;
     teleMessage += `💳 <b>Hình thức:</b> ${paymentMethod === "VietQR" ? "Techcombank VietQR Pro" : "Thanh toán COD"}\n\n`;
     teleMessage += `📦 <b>CHI TIẾT CHIẾN HÀI:</b>\n`;
     
@@ -635,7 +637,7 @@ function sendOrderToTelegram(orderId, name, phone, address, city, paymentMethod,
     .then(response => response.json())
     .then(data => {
         if (data.ok) {
-            console.log('Đã báo đơn về Telegram Bot thành công!');
+            console.log('Đã báo đơn đầy đủ địa chỉ về Telegram Bot thành công!');
         } else {
             console.error('Lỗi cấu hình Telegram:', data.description);
         }
