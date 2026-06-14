@@ -588,9 +588,9 @@ if (paymentMethodSelected === "VietQR") {
     qrZone.classList.remove("style-hidden");
     qrZone.innerHTML = `
         <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
-            <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">TECHCOMBANK VIETQR PRO</p>
+            <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">MBBANK VIETQR PRO</p>
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
-            <p style="color:#6b1724; font-size:0.7 gram; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
+            <p style="color:#6b1724; font-size:0.75 rem; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
         </div>
     `;
 } else {
@@ -710,10 +710,13 @@ function toggleTheme() {
 
 function sendContactMessage(event) {
     event.preventDefault();
-    const formData = new FormData(document.getElementById("main-contact-form"));
-    const name = formData.get("name") || "Không rõ";
-    const email = document.querySelector('#main-contact-form input[type="email"]')?.value || "N/A";
-    const message = document.querySelector('#main-contact-form textarea')?.value || "";
+    const nameInput = document.querySelector('#main-contact-form input[type="text"]');
+    const emailInput = document.querySelector('#main-contact-form input[type="email"]');
+    const messageInput = document.querySelector('#main-contact-form textarea');
+
+    const name = nameInput ? nameInput.value.trim() : "Chiến hữu ẩn danh";
+    const email = emailInput ? emailInput.value.trim() : "N/A";
+    const message = messageInput ? messageInput.value.trim() : "";
 
     const teleMessage = `📧 <b>LIÊN HỆ MỚI từ Website CBL SOCCER</b>\n👤 ${name}\n📧 ${email}\n💬 ${message}`;
 
