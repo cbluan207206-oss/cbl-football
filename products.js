@@ -2,7 +2,7 @@ const DANH_SACH_GIAY = [
     {
         id: 1,
         name: "Giày Bóng Đá Zocker Winner Energy Gen 2 - Xanh Đen TF",
-        brand: "ZOCKER",
+        brand: "Zocker",
         priceRaw: 800000,
         priceSale: 699000,
         colors: ["Xanh Đen"],
@@ -15,7 +15,7 @@ const DANH_SACH_GIAY = [
     {
         id: 2,
         name: " Giày Bóng Đá Zocker Winner Energy Gen 2 - Xanh Nhạt TF",
-        brand: "ZOCKER",
+        brand: "Zocker",
         priceRaw: 800000,
         priceSale: 699000,
         colors: ["Xanh Nhạt"],
@@ -28,7 +28,7 @@ const DANH_SACH_GIAY = [
     {
         id: 3,
         name: "Giày Bóng Đá Việt Nam Superfly 11 Xanh Chuối Gót Bạc TF",
-        brand: "WIMBRO",
+        brand: "Winbro",
         priceRaw: 420000,
         priceSale: 169000,
         colors: ["Xanh Chuối"],
