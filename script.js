@@ -5,10 +5,15 @@
 const MOCK_PRODUCTS = DANH_SACH_GIAY;
 
 /* THÀNH PHẦN QUẢN LÝ TRẠNG THÁI HỆ THỐNG (APPLICATION STATE LOGIC) */
-let globalCart = [];
+let globalCart = JSON.parse(localStorage.getItem("cbl_cart")) || [];
 let selectedFilterSize = null;
 let currentActiveProduct = MOCK_PRODUCTS[0];
 let activeCouponDiscount = 0;
+
+/* hàm lưu vào giỏ hàng */
+function saveCart() {
+    localStorage.setItem("cbl_cart", JSON.stringify(globalCart));
+}
 
 /* ==========================================================================
    HỆ THỐNG KHỞI CHẠY & KHỞI TẠO BAN ĐẦU (APP INITIALIZATION)
@@ -26,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Kích hoạt Render sản phẩm lên hai phân vùng trang chủ và trang sản phẩm chính
     initAppProducts();
     setupImageZoomEffect();
+    updateCartCounters();
 });
 
 /* KHỞI TẠO SẢN PHẨM */
@@ -366,8 +372,9 @@ function addSelectedToCart() {
         });
     }
 
-    updateCartCounters();
-    triggerSuccessNotificationPopup(currentActiveProduct, quantityToBuy);
+    saveCart();
+updateCartCounters();
+triggerSuccessNotificationPopup(currentActiveProduct, quantityToBuy);
 }
 
 function buyNowSelected() {
@@ -477,15 +484,19 @@ function renderCartItems() {
 function alterCartItemQty(cartKey, amount) {
     const idx = globalCart.findIndex(item => item.cartKey === cartKey);
     if (idx > -1) {
-        globalCart[idx].qty += amount;
-        if (globalCart[idx].qty < 1) globalCart[idx].qty = 1;
-        updateCartCounters();
-        renderCartItems();
-    }
+    globalCart[idx].qty += amount;
+    if (globalCart[idx].qty < 1) globalCart[idx].qty = 1;
+
+    saveCart();
+    updateCartCounters();
+    renderCartItems();
+}
 }
 
 function removeCartItem(cartKey) {
     globalCart = globalCart.filter(item => item.cartKey !== cartKey);
+
+    saveCart();
     updateCartCounters();
     renderCartItems();
 }
@@ -649,8 +660,14 @@ function sendOrderToTelegram(orderId, name, phone, address, district, ward, city
 
 function closeBillAndReset() {
     document.getElementById("bill-modal").style.display = "none";
+
     globalCart = [];
+    activeCouponDiscount = 0;
+
+    localStorage.removeItem("cbl_cart");
+
     updateCartCounters();
+    renderCartItems();
     showSection('section-home');
 }
 
