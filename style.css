@@ -210,7 +210,7 @@ body {
     cursor: pointer;
 }
 
-.search-suggestions-box {
+#search-suggestions-box {
     position: absolute;
     top: 110%;
     left: 0;
@@ -218,13 +218,17 @@ body {
     background-color: var(--bg-surface);
     border: var(--border-luxury);
     border-radius: 8px;
-    z-index: 100;
+    z-index: 1100;
     max-height: 300px;
     overflow-y: auto;
     display: none;
     box-shadow: var(--shadow-premium);
 }
-
+/* hiệu ứng di chuột và ô tìm kiếm */
+#search-suggestions .suggestion-item-row:hover {
+    background-color: var(--bg-surface-light);
+    border-left: 3px solid var(--color-gold);
+}
 /* Biểu tượng Giỏ hàng và Wishlist */
 .header-right-icons {
     display: flex;
@@ -678,6 +682,15 @@ body {
     border-radius: 6px;
     border: var(--border-luxury);
     cursor: pointer;
+    transition: var(--transition-smooth);
+    opacity: 0.6;
+}
+
+.thumbnail-images-list img:hover,
+.thumbnail-images-list img.active {
+    opacity: 1;
+    border-color: var(--color-gold);
+    transform: scale(1.05);
 }
 
 .product-intrinsic-video {
