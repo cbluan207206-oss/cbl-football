@@ -77,4 +77,29 @@ const DANH_SACH_GIAY = [
     desc: "Nếu bạn mới tập hoặc dùng để tập các nhóm cơ nhỏ như vai, tay, ngực, hãy bắt đầu từ sợi nhẹ nhất (từ 2kg - 5kg). Nếu tập các bài thân dưới như Squat, Hip Thrust (mông, đùi), bạn nên chọn các sợi từ mức Trung bình (đỏ/đen - từ 9kg trở lên) thì mới cảm nhận rõ cơ bắp được kích hoạt.",
     featured: true
     },
+    {
+    id: 7,
+    name: "Tất(Vớ)",
+    brand: "Phụ Kiện",
+    priceRaw: 30000,
+    priceSale: 25000,
+    colors: ["Trắng", "Đen"],
+    sizes: [1],
+    image: "nc.jpg",
+    images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
+    desc: " bạn đá bóng: Hãy chọn tất có vùng đệm xù dày ở gót và mũi chân để giảm chấn thương, hoặc đầu tư tất chống trượt (loại có các miếng silicone dưới lòng bàn chân) để chân bám chặt vào lót giày, không bị trượt bên trong giày khi chạy.",
+    featured: true
+    },
+    id: 7,
+    name: "Bó Gối",
+    brand: "Phụ Kiện",
+    priceRaw: 300000,
+    priceSale: 250000,
+    colors: ["Trắng", "Đen"],
+    sizes: [M, L],
+    image: "nc.jpg",
+    images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
+    desc: "Chọn loại phù hợp với mức độ vận động và tình trạng khớp gối của bạn.",
+    featured: true
+    },
 ];
