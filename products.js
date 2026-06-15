@@ -87,7 +87,7 @@ const DANH_SACH_GIAY = [
     sizes: [1],
     image: "nc.jpg",
     images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
-    desc: " bạn đá bóng: Hãy chọn tất có vùng đệm xù dày ở gót và mũi chân để giảm chấn thương, hoặc đầu tư tất chống trượt (loại có các miếng silicone dưới lòng bàn chân) để chân bám chặt vào lót giày, không bị trượt bên trong giày khi chạy.",
+    desc: "bạn đá bóng Hãy chọn tất có vùng đệm xù dày ở gót và mũi chân để giảm chấn thương, hoặc đầu tư tất chống trượt (loại có các miếng silicone dưới lòng bàn chân) để chân bám chặt vào lót giày, không bị trượt bên trong giày khi chạy.",
     featured: true
     },
     {
@@ -97,7 +97,7 @@ const DANH_SACH_GIAY = [
     priceRaw: 300000,
     priceSale: 250000,
     colors: ["Trắng", "Đen"],
-    sizes: [M, L],
+    sizes: [1, 2],
     image: "nc.jpg",
     images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
     desc: "Chọn loại phù hợp với mức độ vận động và tình trạng khớp gối của bạn.",
