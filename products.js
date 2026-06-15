@@ -57,11 +57,24 @@ const DANH_SACH_GIAY = [
     brand: "Nike",
     priceRaw: 1200000,
     priceSale: 950000,
-    colors: ["Đỏ rượu", "Đen"],
+    colors: ["Xanh Chuối"],
     sizes: [39, 40, 41, 42, 43, 44, 45],
     image: "vapor17.jpg",
     images: ["vapor17.jpg", "vapor17_1.jpg", "vapor17_2.jpg", "vapor17_3.jpg"],
     desc: "Dòng Vapor kinh điển với thiết kế năng động...",
     featured: true
-    }
+    },
+    {
+    id: 6,
+    name: "Dây Kháng Lực",
+    brand: "Phụ Kiện",
+    priceRaw: 50000,
+    priceSale: 30000,
+    colors: ["Xanh Lá", "Xanh Dương", "Đỏ", "Đen"],
+    sizes: [2_5kg, 5_7kg, 7_10kg, 10_15kg],
+    image: "nc.jpg",
+    images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
+    desc: "Nếu bạn mới tập hoặc dùng để tập các nhóm cơ nhỏ như vai, tay, ngực, hãy bắt đầu từ sợi nhẹ nhất (từ 2kg - 5kg). Nếu tập các bài thân dưới như Squat, Hip Thrust (mông, đùi), bạn nên chọn các sợi từ mức Trung bình (đỏ/đen - từ 9kg trở lên) thì mới cảm nhận rõ cơ bắp được kích hoạt.",
+    featured: true
+    },
 ];
