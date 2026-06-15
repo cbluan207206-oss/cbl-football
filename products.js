@@ -101,5 +101,5 @@ const DANH_SACH_GIAY = [
     images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
     desc: "Chọn loại phù hợp với mức độ vận động và tình trạng khớp gối của bạn.",
     featured: true
-    },
+    }
 ];
