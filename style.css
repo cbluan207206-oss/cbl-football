@@ -249,7 +249,7 @@ body {
     cursor: pointer;
 }
 
-#search-suggestions-box {
+#search-suggestions {
     position: absolute;
     top: 110%;
     left: 0;
@@ -483,7 +483,7 @@ body {
 .product-card:hover {
     transform: translateY(-5px);
     border-color: var(--color-gold);
-    box-shadow: @ 10px 25px rgba (197, 160, 89, 0.15);
+    box-shadow: 0 10px 25px rgba (197, 160, 89, 0.15);
 }
 
 .product-card-img-holder {
