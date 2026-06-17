@@ -36,11 +36,40 @@ html[data-theme="light"] {
     -webkit-tap-highlight-color: transparent;
 }
 
+*:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+/* Tắt outline mặc định cho input nhưng thêm viền focus tự nhiên */
+input:focus, select:focus, textarea:focus {
+    outline: none !important;
+}
+
+/* Tôn trọng cài đặt giảm hiệu ứng của thiết bị người dùng (Chống chóng mặt) */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-light);
     line-height: 1.6;
     overflow-x: hidden;
+    /* Hỗ trợ thanh cuộn cho Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gold) var(--bg-dark);
+}
+
+/* Thêm tiền tố cho Header & Modal để mượt trên iOS */
+.site-header, .bottom-contact-bar, .modal {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
 }
 
 /* Thanh cuộn phong cách Thượng Lưu */
@@ -453,8 +482,8 @@ body {
 
 .product-card:hover {
     transform: translateY(-5px);
-    border-color: var(--color-wine);
-    box-shadow: var(--shadow-premium);
+    border-color: var(--color-gold);
+    box-shadow: @ 10px 25px rgba (197, 160, 89, 0.15);
 }
 
 .product-card-img-holder {
@@ -1061,17 +1090,24 @@ table th { color: var(--color-gold); font-weight: 600; text-transform: uppercase
     
     /* 2. Menu di động khi kích hoạt dạng ngăn kéo thác nước */
     .menu-links {
-        position: absolute; top: 100%; left: 0; width: 100%;
+        position: absolute; 
+        top: 100%; left: 0; width: 100%;
         background-color: rgba(7, 7, 7, 0.98);
         flex-direction: column; gap: 0;
-        max-height: 0; overflow: hidden;
-        transition: max-height 0.4s ease-out;
-        border-bottom: 0px solid transparent;
+    /* Ẩn bằng opacity và transform thay vì max-height để mượt hơn */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition-smooth);
+        border-bottom: 1px solid transparent;
     }
     .menu-links.mobile-open {
-        max-height: 500px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
         border-bottom: 1px solid var(--color-gold);
     }
+
     .nav-item { width: 100%; padding: 15px 25px; text-align: left; border-bottom: 1px solid #111;}
     
     .products-layout-wrapper { flex-direction: column; }
