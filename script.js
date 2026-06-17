@@ -28,16 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 800);
 
-    const savedTheme =
-        localStorage.getItem("theme") || "dark";
-
+    const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute(
         "data-theme",
         savedTheme
     );
-
-});
-
     // Kích hoạt Render sản phẩm lên hai phân vùng trang chủ và trang sản phẩm chính
     initAppProducts();
     setupImageZoomEffect();
@@ -728,7 +723,7 @@ function toggleTheme() {
     const currentTheme = htmlNode.getAttribute("data-theme");
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     htmlNode.setAttribute("data-theme", nextTheme);
-    
+    localStorage. setItem ("theme", nextTheme);
     const themeBtn = document.getElementById("theme-toggle-btn");
     if (themeBtn) {
         themeBtn.innerHTML = nextTheme === "dark" ? `<i class="fas fa-moon"></i>` : `<i class="fas fa-sun"></i>`;
@@ -759,17 +754,4 @@ function sendContactMessage(event) {
         alert("✅ Cảm ơn! Tin nhắn đã được gửi đến CBL Soccer.");
         document.getElementById("main-contact-form").reset();
     }).catch(err => console.error("Lỗi gửi:", err));
-}
-// đảo ngược sáng tối //
-function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute("data-theme");
-
-    if (currentTheme === "dark") {
-        html.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-    } else {
-        html.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-    }
 }
