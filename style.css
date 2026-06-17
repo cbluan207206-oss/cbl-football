@@ -16,6 +16,16 @@
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
+html[data-theme="light"] {
+    --bg-dark: #f5f5f5;
+    --bg-surface: #ffffff;
+    --bg-surface-light: #eeeeee;
+
+    --text-light: #111111;
+    --text-muted: #666666;
+
+    --border-luxury: 1px solid #d6d6d6;
+}
 
 /* Tái cấu trúc Reset hệ thống */
 * {
