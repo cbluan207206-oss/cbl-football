@@ -582,7 +582,7 @@ let billHTML = `
         <p><strong>Khách hàng nhận hàng:</strong> ${name}</p>
         <p><strong>Số điện thoại:</strong> ${phone}</p>
         <p><strong>Địa chỉ giao hàng:</strong> ${address}, P. ${ward}, Q. ${district}, ${city}</p>
-        <p><strong>Hình thức thanh toán:</strong> ${paymentMethodSelected === "VietQR" ? "Techcombank VietQR Pro Auto" : "Thanh toán khi nhận hàng (COD)"}</p>
+        <p><strong>Hình thức thanh toán:</strong> ${paymentMethodSelected === "VietQR" ? "MBBank VietQR Pro Auto" : "Thanh toán khi nhận hàng (COD)"}</p>
         <hr style="border-color:#222; margin:10px 0;">
         <h4 style="color:#c5a059; margin-bottom:5px;">DANH SÁCH SẢN PHẨM:</h4>
 `;
@@ -723,7 +723,7 @@ function toggleTheme() {
     const currentTheme = htmlNode.getAttribute("data-theme");
     const nextTheme = currentTheme === "dark" ? "light" : "dark";
     htmlNode.setAttribute("data-theme", nextTheme);
-    localStorage. setItem ("theme", nextTheme);
+    localStorage.setItem("theme", nextTheme);
     const themeBtn = document.getElementById("theme-toggle-btn");
     if (themeBtn) {
         themeBtn.innerHTML = nextTheme === "dark" ? `<i class="fas fa-moon"></i>` : `<i class="fas fa-sun"></i>`;
