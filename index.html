@@ -54,14 +54,15 @@
             </div>
 
             <div class="menu-links" id="main-nav-links">
-                <button class="nav-item active" onclick="showSection('section-home')"><i class="fas fa-home"></i> Trang Chủ</button>
-                <button class="nav-item" onclick="showSection('section-products')"><i class="fas fa-shoe-prints"></i> Sản Phẩm</button>
-                <button class="nav-item" onclick="showSection('section-info')"><i class="fas fa-info-circle"></i> Giới Thiệu</button>
-                <button class="nav-item" onclick="showSection('section-news')"><i class="fas fa-newspaper"></i> Tin Tức</button>
-                <button class="nav-item" onclick="showSection('section-contact-page')"><i class="fas fa-envelope"></i> Liên Hệ</button>
-                <button class="nav-item" onclick="showSection('section-account')"><i class="fas fa-user"></i> Tài Khoản</button>
-                <button class="nav-item" onclick="showSection('section-policies')"><i class="fas fa-shield-alt"></i> Chính Sách</button>
+                <a href="#" class="nav-item active" onclick="event.preventDefault(); showSection('section-home')"><i class="fas fa-home"></i> Trang Chủ</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-products')"><i class="fas fa-shoe-prints"></i> Sản Phẩm</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-info')"><i class="fas fa-info-circle"></i> Giới Thiệu</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-news')"><i class="fas fa-newspaper"></i> Tin Tức</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-contact-page')"><i class="fas fa-envelope"></i> Liên Hệ</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-account')"><i class="fas fa-user"></i> Tài Khoản</a>
+                <a href="#" class="nav-item" onclick="event.preventDefault(); showSection('section-policies')"><i class="fas fa-shield-alt"></i> Chính Sách</a>
             </div>
+
 
             <div class="search-container">
                 <input type="text" id="product-search" placeholder="Tìm kiếm giày bóng đá..." oninput="searchProduct()">
@@ -170,14 +171,14 @@
                     <div class="filter-group">
                         <h4><i class="fas fa-cut"></i> Chọn Size Giày</h4>
                         <div class="size-filter-grid">
-                            <button class="btn-size-filter" onclick="setFilterSize(38)">38</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(39)">39</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(40)">40</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(41)">41</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(42)">42</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(43)">43</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(44)">44</button>
-                            <button class="btn-size-filter" onclick="setFilterSize(45)">45</button>
+                            <button class="btn-size-filter" onclick="setFilterSize(38)" disabled title="Hết hàng">38</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(39)">39</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(40)">40</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(41)">41</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(42)">42</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(43)">43</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(44)">44</button>
+                            <button class="btn-size-filter available-stock" onclick="setFilterSize(45)">45</button>
                         </div>
                     </div>
                     <div class="attribute-select-box">
@@ -207,9 +208,9 @@
                         <img id="detail-main-img" src="nc.jpg" alt="Ảnh sản phẩm gốc" class="zoomable-image">
                     </div>
                     <div class="thumbnail-images-list" id="detail-thumbnail-list">
-                        <img src="nc.jpg" onclick="changeDetailImage(this.src)" alt="Góc 1">
-                        <img src="nc.jpg" onclick="changeDetailImage(this.src)" alt="Góc 2">
-                        <img src="nc.jpg" onclick="changeDetailImage(this.src)" alt="Góc 3">
+                        <img src="nc.jpg" loading="lazy" onclick="changeDetailImage(this.src)" alt="Góc 1">
+                        <img src="nc.jpg" loading="lazy" onclick="changeDetailImage(this.src)" alt="Góc 2">
+                        <img src="nc.jpg" loading="lazy" onclick="changeDetailImage(this.src)" alt="Góc 3">
                     </div>
                     <div class="product-intrinsic-video">
                         <h5><i class="fab fa-youtube"></i> Video thực tế sản phẩm:</h5>
@@ -274,14 +275,14 @@
                                                  <table>
                                                     <thead><tr><th>Size VN</th><th>Chiều dài bàn chân (cm)</th></tr></thead>
                                                         <tbody>
-                                                        <tr><td>38</td><td>24</td></tr>
-                                                        <tr><td>39</td><td>24.5</td></tr>
-                                                        <tr><td>40</td><td>25.0</td></tr>
-                                                        <tr><td>41</td><td>25.5</td></tr>
-                                                        <tr><td>42</td><td>26.0</td></tr>
-                                                        <tr><td>43</td><td>26.5</td></tr>
-                                                        <tr><td>44</td><td>27.0</td></tr>
-                                                        <tr><td>45</td><td>27.5</td></tr>
+                                                        <tr><td>38</td><td>23.5</td></tr>
+                                                        <tr><td>39</td><td>24</td></tr>
+                                                        <tr><td>40</td><td>24.5</td></tr>
+                                                        <tr><td>41</td><td>25</td></tr>
+                                                        <tr><td>42</td><td>25.5</td></tr>
+                                                        <tr><td>43</td><td>26</td></tr>
+                                                        <tr><td>44</td><td>26.5</td></tr>
+                                                        <tr><td>45</td><td>27</td></tr>
                                                         </tbody>
                                                     </table>
                             </div>
@@ -573,20 +574,22 @@ Mỗi người có một kiểu bàn chân khác nhau. Việc lựa chọn đún
                     <input type="text" id="cus-address" placeholder="Địa chỉ chi tiết (Số nhà, tên tòa nhà, tên đường)" required>
                 </div>
                 
-                <div class="input-group">
-                    <select id="cus-city" required>
+                <!-- Nâng cấp Form Nhập Địa Chỉ -->
+                 <div class="input-group">
+                    <select id="cus-city" required onchange="loadDistricts()">
                         <option value="">--- Chọn Tỉnh / Thành phố ---</option>
-                        <option value="Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
-                        <option value="Hà Nội">Thành phố Hà Nội</option>
-                        <option value="Đà Nẵng">Thành phố Đà Nẵng</option>
-                        <option value="Khác">Tỉnh thành khác</option>
+        <!-- Dữ liệu sẽ được load qua JS -->
+                    </select>
+                 </div>
+                <div class="input-group">
+                    <select id="cus-district" required disabled onchange="loadWards()">
+                        <option value="">--- Chọn Quận / Huyện ---</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <input type="text" id="cus-district" placeholder="Quận / Huyện" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="cus-ward" placeholder="Phường / Xã" required>
+                    <select id="cus-ward" required disabled>
+                        <option value="">--- Chọn Phường / Xã ---</option>
+                    </select>
                 </div>
                 <div class="input-group">
                     <textarea id="cus-note" placeholder="Ghi chú đơn hàng đặc biệt (Ví dụ: Giao giờ hành chính, gọi trước khi giao...)"></textarea>
