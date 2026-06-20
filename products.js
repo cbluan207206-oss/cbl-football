@@ -10,9 +10,9 @@ const DANH_SACH_GIAY = [
         image: "zocker.jpg",
         images: ["zocker.jpg", "zocker_1.jpg", "zocker_2.jpg", "zocker_3.jpg"],
         desc: "Giày Bóng Đá Zocker Winner Energy Gen 2 Xanh Đen TF sở hữu thiết kế mạnh mẽ, đế TF bám sân tốt cùng form ôm chân thoải mái. Lựa chọn lý tưởng cho các trận đấu sân cỏ nhân tạo với độ ổn định và cảm giác bóng ấn tượng.",
-        weight: ~260g (size 41)
-        ground: TF (Turf Ground - sân cỏ nhân tạo 5-7 người)
-        tech: Upper PU thế hệ mới + Đệm EVA êm ái + Công nghệ ma sát kép (đinh lục giác & đinh ngôi sao 3 cánh) + Họa tiết nổi tăng độ kiểm soát bóng
+        weight: "~260g (size 41)",
+        ground: "TF (Turf Ground - sân cỏ nhân tạo 5-7 người)",
+        tech: "Upper PU thế hệ mới + Đệm EVA êm ái + Công nghệ ma sát kép (đinh lục giác & đinh ngôi sao 3 cánh) + Họa tiết nổi tăng độ kiểm soát bóng",
         featured: true
     },
     {
@@ -26,9 +26,9 @@ const DANH_SACH_GIAY = [
         image: "zocker1.jpg",
         images: ["zocker1.jpg", "zocker1_1.jpg", "zocker1_2.jpg", "zocker1_3.jpg"],
         desc: "Giày Bóng Đá Zocker Winner Energy Gen 2 Xanh Nhạt TF nổi bật với phối màu trẻ trung, hiện đại cùng thiết kế tối ưu cho sân cỏ nhân tạo. Đế TF bám sân hiệu quả, hỗ trợ di chuyển linh hoạt và kiểm soát bóng tự tin trong mọi pha xử lý.",
-        weight: ~260g (size 41)
-        ground: TF (Turf Ground - sân cỏ nhân tạo 5-7 người)
-        tech: Upper PU thế hệ mới + Đệm EVA êm ái + Công nghệ ma sát kép (đinh lục giác & đinh ngôi sao 3 cánh) + Họa tiết nổi tăng độ kiểm soát bóng
+        weight: "~260g (size 41)",
+        ground: "TF (Turf Ground - sân cỏ nhân tạo 5-7 người)",
+        tech: "Upper PU thế hệ mới + Đệm EVA êm ái + Công nghệ ma sát kép (đinh lục giác & đinh ngôi sao 3 cánh) + Họa tiết nổi tăng độ kiểm soát bóng",
         featured: true
     },
     {
@@ -42,9 +42,9 @@ const DANH_SACH_GIAY = [
         image: "fly11.jpg",
         images: ["fly11.jpg", "fly11_1.jpg", "fly11_2.jpg", "fly11_3.jpg"],
         desc: "Giày Bóng Đá Việt Nam Superfly 11 Xanh Chuối Gót Bạc TF gây ấn tượng với phối màu nổi bật, năng động và cá tính. Đế TF bám sân tốt, thân giày ôm chân giúp tăng sự ổn định, hỗ trợ bứt tốc và xử lý bóng hiệu quả trên sân cỏ nhân tạo.",
-        weight:
-        ground:
-        tech:
+        weight: "~220g / chiếc (Siêu nhẹ)",
+        ground: "Sân cỏ nhân tạo (Đế TF)",
+        tech: "Upper mềm mại ôm chân + Gót bạc hỗ trợ bứt tốc tăng tốc độ",
         featured: true
     },
     {
@@ -58,9 +58,9 @@ const DANH_SACH_GIAY = [
         image: "1images.png",
         images: ["1images.png", "adidas-main.jpg", "adidas-side.jpg", "adidas-sole.jpg"],
         desc: "Kiểm soát đường bóng xoáy hoàn hảo với hệ thống vân cao su High Definition Grip. Sự kết hợp tinh tế giữa nền đen và sọc vàng đồng tạo điểm nhấn đẳng cấp trên sân phủi.",
-        weight:
-        ground:
-        tech:
+        weight: "~245g / chiếc",
+        ground: "Sân cỏ nhân tạo (Đế TF)",
+        tech: "Vân cao su High Definition Grip kiểm soát bóng + Cổ thun co giãn ôm khít cổ chân",
         featured: false
     },
     {
@@ -74,9 +74,9 @@ const DANH_SACH_GIAY = [
         image: "vapor17.jpg",
         images: ["vapor17.jpg", "vapor17_1.jpg", "vapor17_2.jpg", "vapor17_3.jpg"],
         desc: "Dòng Vapor kinh điển với thiết kế năng động...",
-        weight:
-        ground:
-        tech:
+        weight: "~195g / chiếc (Form tốc độ chuyên dụng)",
+        ground: "Sân cỏ nhân tạo (Đế TF)",
+        tech: "Đệm giảm chấn êm ái + Cấu trúc đinh dăm bám sân bứt tốc tốt hơn",
         featured: true
     },
     {
@@ -90,9 +90,9 @@ const DANH_SACH_GIAY = [
         image: "nc.jpg",
         images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
         desc: "Nếu bạn mới tập hoặc dùng để tập các nhóm cơ nhỏ như vai, tay, ngực, hãy bắt đầu từ sợi nhẹ nhất (từ 2.5kg - 5kg). Nếu tập các bài thân dưới như Squat, Hip Thrust (mông, đùi), bạn nên chọn các sợi từ mức Trung bình (đỏ/đen - từ 9kg trở lên) thì mới cảm nhận rõ cơ bắp được kích hoạt.",
-        weight:
-        ground:
-        tech:
+        weight: "Hộp đóng gói nhỏ gọn",
+        ground: "Tập luyện tại nhà / Phòng Gym / Sân cỏ",
+        tech: "Chất liệu cao su tự nhiên co giãn đàn hồi cao, siêu bền bỉ",
         featured: true
     },
     {
@@ -106,9 +106,9 @@ const DANH_SACH_GIAY = [
         image: "nc.jpg",
         images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
         desc: "Hãy chọn tất có vùng đệm xù dày ở gót và mũi chân để giảm chấn thương, hoặc đầu tư tất chống trượt (loại có các miếng silicone dưới lòng bàn chân) để chân bám chặt vào lót giày, không bị trượt bên trong giày khi chạy.",
-        weight:
-        ground:
-        tech:
+        weight: "~50g / đôi",
+        ground: "Mọi mặt sân (Cỏ nhân tạo, tự nhiên, trong nhà)",
+        tech: "Hệ thống các hạt silicone đúc nổi chống trượt tuyệt đối trong lòng giày",
         featured: true
     },
     {
@@ -122,9 +122,9 @@ const DANH_SACH_GIAY = [
         image: "nc.jpg",
         images: ["nc.jpg", "nc.jpg", "nc.jpg", "nc.jpg"],
         desc: "Chọn loại phù hợp với mức độ vận động và tình trạng khớp gối của bạn.",
-        weight:
-        ground:
-        tech:
+        weight: "Dạng băng cuốn ôm khít",
+        ground: "Bảo vệ khớp gối trong mọi hoạt động thể thao",
+        tech: "Chất liệu vải dệt co giãn 4 chiều thoáng khí + Vòng đệm giảm chấn bánh chè",
         featured: true
     }
 ];
