@@ -608,16 +608,33 @@ billDetailContainer.innerHTML = billHTML;
 const qrZone = document.getElementById("vietqr-payment-area-placeholder");
 if (paymentMethodSelected === "VietQR") {
     qrZone.classList.remove("style-hidden");
+    
+    // 1. CẤU HÌNH THÔNG TIN TÀI KHOẢN NHẬN TIỀN CỦA SHOP
+    const BANK_ID = "techcombank"; // Viết liền không dấu (VD: techcombank, mbbank, vcb, acb...)
+    const ACCOUNT_NO = "0984169335"; // Số tài khoản ngân hàng của bạn
+    const ACCOUNT_NAME = "CBL SOCCER"; // Tên chủ tài khoản (Nên viết in hoa, không dấu)
+    
+    // 2. DỮ LIỆU ĐỘNG TỪ ĐƠN HÀNG
+    const AMOUNT = stats.finalTotal; // Tổng tiền thanh toán
+    const DESCRIPTION = orderId; // Lấy mã đơn hàng làm nội dung chuyển khoản
+
+    // 3. TẠO LINK QR CHUẨN TỪ VIETQR.IO (Sử dụng template compact2 hiển thị rất đẹp)
+    const qrUrl = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.jpg?amount=${AMOUNT}&addInfo=${DESCRIPTION}&accountName=${ACCOUNT_NAME}`;
+
     qrZone.innerHTML = `
-        <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto;">
-            <p style="color:#000; font-weight:bold; font-size:0.75rem; margin-bottom:5px;">MBBANK VIETQR PRO</p>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=STK_0984169335_AMOUNT_${stats.finalTotal}_ND_${orderId}" style="width:160px; height:160px;" alt="Mã chuyển khoản tự động">
-            <p style="color:#6b1724; font-size:0.75rem; font-weight:bold; margin-top:5px;">Nội dung CK bắt buộc: ${orderId}</p>
+        <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <p style="color:#000; font-weight:bold; font-size:0.85rem; margin-bottom:10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">TECHCOMBANK VIETQR PRO</p>
+            <img src="${qrUrl}" style="width:200px; height:auto; border-radius:4px; display:block; margin: 0 auto;" alt="Mã chuyển khoản tự động">
+            <p style="color:#6b1724; font-size:0.8rem; font-weight:bold; margin-top:10px;">
+                Nội dung CK bắt buộc: <br>
+                <span style="font-size:1.1rem; color:#d32f2f;">${orderId}</span>
+            </p>
         </div>
     `;
 } else {
     qrZone.classList.add("style-hidden");
 }
+
 
 // Truyền đầy đủ cả biến district và ward sang cho hàm Telegram nhận diện
 sendOrderToTelegram(orderId, name, phone, address, district, ward, city, paymentMethodSelected, stats);
