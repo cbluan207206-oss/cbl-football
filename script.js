@@ -37,6 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initAppProducts();
     setupImageZoomEffect();
     updateCartCounters();
+    
+    initVietnamAdminData();
 });
 
 /* KHỞI TẠO SẢN PHẨM */
@@ -758,4 +760,95 @@ function sendContactMessage(event) {
         alert("✅ Cảm ơn! Tin nhắn đã được gửi đến CBL Soccer.");
         document.getElementById("main-contact-form").reset();
     }).catch(err => console.error("Lỗi gửi:", err));
+}
+/* ==========================================================================
+   TÍCH HỢP API ĐỊA GIỚI HÀNH CHÍNH VIỆT NAM (TỈNH/THÀNH - QUẬN/HUYỆN - PHƯỜNG/XÃ)
+   ========================================================================== */
+let localProvincesData = [];
+
+// Hàm nạp dữ liệu Tỉnh/Thành khi mở web
+async function initVietnamAdminData() {
+    try {
+        const response = await fetch('https://provinces.open-api.vn/api/?depth=3');
+        localProvincesData = await response.json();
+        
+        const citySelect = document.getElementById("cus-city");
+        if(citySelect) {
+            citySelect.innerHTML = '<option value="">--- Chọn Tỉnh / Thành phố ---</option>';
+            localProvincesData.forEach(city => {
+                const option = document.createElement("option");
+                option.value = city.name; // Lấy tên làm value để gửi thẳng qua Telegram
+                option.setAttribute("data-code", city.code); // Lưu mã code ngầm để lọc Quận/Huyện
+                option.textContent = city.name;
+                citySelect.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error("Lỗi tải dữ liệu địa giới hành chính:", error);
+    }
+}
+
+// Hàm load danh sách Quận/Huyện dựa trên Tỉnh/Thành đã chọn (Gọi khi có sự kiện onchange)
+function loadDistricts() {
+    const citySelect = document.getElementById("cus-city");
+    const districtSelect = document.getElementById("cus-district");
+    const wardSelect = document.getElementById("cus-ward");
+    
+    // Reset lại ô Phường/Xã
+    wardSelect.innerHTML = '<option value="">--- Chọn Phường / Xã ---</option>';
+    wardSelect.disabled = true;
+
+    // Reset lại ô Quận/Huyện
+    districtSelect.innerHTML = '<option value="">--- Chọn Quận / Huyện ---</option>';
+    
+    const selectedOption = citySelect.options[citySelect.selectedIndex];
+    const cityCode = selectedOption.getAttribute("data-code");
+
+    if (!cityCode) {
+        districtSelect.disabled = true;
+        return;
+    }
+
+    const selectedCityData = localProvincesData.find(c => c.code == parseInt(cityCode));
+    
+    if (selectedCityData && selectedCityData.districts) {
+        districtSelect.disabled = false;
+        selectedCityData.districts.forEach(district => {
+            const option = document.createElement("option");
+            option.value = district.name;
+            option.setAttribute("data-code", district.code);
+            option.textContent = district.name;
+            districtSelect.appendChild(option);
+        });
+    }
+}
+
+// Hàm load danh sách Phường/Xã dựa trên Quận/Huyện đã chọn (Gọi khi có sự kiện onchange)
+function loadWards() {
+    const citySelect = document.getElementById("cus-city");
+    const districtSelect = document.getElementById("cus-district");
+    const wardSelect = document.getElementById("cus-ward");
+    
+    wardSelect.innerHTML = '<option value="">--- Chọn Phường / Xã ---</option>';
+    
+    const cityCode = citySelect.options[citySelect.selectedIndex].getAttribute("data-code");
+    const districtCode = districtSelect.options[districtSelect.selectedIndex].getAttribute("data-code");
+
+    if (!districtCode) {
+        wardSelect.disabled = true;
+        return;
+    }
+
+    const selectedCityData = localProvincesData.find(c => c.code == parseInt(cityCode));
+    const selectedDistrictData = selectedCityData.districts.find(d => d.code == parseInt(districtCode));
+
+    if (selectedDistrictData && selectedDistrictData.wards) {
+        wardSelect.disabled = false;
+        selectedDistrictData.wards.forEach(ward => {
+            const option = document.createElement("option");
+            option.value = ward.name;
+            option.textContent = ward.name;
+            wardSelect.appendChild(option);
+        });
+    }
 }
