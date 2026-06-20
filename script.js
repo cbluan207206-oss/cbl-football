@@ -254,6 +254,11 @@ function navigateToProductDetail(productId) {
 
     // Reset lại số lượng đặt mua mặc định về 1
     document.getElementById("detail-qty-input").value = 1;
+    
+    // Tìm nơi đổ dữ liệu chi tiết sản phẩm và thêm 3 dòng này vào:
+    document.getElementById("view-product-weight").innerText = product.weight || "~210g / chiếc";
+    document.getElementById("view-product-ground").innerText = product.ground || "Sân cỏ nhân tạo (Đế TF)";
+    document.getElementById("view-product-tech").innerText = product.tech || "Đệm giảm chấn chuyên nghiệp";
 
     /* ==========================================================================
        XỬ LÝ SỬA LỖI: Tự động đúc danh sách Ảnh nhỏ (Thumbnails) động
