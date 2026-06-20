@@ -278,8 +278,8 @@ function navigateToProductDetail(productId) {
         `).join('');
     }
     
-    // Tự động đúc danh sách Màu Sắc động dựa trên thuộc tính của đôi giày đang xem
-    const colorSelectorsContainer = document.querySelector(".color-variants-selectors");
+   // Tự động đúc danh sách Màu Sắc động dựa trên thuộc tính của đôi giày đang xem
+    const colorSelectorsContainer = document.getElementById("detail-color-variants");
     if (colorSelectorsContainer && product.colors) {
         colorSelectorsContainer.innerHTML = product.colors.map((color, idx) => `
             <label>
@@ -287,7 +287,11 @@ function navigateToProductDetail(productId) {
                 <span>${color}</span>
             </label>
         `).join('');
+    } else if (colorSelectorsContainer) {
+        // Nếu sản phẩm không có mảng colors, hiển thị mặc định
+        colorSelectorsContainer.innerHTML = `<span style="font-size: 0.9rem; color: #8e8e93;">Màu mặc định</span>`;
     }
+
 
     // Đổ danh sách sản phẩm liên quan (Cùng thương hiệu đối tác)
     const relatedContainer = document.getElementById("related-products-container");
