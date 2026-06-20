@@ -610,9 +610,9 @@ if (paymentMethodSelected === "VietQR") {
     qrZone.classList.remove("style-hidden");
     
     // 1. CẤU HÌNH THÔNG TIN TÀI KHOẢN NHẬN TIỀN CỦA SHOP
-    const BANK_ID = "techcombank"; // Viết liền không dấu (VD: techcombank, mbbank, vcb, acb...)
+    const BANK_ID = "mbbank"; // Viết liền không dấu (VD: techcombank, mbbank, vcb, acb...)
     const ACCOUNT_NO = "0984169335"; // Số tài khoản ngân hàng của bạn
-    const ACCOUNT_NAME = "CBL SOCCER"; // Tên chủ tài khoản (Nên viết in hoa, không dấu)
+    const ACCOUNT_NAME = "CAM BA LUAN"; // Tên chủ tài khoản (Nên viết in hoa, không dấu)
     
     // 2. DỮ LIỆU ĐỘNG TỪ ĐƠN HÀNG
     const AMOUNT = stats.finalTotal; // Tổng tiền thanh toán
@@ -623,7 +623,7 @@ if (paymentMethodSelected === "VietQR") {
 
     qrZone.innerHTML = `
         <div style="text-align:center; margin-top:20px; padding:15px; background:#fff; border-radius:8px; width:fit-content; margin:20px auto 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color:#000; font-weight:bold; font-size:0.85rem; margin-bottom:10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">TECHCOMBANK VIETQR PRO</p>
+            <p style="color:#000; font-weight:bold; font-size:0.85rem; margin-bottom:10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">MBBANK VIETQR PRO</p>
             <img src="${qrUrl}" style="width:200px; height:auto; border-radius:4px; display:block; margin: 0 auto;" alt="Mã chuyển khoản tự động">
             <p style="color:#6b1724; font-size:0.8rem; font-weight:bold; margin-top:10px;">
                 Nội dung CK bắt buộc: <br>
@@ -650,7 +650,7 @@ function sendOrderToTelegram(orderId, name, phone, address, district, ward, city
     teleMessage += `📞 <b>Điện thoại:</b> ${phone}\n`;
     // Cập nhật dòng địa chỉ đầy đủ 4 cấp ở đây:
     teleMessage += `📍 <b>Địa chỉ:</b> ${address}, Phường/Xã: ${ward}, Quận/Huyện: ${district}, ${city}\n`;
-    teleMessage += `💳 <b>Hình thức:</b> ${paymentMethod === "VietQR" ? "Techcombank VietQR Pro" : "Thanh toán COD"}\n\n`;
+    teleMessage += `💳 <b>Hình thức:</b> ${paymentMethod === "VietQR" ? "Mbbank VietQR Pro" : "Thanh toán COD"}\n\n`;
     teleMessage += `📦 <b>CHI TIẾT CHIẾN HÀI:</b>\n`;
     
     globalCart.forEach((item, index) => {
